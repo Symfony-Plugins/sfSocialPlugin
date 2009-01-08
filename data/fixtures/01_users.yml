@@ -1,0 +1,28 @@
+sfGuardUser:
+  john:
+    username:  john
+    password:  doe
+  mike:
+    username:  mike
+    password:  delfino
+  danny:
+    username:  danny
+    password:  zucco
+  mario:
+    username:  mario
+    password:  mario
+  luigi:
+    username:  luigi
+    password:  mario
+  anna:
+    username:  anna
+    password:  frank
+  julie:
+    username:  julie
+    password:  sacco
+  max:
+    username:  max
+    password:  garak
+  karl:
+    username:  karl
+    password:  marx

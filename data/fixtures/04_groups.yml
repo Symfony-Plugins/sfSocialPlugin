@@ -1,0 +1,28 @@
+sfSocialGroup:
+  dummies:
+    user_admin: max
+    title: we are all dummies
+    description: after all, there's always something we don't know...
+    created_at: 2007-12-25 00:00
+    updated_at: 2008-01-01 00:01
+
+sfSocialGroupInvite:
+  newdummy1:
+    group_id: dummies
+    user_id: anna
+    replied: true
+  newdummy2:
+    group_id: dummies
+    user_id: luigi
+    replied: false
+
+sfSocialGroupUser:
+  dummy1:
+    group_id: dummies
+    user_id: max
+  dummy2:
+    group_id: dummies
+    user_id: anna
+  dummy3:
+    group_id: dummies
+    user_id: mario

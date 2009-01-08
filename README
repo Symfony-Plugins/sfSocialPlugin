@@ -1,0 +1,62 @@
+# sfSocialPlugin
+
+## Overview
+
+This plugin adds social network capabilities to your project's users.
+So, in example, your users will be able to mutually add as contact,
+send and receive messages, create groups, manage events, receive
+notifications about all this stuff, and so on.
+
+## Installation
+
+To install:
+
+    cd plugins;
+    svn co http://svn.symfony-project.com/plugins/sfSocialPlugin/trunk sfSocialPlugin
+
+The package depends on sfGuardPlugin, as users are managed by it.
+
+## Usage
+
+Enable plugins in your `ProjectConfiguration` class
+
+    [php]
+    // config/ProjectConfiguration.class.php
+    public function setup()
+    {
+      // possibly add other plugins here...
+      $this->enablePlugins(array('sfGuardPlugin', 'sfSocialPlugin'));
+    }
+
+Enable modules in you application settings
+
+    [php]
+    // apps/frontend/config/settings.yml
+    // XXX list is not complete. Customize on your needs
+    enabled_modules: [sfSocialContact, sfSocialMessage]
+
+## Roadmap
+
+For now, there's just a database schema, along with builded models, forms
+and filters.
+
+The project aims to implement:
+
+  * Contact system (aka friends system): search for other users, request
+    contact, accept/deny contact request, see list of your contacts,
+    categorize contacts in groups, see contacts of other users,
+    see contact shared with other users, see "degrees of separation"
+
+  * Message system: send a message, read received messages, reply to a
+    message.
+
+  * Group system: create a group, invite users to join, manage groups.
+
+  * Event system: create an event, invite users to partecipate, confirm
+    partecipation (yes/no/maybe)
+
+  * Comment system: write commments, reply to comments. For groups, events
+    and maybe for something else.
+
+  * Notification system: a glue for all other systems. Notify your contacts
+    when you do an action (add a contact, create an event, etc.)

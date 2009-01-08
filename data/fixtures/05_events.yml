@@ -1,0 +1,35 @@
+sfSocialEvent:
+  maxbirthday:
+    user_admin: max
+    title: let's party!
+    description: guess what? I'm going to turn 35! Wanna party with me?
+    start: 2009-04-01 19:00
+    end: 2009-04-01 22:30
+    location: Rome, Italy
+    created_at: 2009-03-02 12:44
+
+sfSocialEventInvite:
+  mike:
+    event_id: maxbirthday
+    user_id: mike
+    user_from: max
+    replied: true
+  mario:
+    event_id: maxbirthday
+    user_id: mario
+    user_from: max
+    replied: false
+
+sfSocialEventUser:
+  mikemaybe:
+    event_id: maxbirthday
+    user_id: mike
+    confirm: 1
+  annayes:
+    event_id: maxbirthday
+    user_id: anna
+    confirm: 2
+  dannyno:
+    event_id: maxbirthday
+    user_id: danny
+    confirm: 3

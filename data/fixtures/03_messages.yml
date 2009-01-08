@@ -1,0 +1,23 @@
+sfSocialMessage:
+  maxmike:
+    user_from: max
+    user_to: mike
+    subject: lorem ipsum
+    text: dolor sit amet, consectetur adipiscing elit. Sed accumsan laoreet sapien. Maecenas et nisl et mi imperdiet auctor.
+  dannyanna:
+    user_from: danny
+    user_to: anna
+    subject: hello pal
+    text: Duis aliquam, diam consequat varius condimentum, nulla tortor tincidunt enim, sed faucibus pede ipsum a tortor. Curabitur posuere metus ac nisl. Sed porta feugiat ipsum.
+
+sfSocialMessageSent:
+  maxmike:
+    user_from: max
+    user_to: mike
+    subject: lorem ipsum
+    text: dolor sit amet, consectetur adipiscing elit. Sed accumsan laoreet sapien. Maecenas et nisl et mi imperdiet auctor.
+  dannyanna:
+    user_from: danny
+    user_to: anna
+    subject: hello pal
+    text: Duis aliquam, diam consequat varius condimentum, nulla tortor tincidunt enim, sed faucibus pede ipsum a tortor. Curabitur posuere metus ac nisl. Sed porta feugiat ipsum.

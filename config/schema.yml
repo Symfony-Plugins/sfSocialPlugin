@@ -1,0 +1,103 @@
+propel:
+  _attributes:      { package: plugins.sfSocialPlugin.lib.model }
+
+  sf_social_contact:
+    _attributes:    { phpName: sfSocialContact }
+    id: ~
+    user_from: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    user_to: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    created_at: ~
+
+  sf_social_contact_group:
+    _attributes:    { phpName: sfSocialContactGroup }
+    id: ~
+    user_id: { type: integer, required: true, foreignTable: sf_social_contact, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    name: { type: varchar, size: 255 }
+
+  sf_social_contact_group_contact:
+    _attributes:    { phpName: sfSocialContactGroupContact }
+    contact_group_id: { type: integer, primaryKey: true, required: true, foreignTable: sf_social_contact_group, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    contact_id: { type: integer, primaryKey: true, required: true, foreignTable: sf_social_contact, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    created_at: ~
+
+  sf_social_contact_request:
+    _attributes:    { phpName: sfSocialContactRequest }
+    id: ~
+    user_from: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    user_to: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    message: { type: varchar, size: 255 }
+    accepted: { type: boolean, required: true, default: false }
+    created_at: ~
+
+  sf_social_event:
+    _attributes:    { phpName: sfSocialEvent }
+    id: ~
+    user_admin: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    title: { type: varchar, size: 255 }
+    description: { type: longvarchar }
+    start: { type: timestamp }
+    end: { type: timestamp }
+    location: { type: varchar, size: 255 }
+    created_at: ~
+    updated_at: ~
+
+  sf_social_event_invite:
+    _attributes:    { phpName: sfSocialEventInvite }
+    id: ~
+    event_id: { type: integer, required: true, foreignTable: sf_social_event, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    user_id: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    user_from: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    replied: { type: boolean }
+    created_at: ~
+
+  sf_social_event_user:
+    _attributes:    { phpName: sfSocialEventUser }
+    id: ~
+    event_id: { type: integer, required: true, foreignTable: sf_social_event, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    user_id: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    confirm: { type: integer }
+    created_at: ~
+
+  sf_social_group:
+    _attributes:    { phpName: sfSocialGroup }
+    id: ~
+    user_admin: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    title: { type: varchar, size: 255 }
+    description: { type: longvarchar }
+    created_at: ~
+    updated_at: ~
+
+  sf_social_group_invite:
+    _attributes:    { phpName: sfSocialGroupInvite }
+    id: ~
+    group_id: { type: integer, required: true, foreignTable: sf_social_group, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    user_id: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    user_from: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    replied: { type: boolean }
+    created_at: ~
+
+  sf_social_group_user:
+    _attributes:    { phpName: sfSocialGroupUser }
+    id: ~
+    group_id: { type: integer, required: true, foreignTable: sf_social_group, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    user_id: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    confirm: { type: integer }
+    created_at: ~
+
+  sf_social_message:
+    _attributes:    { phpName: sfSocialMessage }
+    id: ~
+    user_from: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    user_to: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    subject: { type: varchar, size: 255 }
+    text: { type: longvarchar }
+    created_at: ~
+
+  sf_social_message_sent:
+    _attributes:    { phpName: sfSocialMessageSent }
+    id: ~
+    user_from: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    user_to: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    subject: { type: varchar, size: 255 }
+    text: { type: longvarchar }
+    created_at: ~
