@@ -11,7 +11,7 @@ propel:
   sf_social_contact_group:
     _attributes:    { phpName: sfSocialContactGroup }
     id: ~
-    user_id: { type: integer, required: true, foreignTable: sf_social_contact, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    contact_id: { type: integer, required: true, foreignTable: sf_social_contact, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     name: { type: varchar, size: 255 }
 
   sf_social_contact_group_contact:

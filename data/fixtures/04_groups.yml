@@ -10,10 +10,12 @@ sfSocialGroupInvite:
   newdummy1:
     group_id: dummies
     user_id: anna
+    user_from: max
     replied: true
   newdummy2:
     group_id: dummies
     user_id: luigi
+    user_from: max
     replied: false
 
 sfSocialGroupUser:

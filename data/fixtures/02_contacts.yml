@@ -20,16 +20,16 @@ sfSocialContact:
 
 sfSocialContactGroup:
   maxfriends:
-    user_id: max
+    contact_id: maxmike
     name: friends
 
 sfSocialContactGroupContact:
   maxfriend1:
     contact_group_id: maxfriends
-    contact_id: mike
+    contact_id: maxmike
   maxfriend2:
     contact_group_id: maxfriends
-    contact_id: mario
+    contact_id: maxmario
 
 sfSocialContactRequest:
   dannymax:
