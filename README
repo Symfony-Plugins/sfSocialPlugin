@@ -33,7 +33,7 @@ Enable modules in you application settings
     [php]
     // apps/frontend/config/settings.yml
     // XXX list is not complete. Customize on your needs
-    enabled_modules: [sfSocialContact, sfSocialMessage]
+    enabled_modules: [default, sfGuardAuth, sfSocialContact, sfSocialMessage]
 
 ## Roadmap
 

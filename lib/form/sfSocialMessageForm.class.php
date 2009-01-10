@@ -12,5 +12,14 @@ class sfSocialMessageForm extends BasesfSocialMessageForm
 {
   public function configure()
   {
+    $uid = sfContext::getInstance()->getUser()->getAttribute('user_id', '', 'sfGuardSecurityUser');
+
+    unset($this['created_at']);
+    unset($this['read']);
+    $this->widgetSchema['user_from'] = new sfWidgetFormInputHidden();
+    $this->setDefault('user_from', $uid);
+    $this->setValidator('user_from', new sfValidatorChoice(array('choices' => array($uid))));
+    $this->setValidator('subject', new sfValidatorString(array('required' => true)));
+    $this->setValidator('text', new sfValidatorString(array('required' => true)));
   }
 }

@@ -9,6 +9,12 @@ sfSocialMessage:
     user_to: anna
     subject: hello pal
     text: Duis aliquam, diam consequat varius condimentum, nulla tortor tincidunt enim, sed faucibus pede ipsum a tortor. Curabitur posuere metus ac nisl. Sed porta feugiat ipsum.
+    read: true
+  mariomax:
+    user_from: mario
+    user_to: max
+    subject: how do you do?
+    text: are you happy? I'm fine. Hooga appa loopa. Eeny, meeny, miny, moe
 
 sfSocialMessageSent:
   maxmike:
@@ -21,3 +27,8 @@ sfSocialMessageSent:
     user_to: anna
     subject: hello pal
     text: Duis aliquam, diam consequat varius condimentum, nulla tortor tincidunt enim, sed faucibus pede ipsum a tortor. Curabitur posuere metus ac nisl. Sed porta feugiat ipsum.
+  mariomax:
+    user_from: mario
+    user_to: max
+    subject: how do you do?
+    text: are you happy? I'm fine. Hooga appa loopa. Eeny, meeny, miny, moe

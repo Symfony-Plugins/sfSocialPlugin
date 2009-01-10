@@ -1,0 +1,21 @@
+sf_social_message_sentlist:
+  url:   /messages/sent/*
+  param: { module: sfSocialMessage, action: sentlist }
+
+sf_social_message_list:
+  url:   /messages/*
+  param: { module: sfSocialMessage, action: list }
+
+sf_social_message_sentread:
+  url:   /message/sent/:id
+  param: { module: sfSocialMessage, action: sentread }
+  requirements: { id: \d+ }
+
+sf_social_message_read:
+  url:   /message/:id
+  param: { module: sfSocialMessage, action: read }
+  requirements: { id: \d+ }
+
+sf_social_message_new:
+  url:   /message/compose/*
+  param: { module: sfSocialMessage, action: compose }

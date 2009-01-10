@@ -1,20 +1,14 @@
 <?php
 
-/*
- * This file is part of the symfony package.
- * (c) 2004-2006 Lionel Guichard <lionel.guichard@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-require_once(dirname(__FILE__).'/../lib/BasesfSocialContactActions.class.php');
+require_once dirname(__FILE__).'/../lib/BasesfSocialContactActions.class.php';
 
 /**
- *
- * @package    symfony
- * @subpackage plugin
- * @author     Lionel Guichard <lionel.guichard@gmail.com>
+ * sfSocialContact actions.
+ * 
+ * @package    sfSocialPlugin
+ * @subpackage sfSocialContact
+ * @author     Your name here
+ * @version    SVN: $Id: actions.class.php 12628 2008-11-04 14:43:36Z Kris.Wallsmith $
  */
 class sfSocialContactActions extends BasesfSocialContactActions
 {

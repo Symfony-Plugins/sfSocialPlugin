@@ -1,14 +1,11 @@
 <?php
 
-if (!isset($_SERVER['SYMFONY']))
-{
-  throw new RuntimeException('Could not find symfony core libraries.');
-}
 
-require_once $_SERVER['SYMFONY'].'/autoload/sfCoreAutoload.class.php';
+
+require_once(dirname(__FILE__).'/../../../../config/ProjectConfiguration.class.php');
+$configuration = new ProjectConfiguration(realpath(dirname(__FILE__).'/../../../..'));
 sfCoreAutoload::register();
 
-$configuration = new sfProjectConfiguration(getcwd());
 require_once $configuration->getSymfonyLibDir().'/vendor/lime/lime.php';
 
 require_once dirname(__FILE__).'/../../config/sfSocialPluginConfiguration.class.php';
