@@ -43,4 +43,17 @@ class sfSocialMessagePeer extends BasesfSocialMessagePeer
     return $pager;
   }
 
+  /**
+   * get number of unread messages of user
+   * @param  sfGuardUser   $user
+   * @return integer
+   */
+  public static function countUnreadMessages(sfGuardUser $user)
+  {
+    $c = new Criteria();
+    $c->add(self::USER_TO, $user->getId());
+    $c->add(self::READ, false);
+    return self::doCount($c);
+  }
+
 }

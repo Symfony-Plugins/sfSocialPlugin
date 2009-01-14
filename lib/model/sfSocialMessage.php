@@ -18,7 +18,7 @@ class sfSocialMessage extends BasesfSocialMessage
    */
   public function read()
   {
-    $this->read = true;
+    $this->setRead(true);
     $this->save();
   }
 

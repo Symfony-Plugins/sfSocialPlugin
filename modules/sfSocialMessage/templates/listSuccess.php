@@ -2,6 +2,9 @@
 <h2><?php echo __('No messages received yet') ?></h2>
 <?php else: ?>
 <h2><?php echo __('Messages received') ?></h2>
+<?php if ($unread > 0): ?>
+<?php echo $unread ?> <?php echo __('unread messages') ?>
+<?php endif ?>
 <ul>
 <?php foreach ($pager->getResults() as $message): ?>
   <li class="<?php echo $message->getRead() ? 'read' : 'unread' ?>">

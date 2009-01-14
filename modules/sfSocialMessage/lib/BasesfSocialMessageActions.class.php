@@ -18,6 +18,7 @@ abstract class BasesfSocialMessageActions extends sfActions
   {
     $page = $request->getParameter('page');
     $this->pager = sfSocialMessagePeer::getUserMessages($this->getUser()->getGuardUser(), $page);
+    $this->unread = sfSocialMessagePeer::countUnreadMessages($this->getUser()->getGuardUser());
   }
 
  /**
