@@ -54,3 +54,32 @@ sf_social_event_view:
 sf_social_event_new:
   url:   /event/create
   param: { module: sfSocialEvent, action: create }
+  
+# contacts
+
+sf_social_contact_requests:
+  url:   /contacts/requests/*
+  param: { module: sfSocialContact, action: requests }
+
+sf_social_contact_list:
+  url:   /contacts/*
+  param: { module: sfSocialContact, action: list }
+    
+sf_social_contact_accept_request:
+  url:   /request/accept/:id
+  param: { module: sfSocialContact, action: acceptrequest }
+  requirements: { id: \d+ }
+
+sf_social_contact_deny_request:
+  url:   /request/deny/:id
+  param: { module: sfSocialContact, action: denyrequest }
+  requirements: { id: \d+ }
+
+sf_social_contact_send_request:
+  url:   /request/send
+  param: { module: sfSocialContact, action: sendrequest }
+
+sf_social_contact_delete:
+  url:   /contact/delete/:id
+  param: { module: sfSocialContact, action: delete }
+  requirements: { id: \d+ }
