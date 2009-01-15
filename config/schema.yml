@@ -7,6 +7,7 @@ propel:
     user_from: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     user_to: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     created_at: ~
+    _uniques: { contact: [user_from, user_to] }
 
   sf_social_contact_group:
     _attributes:    { phpName: sfSocialContactGroup }
@@ -26,18 +27,19 @@ propel:
     user_from: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     user_to: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     message: { type: varchar, size: 255 }
-    accepted: { type: boolean, required: true, default: false }
+    accepted: { type: boolean, default: false }
     created_at: ~
+    _uniques: { request: [user_from, user_to] }
 
   sf_social_event:
     _attributes:    { phpName: sfSocialEvent }
     id: ~
     user_admin: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
-    title: { type: varchar, size: 255 }
-    description: { type: longvarchar }
+    title: { type: varchar, size: 255, required: true }
+    description: { type: longvarchar, required: true }
     start: { type: timestamp }
     end: { type: timestamp }
-    location: { type: varchar, size: 255 }
+    location: { type: varchar, size: 255, required: true }
     created_at: ~
     updated_at: ~
 
@@ -47,14 +49,14 @@ propel:
     event_id: { type: integer, required: true, foreignTable: sf_social_event, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     user_id: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     user_from: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
-    replied: { type: boolean }
+    replied: { type: boolean, default: false }
     created_at: ~
+    _uniques: { invite: [event_id, user_id, user_from] }
 
   sf_social_event_user:
     _attributes:    { phpName: sfSocialEventUser }
-    id: ~
-    event_id: { type: integer, required: true, foreignTable: sf_social_event, foreignReference: id, onDelete: cascade, onUpdate: cascade }
-    user_id: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    event_id: { type: integer, primaryKey: true, required: true, foreignTable: sf_social_event, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    user_id: { type: integer, primaryKey: true, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     confirm: { type: integer }
     created_at: ~
 
@@ -73,8 +75,9 @@ propel:
     group_id: { type: integer, required: true, foreignTable: sf_social_group, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     user_id: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     user_from: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
-    replied: { type: boolean }
+    replied: { type: boolean, default: false }
     created_at: ~
+    _uniques: { invite: [group_id, user_id, user_from] }
 
   sf_social_group_user:
     _attributes:    { phpName: sfSocialGroupUser }
@@ -89,8 +92,8 @@ propel:
     id: ~
     user_from: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     user_to: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
-    subject: { type: varchar, size: 255 }
-    text: { type: longvarchar }
+    subject: { type: varchar, size: 255, required: true }
+    text: { type: longvarchar, required: true }
     read: { type: boolean, default: false }
     created_at: ~
 

@@ -1,3 +1,5 @@
+# messages
+
 sf_social_message_sentlist:
   url:   /messages/sent/*
   param: { module: sfSocialMessage, action: sentlist }
@@ -19,3 +21,36 @@ sf_social_message_read:
 sf_social_message_new:
   url:   /message/compose/*
   param: { module: sfSocialMessage, action: compose }
+
+# events
+
+sf_social_event_invitedlist:
+  url:   /events/invited/*
+  param: { module: sfSocialEvent, action: invitedlist }
+
+sf_social_event_list:
+  url:   /events/*
+  param: { module: sfSocialEvent, action: list }
+
+sf_social_event_pastlist:
+  url:   /pastevents/*
+  param: { module: sfSocialEvent, action: pastlist }
+
+sf_social_event_edit:
+  url:   /event/:id/edit
+  param: { module: sfSocialEvent, action: edit }
+  requirements: { id: \d+ }
+
+sf_social_event_invite:
+  url:   /event/:id/invite/*
+  param: { module: sfSocialEvent, action: invite }
+  requirements: { id: \d+ }
+
+sf_social_event_view:
+  url:   /event/:id
+  param: { module: sfSocialEvent, action: view }
+  requirements: { id: \d+ }
+
+sf_social_event_new:
+  url:   /event/create
+  param: { module: sfSocialEvent, action: create }
