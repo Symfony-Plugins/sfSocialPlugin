@@ -30,10 +30,11 @@ Enable plugins in your `ProjectConfiguration` class
 
 Enable modules in you application settings
 
-    [php]
-    // apps/frontend/config/settings.yml
-    // XXX list is not complete. Customize on your needs
-    enabled_modules: [default, sfGuardAuth, sfSocialContact, sfSocialMessage]
+    [yml]
+    # apps/frontend/config/settings.yml
+    enabled_modules: [default, sfGuardAuth, sfSocialContact, sfSocialMessage, sfSocialEvent]
+    # this list is not complete: customize on your needs
+
 
 ## Roadmap
 
@@ -42,21 +43,21 @@ and filters.
 
 The project aims to implement:
 
-  * Contact system (aka friends system): search for other users, request
+  * **Contact** system (aka friends system): search for other users, request
     contact, accept/deny contact request, see list of your contacts,
     categorize contacts in groups, see contacts of other users,
     see contact shared with other users, see "degrees of separation"
 
-  * Message system: send a message, read received messages, reply to a
+  * **Message** system: send a message, read received messages, reply to a
     message.
 
-  * Group system: create a group, invite users to join, manage groups.
+  * **Group** system: create a group, invite users to join, manage groups.
 
-  * Event system: create an event, invite users to partecipate, confirm
+  * **Event** system: create an event, invite users to partecipate, confirm
     partecipation (yes/no/maybe)
 
-  * Comment system: write commments, reply to comments. For groups, events
+  * **Comment** system: write commments, reply to comments. For groups, events
     and maybe for something else.
 
-  * Notification system: a glue for all other systems. Notify your contacts
+  * **Notification** system: a glue for all other systems. Notify your contacts
     when you do an action (add a contact, create an event, etc.)

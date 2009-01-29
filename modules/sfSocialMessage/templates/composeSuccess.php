@@ -3,8 +3,9 @@
     <?php echo $form ?>
     <tr>
       <td colspan="2">
-        <input type="submit" />
+        <input type="submit" value="<?php echo __('send') ?>" />
       </td>
     </tr>
   </table>
 </form>
+<?php echo link_to(__('cancel'), '@sf_social_message_list') ?>

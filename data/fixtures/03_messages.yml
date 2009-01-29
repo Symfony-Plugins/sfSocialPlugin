@@ -1,34 +1,36 @@
 sfSocialMessage:
-  maxmike:
+  from_max:
     user_from: max
-    user_to: mike
     subject: lorem ipsum
     text: dolor sit amet, consectetur adipiscing elit. Sed accumsan laoreet sapien. Maecenas et nisl et mi imperdiet auctor.
-  dannyanna:
+  from_danny:
     user_from: danny
-    user_to: anna
     subject: hello pal
     text: Duis aliquam, diam consequat varius condimentum, nulla tortor tincidunt enim, sed faucibus pede ipsum a tortor. Curabitur posuere metus ac nisl. Sed porta feugiat ipsum.
-    read: true
-  mariomax:
+  from_mario:
     user_from: mario
-    user_to: max
     subject: how do you do?
     text: are you happy? I'm fine. Hooga appa loopa. Eeny, meeny, miny, moe
+  from_luigi:
+    user_from: luigi
+    subject: a message
+    text: a text for a message. Clever, uhu?
 
-sfSocialMessageSent:
-  maxmike:
-    user_from: max
+sfSocialMessageRcpt:
+  max_to_mike:
+    msg_id: from_max
     user_to: mike
-    subject: lorem ipsum
-    text: dolor sit amet, consectetur adipiscing elit. Sed accumsan laoreet sapien. Maecenas et nisl et mi imperdiet auctor.
-  dannyanna:
-    user_from: danny
+  max_to_anna:
+    msg_id: from_max
     user_to: anna
-    subject: hello pal
-    text: Duis aliquam, diam consequat varius condimentum, nulla tortor tincidunt enim, sed faucibus pede ipsum a tortor. Curabitur posuere metus ac nisl. Sed porta feugiat ipsum.
-  mariomax:
-    user_from: mario
+  danny_to_mike:
+    msg_id: from_danny
+    user_to: mike
+    read: true
+  mario_to_max:
+    msg_id: from_mario
     user_to: max
-    subject: how do you do?
-    text: are you happy? I'm fine. Hooga appa loopa. Eeny, meeny, miny, moe
+  luigi_to_max:
+    msg_id: from_luigi
+    user_to: max
+    read: true

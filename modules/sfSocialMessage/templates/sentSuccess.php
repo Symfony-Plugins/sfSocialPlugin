@@ -1,2 +1,8 @@
 <h2>OK</h2>
-<?php echo __('Message successfully sent to') ?> <?php echo $to ?>
+<?php echo __('Message successfully sent to') ?>:
+<ul>
+<?php foreach ($to as $user): ?>
+  <li><?php echo $user->getUsername() ?></li>
+<?php endforeach ?>
+</ul>
+<?php echo link_to(__('Back to list'), '@sf_social_message_list') ?>

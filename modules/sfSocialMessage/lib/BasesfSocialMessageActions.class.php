@@ -10,15 +10,20 @@
 abstract class BasesfSocialMessageActions extends sfActions
 {
 
+  public function preExecute()
+  {
+    $this->user = $this->getUser()->getGuardUser();
+  }
+
  /**
   * List of received messages
   * @param sfRequest $request A request object
   */
   public function executeList(sfWebRequest $request)
   {
-    $page = $request->getParameter('page');
-    $this->pager = sfSocialMessagePeer::getUserMessages($this->getUser()->getGuardUser(), $page);
-    $this->unread = sfSocialMessagePeer::countUnreadMessages($this->getUser()->getGuardUser());
+    $this->pager = sfSocialMessageRcptPeer::getUserMessages($this->user,
+                                                            $request->getParameter('page'));
+    $this->unread = sfSocialMessageRcptPeer::countUnreadMessages($this->user);
   }
 
  /**
@@ -27,8 +32,8 @@ abstract class BasesfSocialMessageActions extends sfActions
   */
   public function executeSentlist(sfWebRequest $request)
   {
-    $page = $request->getParameter('page');
-    $this->pager = sfSocialMessagePeer::getUserSentMessages($this->getUser()->getGuardUser(), $page);
+    $this->pager = sfSocialMessageRcptPeer::getUserSentMessages($this->user,
+                                                                $request->getParameter('page'));
   }
 
  /**
@@ -37,13 +42,12 @@ abstract class BasesfSocialMessageActions extends sfActions
   */
   public function executeRead(sfWebRequest $request)
   {
-    $id = $request->getParameter('id');
-    $this->forward404Unless($id, 'id not passed');
-    $this->message = sfSocialMessagePeer::retrieveByPK($id);
+    $this->message = sfSocialMessagePeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($this->message, 'message not found');
-    $this->forward404Unless($this->message->checkUserTo($this->getUser()->getGuardUser()),
+    $this->rcpts = $this->message->getsfSocialMessageRcpts();
+    $this->forward404Unless($this->message->checkUserTo($this->user),
                             'unauthorized');
-    $this->message->read();
+    $this->message->read($this->user);
   }
 
  /**
@@ -52,12 +56,11 @@ abstract class BasesfSocialMessageActions extends sfActions
   */
   public function executeSentread(sfWebRequest $request)
   {
-    $id = $request->getParameter('id');
-    $this->forward404Unless($id, 'id not passed');
-    $this->message = sfSocialMessageSentPeer::retrieveByPK($id);
+    $this->message = sfSocialMessagePeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($this->message, 'message not found');
-    $this->forward404Unless($this->message->checkUserFrom($this->getUser()->getGuardUser()),
+    $this->forward404Unless($this->message->checkUserFrom($this->user),
                             'unauthorized');
+    $this->rcpts = $this->message->getsfSocialMessageRcpts();
   }
 
  /**
@@ -73,15 +76,17 @@ abstract class BasesfSocialMessageActions extends sfActions
     {
       $message = sfSocialMessagePeer::retrieveByPK($reply_to);
       $this->forward404Unless($message, 'message not found');
-      $this->forward404Unless($message->checkUserTo($this->getUser()->getGuardUser()),
+      $this->forward404Unless($message->checkUserTo($this->user),
                               'unauthorized');
-      $this->form->setDefault('user_to', $message->getsfGuardUserRelatedByUserFrom()->getId());
+      $this->form->setDefault('to', $message->getsfGuardUser()->getId());
       $this->form->setDefault('subject', $message->getReplySubject());
     }
     if ($request->isMethod('post'))
     {
       $values = $request->getParameter('sf_social_message');
       $sent = $this->form->bindAndSave($values);
+      $msg = $this->form->getObject();
+      $msg->send($values['to']);
       $this->forwardIf($sent, 'sfSocialMessage', 'sent');
     }
   }
@@ -93,9 +98,8 @@ abstract class BasesfSocialMessageActions extends sfActions
   public function executeSent(sfWebRequest $request)
   {
     $values = $request->getParameter('sf_social_message', array());
-    $this->forward404Unless($values['user_to'], 'user not found');
-    $to = sfGuardUserPeer::retrieveByPK($values['user_to']);
-    $this->to = $to->getUsername();
+    $this->forward404Unless($values['to'], 'users not found');
+    $this->to = sfGuardUserPeer::retrieveByPKs($values['to']);
   }
 
 }

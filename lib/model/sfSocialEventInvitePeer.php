@@ -22,6 +22,7 @@ class sfSocialEventInvitePeer extends BasesfSocialEventInvitePeer
     $pager->setCriteria($c);
     $pager->setPeerMethod('doSelectJoinAllExceptsfGuardUserRelatedByUserFrom');
     #$pager->setPeerMethod('doSelectJoinAll');
+    #$pager->setPeerMethod('doSelectJoinAllExceptinvited');
     $pager->setPage($page);
     $pager->init();
     return $pager;

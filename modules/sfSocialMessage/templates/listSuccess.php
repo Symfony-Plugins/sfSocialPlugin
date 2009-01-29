@@ -6,11 +6,12 @@
 <?php echo $unread ?> <?php echo __('unread messages') ?>
 <?php endif ?>
 <ul>
-<?php foreach ($pager->getResults() as $message): ?>
-  <li class="<?php echo $message->getRead() ? 'read' : 'unread' ?>">
+<?php foreach ($pager->getResults() as $rcpt): ?>
+<?php $message = $rcpt->getSfSocialMessage() ?>
+  <li class="<?php echo $rcpt->getRead() ? 'read' : 'unread' ?>">
     <?php echo $message->getCreatedAt() ?>
     * <?php echo link_to($message->getSubject(), '@sf_social_message_read?id=' . $message->getId()) ?>
-    - <?php echo __('from') ?> <u><?php echo $message->getsfGuardUserRelatedByUserFrom()->getUsername() ?></u> <!-- TODO user link -->
+    - <?php echo __('from') ?> <u><?php echo $message->getsfGuardUser()->getUsername() ?></u> <!-- TODO user link -->
   </li>
 <?php endforeach ?>
 </ul>
@@ -20,3 +21,5 @@
 <?php endforeach ?>
 <?php endif ?>
 <?php endif ?>
+<?php echo link_to(__('Sent messages'), '@sf_social_message_sentlist') ?> |
+<?php echo link_to(__('Compose a new message'), '@sf_social_message_new') ?>

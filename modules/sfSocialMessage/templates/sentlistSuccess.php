@@ -3,11 +3,11 @@
 <?php else: ?>
 <h2><?php echo __('Messages sent') ?></h2>
 <ul>
-<?php foreach ($pager->getResults() as $message): ?>
-  <li class="<?php echo $message->getRead() ? 'read' : 'unread' ?>">
+<?php foreach ($pager->getResults() as $rcpt): ?>
+<?php $message = $rcpt->getSfSocialMessage() ?>
+  <li class="read">
     <?php echo $message->getCreatedAt() ?>
     * <?php echo link_to($message->getSubject(), '@sf_social_message_sentread?id=' . $message->getId()) ?>
-    - <?php echo __('to') ?> <u><?php echo $message->getsfGuardUserRelatedByUserTo()->getUsername() ?></u> <!-- TODO user link -->
   </li>
 <?php endforeach ?>
 </ul>
@@ -17,3 +17,4 @@
 <?php endforeach ?>
 <?php endif ?>
 <?php endif ?>
+<?php echo link_to(__('Received messages'), '@sf_social_message_list') ?>
