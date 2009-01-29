@@ -2,12 +2,12 @@
 
 /**
  * Base actions for the sfSocialPlugin sfSocialContact module.
- * 
+ *
  * @package     sfSocialPlugin
  * @subpackage  sfSocialContact
  * @author      Lionel Guichard <lionel.guichard@gmail.com>
  */
-abstract class BasesfSocialContactActions extends sfActions
+class BasesfSocialContactActions extends sfActions
 {
 	/**
   * List of contacts
@@ -56,14 +56,14 @@ abstract class BasesfSocialContactActions extends sfActions
     $this->forward404Unless($id, 'id not passed');
     $this->request = sfSocialContactRequestPeer::retrieveByPK($id);
     $this->forward404Unless($this->request, 'request not found');
-		
+
 		$this->forward404Unless($this->request->checkUserFrom($this->getUser()->getGuardUser()),
                             'unauthorized');
-		
+
 		$this->request->accepted();
 
 		$this->getUser()->addContact($this->request->getsfGuardUserRelatedByUserFrom());
-		
+
 		$this->redirect('@sf_social_contact_list');
   }
 
@@ -78,12 +78,12 @@ abstract class BasesfSocialContactActions extends sfActions
     $this->forward404Unless($id, 'id not passed');
     $this->request = sfSocialContactRequestPeer::retrieveByPK($id);
     $this->forward404Unless($this->request, 'request not found');
-		
+
 		$this->forward404Unless($this->request->checkUserFrom($this->getUser()->getGuardUser()),
                             'unauthorized');
-		
+
 		$this->request->refused();
-		
+
 		$this->redirect('@sf_social_contact_list');
   }
 

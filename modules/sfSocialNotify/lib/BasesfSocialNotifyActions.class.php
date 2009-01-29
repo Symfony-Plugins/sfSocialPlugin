@@ -2,12 +2,31 @@
 
 /**
  * Base actions for the sfSocialPlugin sfSocialNotify module.
- * 
+ *
  * @package     sfSocialPlugin
  * @subpackage  sfSocialNotify
- * @author      Your name here
- * @version     SVN: $Id: BaseActions.class.php 12628 2008-11-04 14:43:36Z Kris.Wallsmith $
+ * @author      Massimiliano Arione <garakkio@gmail.com>
  */
-abstract class BasesfSocialNotifyActions extends sfActions
+class BasesfSocialNotifyActions extends sfActions
 {
+
+
+ /**
+  * get a received notify
+  * @param sfRequest $request A request object
+  */
+  public function executeGet(sfWebRequest $request)
+  {
+    $notify = sfSocialNotifyPeer::retrieveByPK($request->getParameter('id'));
+    $this->forward404Unless($notify, 'notify not found');
+    $notify->setModel();
+    $notify->read();
+    // this is really ugly! Refactoring needed
+    switch ($notify->getModelName())
+    {
+      case 'sfSocialMessage':
+        return $this->redirect('@sf_social_message_read?id=' . $notify->getModelId());
+      // TODO other models
+    }
+  }
 }

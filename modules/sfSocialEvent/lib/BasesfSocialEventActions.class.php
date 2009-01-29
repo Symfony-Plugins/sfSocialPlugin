@@ -7,7 +7,7 @@
  * @subpackage  sfSocialEvent
  * @author      Massimiliano Arione <garakkio@gmail.com>
  */
-abstract class BasesfSocialEventActions extends sfActions
+class BasesfSocialEventActions extends sfActions
 {
 
  /**

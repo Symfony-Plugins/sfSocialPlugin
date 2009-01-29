@@ -101,3 +101,12 @@ propel:
     msg_id: { type: integer, required: true, foreignTable: sf_social_message, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     user_to: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     read: { type: boolean, default: false }
+
+  sf_social_notify:
+    _attributes:    { phpName: sfSocialNotify }
+    id: ~
+    user_id: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+    model_name: { type: varchar, size: 255, required: true }
+    model_id: { type: integer, required: true }
+    read: { type: boolean, default: false }
+    created_at: ~

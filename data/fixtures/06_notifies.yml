@@ -1,0 +1,5 @@
+sfSocialNotify:
+  to_max:
+    user_id: max
+    model_name: sfSocialMessage
+    model_id: 3

@@ -2,11 +2,10 @@
 
 /**
  * sfSocialPlugin configuration.
- * 
+ *
  * @package     sfSocialPlugin
  * @subpackage  config
- * @author      Your name here
- * @version     SVN: $Id: PluginConfiguration.class.php 12675 2008-11-06 08:07:42Z Kris.Wallsmith $
+ * @author      Massimiliano Arione <garakkio@gmail.com>
  */
 class sfSocialPluginConfiguration extends sfPluginConfiguration
 {
@@ -15,5 +14,11 @@ class sfSocialPluginConfiguration extends sfPluginConfiguration
    */
   public function initialize()
   {
+    if (in_array('sfSocialNotify', sfConfig::get('sf_enabled_modules', array())))
+    {
+      $this->dispatcher->connect('social.write_message', array('sfSocialNotifyListener', 'listenToWriteMessage'));
+      // TODO connect to other listeners here
+    }
+
   }
 }

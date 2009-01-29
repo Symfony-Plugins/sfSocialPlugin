@@ -7,7 +7,7 @@
  * @subpackage  sfSocialMessage
  * @author      Massimiliano Arione <garakkio@gmail.com>
  */
-abstract class BasesfSocialMessageActions extends sfActions
+class BasesfSocialMessageActions extends sfActions
 {
 
   public function preExecute()
@@ -87,7 +87,11 @@ abstract class BasesfSocialMessageActions extends sfActions
       $sent = $this->form->bindAndSave($values);
       $msg = $this->form->getObject();
       $msg->send($values['to']);
-      $this->forwardIf($sent, 'sfSocialMessage', 'sent');
+      if ($sent)
+      {
+        $this->dispatcher->notify(new sfEvent($msg, 'social.write_message'));
+        $this->forward('sfSocialMessage', 'sent');
+      }
     }
   }
 
