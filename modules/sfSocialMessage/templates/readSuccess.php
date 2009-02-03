@@ -1,4 +1,4 @@
-<h2><?php echo __('Message from') ?> <u><?php echo $message->getsfGuardUser()->getUsername() ?></u></h2> <!-- TODO user link -->
+<h2><?php echo __('Message from') ?> <?php echo link_to($message->getsfGuardUser(), '@sf_social_user?username=' . $message->getsfGuardUser()) ?></u></h2> <!-- TODO user link -->
 <h3><?php echo __('Date') ?>: <?php echo $message->getCreatedAt() ?></h3>
 <h3><?php echo __('Subject') ?>: <?php echo $message->getSubject() ?></h3>
 <blockquote>

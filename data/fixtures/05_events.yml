@@ -26,7 +26,10 @@ sfSocialEventInvite:
     event_id: maxbirthday
     user_id: mario
     user_from: max
-    replied: false
+  max:
+    event_id: pizzaparty
+    user_id: max
+    user_from: anna
 
 sfSocialEventUser:
   mikemaybe:

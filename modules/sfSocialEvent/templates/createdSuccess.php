@@ -6,4 +6,4 @@
 <?php endif ?>
 
 <p />
-<?php echo link_to('Back to event', '@sf_social_event_view?id=' . $event->getId()) ?>
+<?php echo link_to('Back to event', '@sf_social_event?id=' . $event->getId()) ?>

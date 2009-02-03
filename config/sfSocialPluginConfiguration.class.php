@@ -14,9 +14,14 @@ class sfSocialPluginConfiguration extends sfPluginConfiguration
    */
   public function initialize()
   {
-    if (in_array('sfSocialNotify', sfConfig::get('sf_enabled_modules', array())))
+    $modules = sfConfig::get('sf_enabled_modules', array());
+    if (in_array('sfSocialNotify', $modules))
     {
-      $this->dispatcher->connect('social.write_message', array('sfSocialNotifyListener', 'listenToWriteMessage'));
+      if (in_array('sfSocialMessage', $modules))
+      {
+        $this->dispatcher->connect('social.write_message', array('sfSocialNotifyListener',
+                                                                 'listenToWriteMessage'));
+      }
       // TODO connect to other listeners here
     }
 

@@ -7,7 +7,7 @@
 </div>
 
 <div id="event_confirm">
-<form action="<?php echo url_for('@sf_social_event_view?id=' . $event->getId()) ?>" method="post">
+<form action="<?php echo url_for('@sf_social_event?id=' . $event->getId()) ?>" method="post">
   <table>
     <?php echo $form ?>
     <tr>

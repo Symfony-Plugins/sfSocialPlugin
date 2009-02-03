@@ -46,7 +46,7 @@ sf_social_event_invite:
   param: { module: sfSocialEvent, action: invite }
   requirements: { id: \d+ }
 
-sf_social_event_view:
+sf_social_event:
   url:   /event/:id
   param: { module: sfSocialEvent, action: view }
   requirements: { id: \d+ }
@@ -90,3 +90,10 @@ sf_social_notify:
   url:   /notify/:id
   param: { module: sfSocialNotify, action: get }
   requirements: { id: \d+ }
+
+# user
+
+sf_social_user:
+  url:   /user/:username
+  param: { module: sfSocialUser, action: user }
+  requirements: { usernam: \w+ }

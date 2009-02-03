@@ -34,6 +34,8 @@ class sfSocialMessageRcptPeer extends BasesfSocialMessageRcptPeer
   {
     $c = new Criteria();
     $c->add(sfSocialMessagePeer::USER_FROM, $user->getId());
+    #$c->addSelectColumn('COUNT(*)');
+    $c->addAsColumn('number', 'COUNT(*)');
     $c->addGroupByColumn(self::MSG_ID);
     $c->addDescendingOrderByColumn(sfSocialMessagePeer::CREATED_AT);
     $pager = new sfPropelPager('sfSocialMessageRcpt', $n);

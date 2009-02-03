@@ -11,7 +11,7 @@
   <li class="<?php echo $rcpt->getRead() ? 'read' : 'unread' ?>">
     <?php echo $message->getCreatedAt() ?>
     * <?php echo link_to($message->getSubject(), '@sf_social_message_read?id=' . $message->getId()) ?>
-    - <?php echo __('from') ?> <u><?php echo $message->getsfGuardUser()->getUsername() ?></u> <!-- TODO user link -->
+    - <?php echo __('from') ?> <?php echo link_to($message->getsfGuardUser(), '@sf_social_user?username=' . $message->getsfGuardUser()) ?>
   </li>
 <?php endforeach ?>
 </ul>

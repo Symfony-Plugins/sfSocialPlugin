@@ -19,4 +19,4 @@
 
 <hr />
 
-<?php echo link_to(__('Back to event'), '@sf_social_event_view?id=' . $event->getId()) ?>
+<?php echo link_to(__('Back to event'), '@sf_social_event?id=' . $event->getId()) ?>

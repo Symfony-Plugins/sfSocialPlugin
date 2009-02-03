@@ -5,10 +5,10 @@
 <ul>
 <?php foreach ($pager->getResults() as $event): ?>
   <li>
-    <?php echo link_to($event->getTitle(), '@sf_social_event_view?id=' . $event->getId()) ?>
-    <?php echo $event->getStart() ?> - <?php echo $event->getEnd() ?>
+    <?php echo link_to($event, '@sf_social_event?id=' . $event->getId()) ?>
+    <?php echo $event->getWhen() ?>
     <?php echo __('in') ?> <?php echo $event->getLocation() ?>
-    - <?php echo __('by') ?> <u><?php echo $event->getsfGuardUser()->getUsername() ?></u> <!-- TODO user link -->
+    - <?php echo __('by') ?> <?php echo link_to($event->getsfGuardUser(), '@sf_social_user?username=' . $event->getsfGuardUser()) ?>
   </li>
 <?php endforeach ?>
 </ul>
