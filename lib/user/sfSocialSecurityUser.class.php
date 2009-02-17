@@ -52,11 +52,11 @@ class sfSocialSecurityUser extends sfGuardSecurityUser
     return $this->getGuardUser()->addContact($user);
   }
 	
-	/**
+  /**
    * Accept request from a contact
    * 
    * @param  sfGuardUser $user
-	 * @param  string $message
+   * @param  string $message
    * @return booelan 
    * @access public
    */
@@ -65,10 +65,10 @@ class sfSocialSecurityUser extends sfGuardSecurityUser
     return $this->getGuardUser()->sendRequestContact($user, $message);
   }
 	
-	/**
+  /**
    * Accept request from a contact
    * 
-   * @param  user $user_from
+   * @param  user $user
    * @return booelan 
    * @access public
    */
@@ -77,10 +77,10 @@ class sfSocialSecurityUser extends sfGuardSecurityUser
     return $this->getGuardUser()->acceptRequestContact($user);
   }
 
-	/**
+  /**
    * Deny request from a contact
    * 
-   * @param  user $user_from
+   * @param  user $user
    * @return booelan 
    * @access public
    */
@@ -92,7 +92,7 @@ class sfSocialSecurityUser extends sfGuardSecurityUser
   /**
    * Remove contact
    * 
-   * @param  int $id
+   * @param  user $user
    * @return boolean 
    * @access public
    */
@@ -108,12 +108,12 @@ class sfSocialSecurityUser extends sfGuardSecurityUser
    * @return booelan 
    * @access public
    */
-	public function addContactByUsername($username)
+  public function addContactByUsername($username)
   {
-		return $this->getGuardUser()->addContactByUsername($username);
-	}
+    return $this->getGuardUser()->addContactByUsername($username);
+  }
 	
-	/**
+  /**
    * Remove contact from username
    * 
    * @param  string $username
@@ -123,17 +123,17 @@ class sfSocialSecurityUser extends sfGuardSecurityUser
   public function removeContactByUsername($username)
   {
   	return $this->getGuardUser()->removeContactByUsername($username);
-	}
+  }
 	
-	/**
+  /**
    * Remove all contatcs from username
    * 
    * @param  null
    * @return boolean 
    * @access public
-  */
+   */
   public function removeAllContacts()
   {
   	return $this->getGuardUser()->removeAllContacts();
-	}
+  }
 }

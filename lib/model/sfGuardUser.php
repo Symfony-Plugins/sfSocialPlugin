@@ -56,8 +56,18 @@ class sfGuardUser extends PluginsfGuardUser
     {
       throw new Exception(sprintf('The user "%s" does not exist.', $user_to));
     }
-   	
-  	$scr = new sfSocialContactRequest();
+
+		if ($user_to->getId() == $this->getId())
+    {
+      throw new Exception(sprintf("You can't add yourself as a contact", $user_to));
+    }
+
+   	if($this->hasContact($user_to))
+  	{
+			throw new Exception(sprintf("You can't add a contact that already exist", $user_to));
+		}
+		
+		$scr = new sfSocialContactRequest();
   	$scr->setUserFrom($this->getId());
   	$scr->setUserTo($user_to->getId());
   	$scr->setMessage($message);
