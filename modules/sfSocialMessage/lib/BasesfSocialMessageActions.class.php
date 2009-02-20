@@ -15,10 +15,10 @@ class BasesfSocialMessageActions extends sfActions
     $this->user = $this->getUser()->getGuardUser();
   }
 
- /**
-  * List of received messages
-  * @param sfRequest $request A request object
-  */
+  /**
+   * List of received messages
+   * @param sfRequest $request A request object
+   */
   public function executeList(sfWebRequest $request)
   {
     $this->pager = sfSocialMessageRcptPeer::getUserMessages($this->user,
@@ -26,20 +26,20 @@ class BasesfSocialMessageActions extends sfActions
     $this->unread = sfSocialMessageRcptPeer::countUnreadMessages($this->user);
   }
 
- /**
-  * List of sent messages
-  * @param sfRequest $request A request object
-  */
+  /**
+   * List of sent messages
+   * @param sfRequest $request A request object
+   */
   public function executeSentlist(sfWebRequest $request)
   {
     $this->pager = sfSocialMessageRcptPeer::getUserSentMessages($this->user,
                                                                 $request->getParameter('page'));
   }
 
- /**
-  * Read a received message
-  * @param sfRequest $request A request object
-  */
+  /**
+   * Read a received message
+   * @param sfRequest $request A request object
+   */
   public function executeRead(sfWebRequest $request)
   {
     $this->message = sfSocialMessagePeer::retrieveByPK($request->getParameter('id'));
@@ -50,10 +50,10 @@ class BasesfSocialMessageActions extends sfActions
     $this->message->read($this->user);
   }
 
- /**
-  * Read a sent message
-  * @param sfRequest $request A request object
-  */
+  /**
+   * Read a sent message
+   * @param sfRequest $request A request object
+   */
   public function executeSentread(sfWebRequest $request)
   {
     $this->message = sfSocialMessagePeer::retrieveByPK($request->getParameter('id'));
@@ -63,10 +63,10 @@ class BasesfSocialMessageActions extends sfActions
     $this->rcpts = $this->message->getsfSocialMessageRcpts();
   }
 
- /**
-  * Compose a new message
-  * @param sfRequest $request A request object
-  */
+  /**
+   * Compose a new message
+   * @param sfRequest $request A request object
+   */
   public function executeCompose(sfWebRequest $request)
   {
     $this->form = new sfSocialMessageForm();
@@ -95,10 +95,18 @@ class BasesfSocialMessageActions extends sfActions
     }
   }
 
- /**
-  * Message successfully sent
-  * @param sfRequest $request A request object
-  */
+  /**
+   * Javascript for "Compose a new message"
+   * @param sfRequest $request A request object
+   */
+  public function executeComposejs(sfWebRequest $request)
+  {
+  }
+
+  /**
+   * Message successfully sent
+   * @param sfRequest $request A request object
+   */
   public function executeSent(sfWebRequest $request)
   {
     $values = $request->getParameter('sf_social_message', array());

@@ -22,6 +22,10 @@ sf_social_message_new:
   url:   /message/compose/*
   param: { module: sfSocialMessage, action: compose }
 
+sf_social_message_js:
+  url:   /message.js
+  param: { module: sfSocialMessage, action: composejs, sf_format: js }
+
 # events
 
 sf_social_event_invitedlist:
@@ -83,6 +87,10 @@ sf_social_contact_delete:
   url:   /contact/delete/:id
   param: { module: sfSocialContact, action: delete }
   requirements: { id: \d+ }
+
+sf_social_contact_search:
+  url:   /search/*
+  param: { module: sfSocialContact, action: search, sf_format: json }
 
 # notify
 

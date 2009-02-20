@@ -22,4 +22,25 @@ class sfSocialContactPeer extends BasesfSocialContactPeer
     return $pager;
   }
 
+	/**
+   * search user's contacts (possibly exlcuding someones)
+   * @param  sfGuardUser   $user
+   * @param  string        $text        text to search
+   * @param  string        $exclude_ids ids to exclude (e.g. "4,10,15")
+   * @return array
+   */
+  public static function search(sfGuardUser $user, $text, $exclude_ids = array())
+  {
+    $c = new Criteria();
+    $c->add(self::USER_FROM , $user->getId());
+    $c->add(sfGuardUserPeer::USERNAME, '%' . $text . '%', Criteria::LIKE);
+    if (!empty($exclude_ids))
+    {
+      $c->add(sfGuardUserPeer::ID, explode(',', $exclude_ids), Criteria::NOT_IN);
+    }
+    $c->addAscendingOrderByColumn(sfGuardUserPeer::USERNAME);
+    $c->setLimit(30);
+    return self::doSelectJoinsfGuardUserRelatedByUserTo($c);
+  }
+
 }

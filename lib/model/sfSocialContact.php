@@ -2,6 +2,16 @@
 
 class sfSocialContact extends BasesfSocialContact
 {
+
+  /**
+   * magic method
+   * @return string
+   */
+  public function __toString()
+  {
+    return $this->getsfGuardUserRelatedByUserTo();
+  }
+
   /**
    * check if contact is belonging to user
    *
@@ -25,30 +35,30 @@ class sfSocialContact extends BasesfSocialContact
   	{
 	  	throw new PropelException("You cannot delete an object that has been deleted.");
     }
-		
+
 		if ($con == null)
 		{
       $con = Propel::getConnection();
 		}
-	
+
 		try
 		{
 			$con->beginTransaction();
-			
+
 			parent::delete($con);
-			
+
 			$c = new Criteria();
 			$c->add(sfSocialContactPeer::USER_FROM, $this->getUserTo());
 			$c->add(sfSocialContactPeer::USER_TO, $this->getUserFrom());
 			sfSocialContactPeer::doDelete($c);
-			
+
 			$c = new Criteria();
 			$criterion = $c->getNewCriterion(sfSocialContactRequestPeer::USER_FROM, $this->getUserTo())->addOr($c->getNewCriterion(sfSocialContactRequestPeer::USER_TO, $this->getUserTo()));
 			$c->addAnd($criterion);
 			$criterion = $c->getNewCriterion(sfSocialContactRequestPeer::USER_FROM, $this->getUserFrom())->addOr($c->getNewCriterion(sfSocialContactRequestPeer::USER_TO, $this->getUserFrom()));
 			$c->addAnd($criterion);
 			sfSocialContactRequestPeer::doDelete($c);
-			
+
 			$con->commit();
 		}
 		catch (PDOException $e)

@@ -23,8 +23,16 @@ class sfSocialMessageForm extends BasesfSocialMessageForm
                         new sfValidatorChoice(array('choices' => array($uid))));
 
     // add recipients field
-    $this->widgetSchema['to'] = new sfWidgetFormPropelChoiceMany(array('model' => 'sfGuardUser',
-                                                                       'add_empty' => false));
+    $c = new Criteria;
+    $c->add(sfSocialContactPeer::USER_FROM, $uid);
+    $c->setLimit(50);
+    $c->addAscendingOrderByColumn(sfGuardUserPeer::USERNAME);
+    $this->widgetSchema['to'] = new sfWidgetFormPropelChoiceMany(array('model'       => 'sfSocialContact',
+                                                                       'add_empty'   => false,
+                                                                       'peer_method' => 'doSelectJoinsfGuardUserRelatedByUserTo',
+                                                                       'criteria'    => $c,
+                                                                       )
+                                                                 );
     $this->setValidator('to',
                         new sfValidatorPropelChoiceMany(array('model' => 'sfGuardUser',
                                                               'column' => 'id')));
