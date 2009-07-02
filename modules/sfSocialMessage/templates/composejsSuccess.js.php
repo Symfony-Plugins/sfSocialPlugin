@@ -23,6 +23,8 @@ sfsmsg =
     }
     // save name of "to" field, to use it in "add" function
     sfsmsg.toname = to.getAttribute('name');
+    // get possible selected values of field
+    var selected = to.options.selectedIndex > 0 ? to.options[to.options.selectedIndex] : null;
     // create a container for autocomplete
     var div = document.createElement('div');
     div.setAttribute('id', 'msgcont');
@@ -34,6 +36,11 @@ sfsmsg =
     var rcpts = document.createElement('div');
     rcpts.setAttribute('id', 'rcpts');
     div.appendChild(rcpts);
+    // add possible selected values
+    if (selected)
+    {
+      sfsmsg.add(selected.value, selected.text);
+    }
     // add a new input field
     var input = document.createElement('input');
     input.setAttribute('id', 'msginput');
@@ -107,25 +114,24 @@ sfsmsg =
     var myHandler = function(sType, aArgs)
     {
       var oData = aArgs[2];
-      sfsmsg.add(oData);
+      sfsmsg.add(oData[0], oData[1]);
       var input = document.getElementById('msginput');
       input.value = '';
-      sfsmsg.rcpts.push(oData[0]);
     };
     ac.itemSelectEvent.subscribe(myHandler);
   },
 
-  // add selected name to rpcts. data = [id, name] e.g.: 4,mario
-  add: function(data)
+  // add selected id/name to rpcts. data = [id, name] e.g.: 4,mario
+  add: function(id, name)
   {
     var rcpts = document.getElementById('rcpts');
     // create a span with selected name inside
     var span = document.createElement('span');
-    span.appendChild(document.createTextNode(data[1]));
+    span.appendChild(document.createTextNode(name));
     // add a remove link ("X") with id inside
     var a = document.createElement('a');
     a.appendChild(document.createTextNode('x'));
-    a.setAttribute('href', '#' + data[0]);
+    a.setAttribute('href', '#' + id);
     a.setAttribute('title', 'remove');  // TODO localize!
     YAHOO.util.Event.addListener(a, 'click', sfsmsg.remove);
     span.appendChild(a);
@@ -133,10 +139,12 @@ sfsmsg =
     var ih = document.createElement('input');
     ih.setAttribute('type', 'hidden');
     ih.setAttribute('name', sfsmsg.toname);
-    ih.setAttribute('value', data[0]);
+    ih.setAttribute('value', id);
     span.appendChild(ih);
     // insert span in div
     rcpts.appendChild(span);
+    // add to rcpts array
+    sfsmsg.rcpts.push(id);
   },
 
   // remove rpct

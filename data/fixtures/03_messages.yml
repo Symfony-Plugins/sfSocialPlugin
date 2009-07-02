@@ -3,18 +3,27 @@ sfSocialMessage:
     user_from: max
     subject: lorem ipsum
     text: dolor sit amet, consectetur adipiscing elit. Sed accumsan laoreet sapien. Maecenas et nisl et mi imperdiet auctor.
+    created_at: 2009-01-07 12:13:14
   from_danny:
     user_from: danny
     subject: hello pal
     text: Duis aliquam, diam consequat varius condimentum, nulla tortor tincidunt enim, sed faucibus pede ipsum a tortor. Curabitur posuere metus ac nisl. Sed porta feugiat ipsum.
+    created_at: 2009-01-08 13:13:14
   from_mario:
     user_from: mario
     subject: how do you do?
     text: are you happy? I'm fine. Hooga appa loopa. Eeny, meeny, miny, moe
+    created_at: 2009-01-09 20:55:24
   from_luigi:
     user_from: luigi
     subject: a message
     text: a text for a message. Clever, uhu?
+    created_at: 2009-01-10 09:43:14
+  from_jimmy:
+    user_from: jimmy
+    subject: 3 little pigs
+    text: who's afraid of big bad wolf, big bad wolf, big bad wolf.
+    created_at: 2009-01-14 18:13:14
 
 sfSocialMessageRcpt:
   max_to_mike:
@@ -34,3 +43,9 @@ sfSocialMessageRcpt:
     msg_id: from_luigi
     user_to: max
     read: true
+  jimmy_to_max:
+    msg_id: from_jimmy
+    user_to: max
+  danny_to_max:
+    msg_id: from_danny
+    user_to: max

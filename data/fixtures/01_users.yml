@@ -26,3 +26,12 @@ sfGuardUser:
   karl:
     username:  karl
     password:  marx
+  jimmy:
+    username:  jimmy
+    password:  dummy
+  timmy:
+    username:  timmy
+    password:  dummy
+  tommy:
+    username:  tommy
+    password:  dummy

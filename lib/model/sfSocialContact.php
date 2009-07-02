@@ -67,4 +67,15 @@ class sfSocialContact extends BasesfSocialContact
 			throw $e;
 		}
   }
+
+  /**
+   * used by sfSocialMessageForm to get correct user's id
+   * If not used, contact's id is taken instead (which is, of course, wrong)
+   * @return integer
+   */
+  public function getUserId()
+  {
+    return $this->getsfGuardUserRelatedByUserTo()->getId();
+  }
+
 }

@@ -6,13 +6,11 @@
 <?php use_javascript('http://yui.yahooapis.com/2.7.0/build/autocomplete/autocomplete-min.js') ?>
 <?php use_javascript(url_for('@sf_social_message_js')) ?>
 <form id="compose_message" action="<?php echo url_for('@sf_social_message_new') ?>" method="post">
-  <table>
+  <ul id="form">
     <?php echo $form ?>
-    <tr>
-      <td colspan="2">
-        <input type="submit" value="<?php echo __('send') ?>" />
-      </td>
-    </tr>
-  </table>
+    <li class="buttons">
+      <?php echo link_to(__('cancel'), '@sf_social_message_list', 'class=cancel') ?>
+      <input type="submit" value="<?php echo __('send') ?>" />
+    </li>
+  </ul>
 </form>
-<?php echo link_to(__('cancel'), '@sf_social_message_list') ?>

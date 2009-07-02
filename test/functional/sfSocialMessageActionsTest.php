@@ -1,10 +1,13 @@
 <?php
 
-include dirname(__FILE__).'/../bootstrap/functional.php';
+include dirname(__FILE__) . '/../bootstrap/functional.php';
 
-$browser = new sfTestFunctional(new sfBrowser());
+$browser = new loggedTest(new sfBrowser());
 
 $browser->
+
+  doLogin()->
+
   info('index (list)')->
   get('/messages/')->
 
@@ -15,7 +18,7 @@ $browser->
 
   with('response')->begin()->
     isStatusCode(200)->
-    checkElement('body h2', '/messages/')->
-    checkElement('body ul li', 2)->
+    checkElement('body h2', '/Messages received/')->
+    checkElement('body ul li', 7)->
   end()
 ;

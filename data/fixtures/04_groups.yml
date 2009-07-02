@@ -3,8 +3,8 @@ sfSocialGroup:
     user_admin: max
     title: we are all dummies
     description: after all, there's always something we don't know...
-    created_at: 2007-12-25 00:00
-    updated_at: 2008-01-01 00:01
+    created_at: 2007-12-25 00:00:01
+    updated_at: 2008-01-01 00:01:05
 
 sfSocialGroupInvite:
   newdummy1:

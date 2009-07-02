@@ -17,6 +17,24 @@ sfSocialContact:
   mariomax:
     user_from: mario
     user_to: max
+  maxjimmy:
+    user_from: max
+    user_to: jimmy
+  jimmymax:
+    user_from: jimmy
+    user_to: max
+  maxtimmy:
+    user_from: max
+    user_to: timmy
+  timmymax:
+    user_from: timmy
+    user_to: max
+  maxtommy:
+    user_from: max
+    user_to: tommy
+  tommymax:
+    user_from: tommy
+    user_to: max
 
 sfSocialContactGroup:
   maxfriends:
@@ -36,9 +54,9 @@ sfSocialContactRequest:
     user_from: danny
     user_to: max
     message: Hello Max, I would like to be your friend :-)
-    created_at: 2009-01-08 10:23
+    created_at: 2009-01-08 10:23:00
   maxluigi:
     user_from: max
     user_to: luigi
     message: Hi bro, remember of me?
-    created_at: 2009-01-07 11:01
+    created_at: 2009-01-07 11:01:01

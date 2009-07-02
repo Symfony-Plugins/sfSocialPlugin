@@ -31,6 +31,7 @@ class sfSocialMessageForm extends BasesfSocialMessageForm
                                                                        'add_empty'   => false,
                                                                        'peer_method' => 'doSelectJoinsfGuardUserRelatedByUserTo',
                                                                        'criteria'    => $c,
+                                                                       'key_method'  => 'getUserId',
                                                                        )
                                                                  );
     $this->setValidator('to',
