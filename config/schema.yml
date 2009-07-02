@@ -92,7 +92,7 @@ propel:
     id: ~
     user_from: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     subject: { type: varchar, size: 255, required: true }
-    text: { type: longvarchar }
+    text: { type: longvarchar, required: true }
     created_at: ~
 
   sf_social_message_rcpt:

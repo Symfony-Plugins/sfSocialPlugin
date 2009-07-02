@@ -10,7 +10,7 @@ class sfSocialContactRequestPeer extends BasesfSocialContactRequestPeer
    * @param  integer       $n     max per page
    * @return sfPropelPager
    */
-  public static function getReceiveRequests(sfGuardUser $user, $page = 1, $n = 10)
+  public static function getReceivedRequests(sfGuardUser $user, $page = 1, $n = 10)
   {
     $c = new Criteria();
     $c->add(self::USER_TO, $user->getId());

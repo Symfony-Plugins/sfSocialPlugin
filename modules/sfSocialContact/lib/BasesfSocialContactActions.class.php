@@ -16,7 +16,6 @@ class BasesfSocialContactActions extends sfActions
    */
   public function executeList(sfWebRequest $request)
   {
-		//myUser::addContact();
     $page = $request->getParameter('page');
     $this->pager = sfSocialContactPeer::getContacts($this->getUser()->getGuardUser(), $page);
   }
@@ -42,7 +41,7 @@ class BasesfSocialContactActions extends sfActions
   public function executeRequests(sfWebRequest $request)
   {
     $page = $request->getParameter('page');
-    $this->pager = sfSocialContactRequestPeer::getReceiveRequests($this->getUser()->getGuardUser(), $page);
+    $this->pager = sfSocialContactRequestPeer::getReceivedRequests($this->getUser()->getGuardUser(), $page);
   }
 
   /**

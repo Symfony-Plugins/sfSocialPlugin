@@ -35,7 +35,9 @@ class sfSocialMessageForm extends BasesfSocialMessageForm
                                                                        )
                                                                  );
     $this->setValidator('to',
-                        new sfValidatorPropelChoiceMany(array('model' => 'sfGuardUser',
-                                                              'column' => 'id')));
+                        new sfValidatorPropelChoiceMany(array('model'    => 'sfGuardUser',
+                                                              'column'   => 'id',
+                                                              'required' => true)));
+
   }
 }

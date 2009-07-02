@@ -2,9 +2,9 @@
 <h2><?php echo __('No events yet') ?></h2>
 <?php else: ?>
 <h2><?php echo __('Events') ?></h2>
-<ul>
+<ul id="list">
 <?php foreach ($pager->getResults() as $event): ?>
-  <li>
+  <li class="<?php $bRow = empty($bRow) ? print('a') : false ?>">
     <?php echo link_to($event->getTitle(), '@sf_social_event?id=' . $event->getId()) ?>
     <?php echo $event->getWhen() ?>
     <?php echo __('in') ?> <?php echo $event->getLocation() ?>

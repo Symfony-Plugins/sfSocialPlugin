@@ -50,7 +50,6 @@ class BasesfSocialEventActions extends sfActions
     $this->forward404Unless($id, 'id not passed');
     $this->event = sfSocialEventPeer::retrieveByPK($id);
     $this->forward404Unless($this->event, 'event not found');
-
     // confirm form
     $this->getContext()->set('Event', $this->event);
     $event_user = sfSocialEventUserPeer::retrieveByPK($this->event->getId(), $this->getUser()->getGuardUser()->getId());
@@ -59,7 +58,6 @@ class BasesfSocialEventActions extends sfActions
     {
       $this->form->bindAndSave($request->getParameter($this->form->getName()));
     }
-
     // invite form
     $this->isAdmin = $this->event->getSfGuardUser()->getId() == $this->getUser()->getGuardUser()->getId();
     if ($this->isAdmin)
@@ -129,7 +127,11 @@ class BasesfSocialEventActions extends sfActions
     $this->getContext()->set('Event', $this->event);
     $this->form = new sfSocialEventInviteForm();
     $this->forward404If($this->event->getUserAdmin() != $values['user_from'], 'access denied');
-    $this->form->bindAndSave($values);
+    if ($this->form->bindAndSave($values))
+    {
+      $this->getUser()->setFlash('notice', count($this->form->getValue('user_id')) . ' users invited.');
+    }
+    $this->redirect('@sf_social_event?id=' . $this->event->getId());
   }
 
 }

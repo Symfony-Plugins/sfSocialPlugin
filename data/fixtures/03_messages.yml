@@ -24,6 +24,11 @@ sfSocialMessage:
     subject: 3 little pigs
     text: who's afraid of big bad wolf, big bad wolf, big bad wolf.
     created_at: 2009-01-14 18:13:14
+  from_goofy:
+    user_from: goofy
+    subject: yup
+    text: I don't know what to say, but I say it.
+    created_at: 2009-07-02 13:22:04
 
 sfSocialMessageRcpt:
   max_to_mike:
@@ -48,4 +53,7 @@ sfSocialMessageRcpt:
     user_to: max
   danny_to_max:
     msg_id: from_danny
+    user_to: max
+  goofy_to_max:
+    msg_id: from_goofy
     user_to: max

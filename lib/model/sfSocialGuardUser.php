@@ -14,10 +14,10 @@
  * @subpackage plugin
  * @author     Lionel Guichard <lionel.guichard@gmail.com>
  */
-class sfGuardUser extends PluginsfGuardUser
+class sfSocialGuardUser extends PluginsfGuardUser
 {
   protected $contacts	= null;
-  
+
   /**
    * Returns true if user has contact.
    *
@@ -34,29 +34,18 @@ class sfGuardUser extends PluginsfGuardUser
 		{
 	  	return true;
 		}
-		
+
 		return false;
   }
-  
+
   /**
    * Send request to contact.
    *
    * @param  sfGuardUser $user_to
    * @return boolean
-   */  
+   */
   public function sendRequestContact(sfGuardUser $user_to, $message = '')
   {
-    if ($user_to instanceof sfGuardUser)
-		{
-	  	$user_to = $user_to->getId();
-		}
-
-		$user_to = sfGuardUserPeer::retrieveByPk($user_to);
-    if (!$user_to)
-    {
-      throw new Exception(sprintf('The user "%s" does not exist.', $user_to));
-    }
-
 		if ($user_to->getId() == $this->getId())
     {
       throw new Exception(sprintf("You can't add yourself as a contact", $user_to));
@@ -66,68 +55,44 @@ class sfGuardUser extends PluginsfGuardUser
   	{
 			throw new Exception(sprintf("You can't add a contact that already exist", $user_to));
 		}
-		
+
 		$scr = new sfSocialContactRequest();
   	$scr->setUserFrom($this->getId());
   	$scr->setUserTo($user_to->getId());
   	$scr->setMessage($message);
   	$scr->save();
   }
-  
+
   /**
    * Accept request from contact.
-   *
-   * @param  sfGuardUser $user_to
-   * @return boolean
-   */  
+   * @param  sfSocialContactRequest $scr
+   */
   public function acceptRequestContact(sfSocialContactRequest $scr)
   {
-    if($scr instanceof sfSocialContactRequest)
-		{
-	  	$scr = $scr->getId();
-		}
-
-		$scr = sfSocialContactRequest::retrieveByPk($scr);
-    if (!$scr)
-    {
-      throw new Exception(sprintf('The request "%s" does not exist.', $scr));
-    }
-   	
-   	// mark as accept
-		$scr->accepted();
-	
 		// add contact
 		$this->addContact($scr->getUserFrom());
+
+   	// mark as accept
+		$scr->accepted();
   }
-  
+
   /**
    * Refused request from contact.
    *
    * @param  sfGuardUser $user_to
    * @return boolean
-   */  
+   */
   public function denyRequestContact(sfSocialContactRequest $scr)
   {
-    if($scr instanceof sfSocialContactRequest)
-		{
-	  	$scr = $scr->getId();
-		}
-
-		$scr = sfSocialContactRequest::retrieveByPk($scr);
-    if (!$scr)
-    {
-      throw new Exception(sprintf('The request "%s" does not exist.', $scr));
-    }
-   	
 		$scr->refused();
   }
-  
+
   /**
    * Returns an array containing the contacts list.
    *
    * @param  int $limit
    * @return array
-   */	
+   */
   public function getContacts($limit = false)
   {
 		if (!$this->contacts)
@@ -137,73 +102,49 @@ class sfGuardUser extends PluginsfGuardUser
 	  	if($limit)
 	   		$c->setLimit($limit);
 	  	$scs = sfSocialContactPeer::doSelect($c);
-		
+
 	  	foreach ($scs as $sc)
 	  	{
 	    	$this->contacts[] = $sc->getsfGuardUserRelatedByUserTo();
 	  	}
-		
+
 	  	return  $this->contacts;
 		}
   }
-	
-	/**
-   * Add contact 
-   *
-   * @param  sfGuardUser $user_to
-   * @return boolean
-   */
-	public function addContact($user_to)
-  {
-    if($user_to instanceof sfGuardUser)
-		{
-	  	$user_to = $user_to->getId();
-		}
 
-		$user_to = sfGuardUserPeer::retrieveByPk($user_to);
-    if (!$user_to)
-    {
-      throw new Exception(sprintf('The user "%s" does not exist.', $user_to));
-    }
-    
+	/**
+   * Add contact
+   * @param  sfGuardUser $user_to
+   */
+	public function addContact(sfGuardUser $user_to)
+  {
 		$sc = new sfSocialContact();
 		$sc->setUserFrom($this->getId());
 		$sc->setUserTo($user_to->getId());
 		$sc->save();
-		
+
 		$sc = new sfSocialContact();
 		$sc->setUserFrom($user_to->getId());
 		$sc->setUserTo($this->getId());
 		$sc->save();
   }
-	
+
 	/**
-   * Remove contact 
+   * Remove contact
    *
    * @param  sfGuardUser $user_to
    * @return boolean
    */
-  public function removeContact($user_to)
+  public function removeContact(sfGuardUser $user_to)
   {
-    if ($user_to instanceof sfGuardUser)
-		{
-	  	$user_to = $user_to->getId();
-		}
-		
-    $user_to = sfGuardUserPeer::retrieveByUsername($user_to);
-    if (!$user_to)
-    {
-      throw new Exception(sprintf('The user "%s" does not exist.', $user_to));
-    }
-    
     $c = new Criteria();
 		$c->add(sfSocialContactPeer::USER_FROM, $this->getId());
 		$c->add(sfSocialContactPeer::USER_TO, $user_to->getId());
 		return sfSocialContactPeer::doDelete($c);
   }
-	
+
 	/**
-   * Add contact by username 
+   * Add contact by username
    *
    * @param  string $username
    * @return boolean
@@ -215,15 +156,15 @@ class sfGuardUser extends PluginsfGuardUser
     {
       throw new Exception(sprintf('The user "%s" does not exist.', $user_to));
    	}
-    
+
 		$sc = new sfSocialContact();
 		$sc->setUserFrom($this->getId());
 		$sc->setUserTo($user_to->getId());
 		$sc->save();
   }
-	
+
 	/**
-   * Remove contact by username 
+   * Remove contact by username
    *
    * @param  string $username
    * @return boolean
@@ -235,15 +176,15 @@ class sfGuardUser extends PluginsfGuardUser
     {
       throw new Exception(sprintf('The user "%s" does not exist.', $user_to));
     }
-    
+
 		$this->removeContact($user_to);
   }
-	
+
 	/**
-   * Remove all contatcs 
+   * Remove all contatcs
    *
    * @return boolean
-   */	
+   */
   public function removeAllContacts()
   {
 		$c = new Criteria();

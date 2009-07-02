@@ -10,9 +10,6 @@
 class sfSocialEventUserForm extends BasesfSocialEventUserForm
 {
 
-  // choices for confirm
-  private static $choices = array(1 => 'maybe', 2 => 'yes', 3 => 'no');
-
   public function configure()
   {
     // hide unuseful fields
@@ -20,7 +17,7 @@ class sfSocialEventUserForm extends BasesfSocialEventUserForm
 
     // make confirm a choice
     $this->widgetSchema['confirm'] = new sfWidgetFormChoice(array(
-      'choices'  => self::$choices,
+      'choices'  => sfSocialEventUser::$choices,
       'expanded' => true,
     ));
 
@@ -36,5 +33,5 @@ class sfSocialEventUserForm extends BasesfSocialEventUserForm
     $this->setDefault('event_id', $eid);
     $this->setValidator('event_id', new sfValidatorChoice(array('choices' => array($eid))));
   }
-  
+
 }

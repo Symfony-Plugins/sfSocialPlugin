@@ -84,11 +84,10 @@ class BasesfSocialMessageActions extends sfActions
     if ($request->isMethod('post'))
     {
       $values = $request->getParameter('sf_social_message');
-      $sent = $this->form->bindAndSave($values);
-      $msg = $this->form->getObject();
-      $msg->send($values['to']);
-      if ($sent)
+      if ($this->form->bindAndSave($values))
       {
+        $msg = $this->form->getObject();
+        $msg->send($values['to']);
         $this->dispatcher->notify(new sfEvent($msg, 'social.write_message'));
         $this->forward('sfSocialMessage', 'sent');
       }

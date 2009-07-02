@@ -35,3 +35,9 @@ sfGuardUser:
   tommy:
     username:  tommy
     password:  dummy
+  mickey:
+    username:  mickey
+    password:  mouse
+  goofy:
+    username:  goofy
+    password:  boofy

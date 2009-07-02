@@ -24,7 +24,7 @@ sfsmsg =
     // save name of "to" field, to use it in "add" function
     sfsmsg.toname = to.getAttribute('name');
     // get possible selected values of field
-    var selected = to.options.selectedIndex > 0 ? to.options[to.options.selectedIndex] : null;
+    var selected = to.options.selectedIndex > -1 ? to.options[to.options.selectedIndex] : null;
     // create a container for autocomplete
     var div = document.createElement('div');
     div.setAttribute('id', 'msgcont');

@@ -1,3 +1,57 @@
 <?php
 
 include dirname(__FILE__).'/../bootstrap/functional.php';
+
+$browser = new loggedTest(new sfBrowser());
+
+$browser->
+
+  doLogin()->
+
+  info('index (list)')->
+  get('/events/')->
+  with('request')->begin()->
+    isParameter('module', 'sfSocialEvent')->
+    isParameter('action', 'list')->
+  end()->
+  with('response')->begin()->
+    isStatusCode(200)->
+    checkElement('body h2', '/Events/')->
+    // XXX this will work until 2012-12-21 :-)
+    checkElement('ul#list li', time() > strtotime('2009-09-09 10:00:00') ? 1 : 2)->
+  end()->
+
+  info('single event')->
+  click('End of the world')->
+    with('request')->begin()->
+    isParameter('module', 'sfSocialEvent')->
+    isParameter('action', 'view')->
+  end()->
+    with('response')->begin()->
+    checkElement('body h2', '/Event "End of the world"/')->
+  end()->
+
+  info('confirm event')->
+  click('confirm', array('sf_social_event_user' => array(
+    'confirm' => '2',
+  )))->
+  with('form')->begin()->hasErrors(false)->
+  end()
+;
+
+$browser->test()->is($browser->getResponseDom()->getElementById('sf_social_event_user_confirm_2')->getAttribute('checked'), 'checked', '"yes" is now checked');
+
+$browser->
+
+  info('invite friend')->
+  click('invite', array('sf_social_event_invite' => array(
+    'user_id' => '5',
+  )))->
+  with('form')->begin()->hasErrors(false)->
+  end()->
+    followRedirect()->
+    with('response')->begin()->
+    checkElement('ul#invited li', true)->
+  end()
+
+;
