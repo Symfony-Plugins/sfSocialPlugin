@@ -16,11 +16,12 @@ sfToolkit::clearDirectory(sfConfig::get('sf_app_cache_dir'));
 // clear fixture data
 new sfDatabaseManager(ProjectConfiguration::getApplicationConfiguration('frontend', 'test', true));
 
-$tables = array('sf_social' => array('contact', 'contact_group', 'contact_group_contact', 'event',
-                'event_invite', 'event_user', 'group', 'group_invite', 'group_user',
-                'message', 'message_rcpt', 'notify'),
-                'sf_guard' => array('group', 'group_permission', 'permission',
-                'user', 'user_group', 'user_permission'));
+$tables = array('sf_social' => array('contact', 'contact_group', 'contact_group_contact',
+                  'contact_request', 'event', 'event_invite',
+                  'event_user', 'group', 'group_invite', 'group_user',
+                  'message', 'message_rcpt', 'notify'),
+                'sf_guard' => array('group', 'group_permission', 'permission', 'user',
+                  'user_group', 'user_permission'));
 $con = Propel::getConnection();
 foreach ($tables as $plugin => $table)
 {

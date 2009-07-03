@@ -9,112 +9,124 @@
  */
 class BasesfSocialContactActions extends sfActions
 {
+
+  public function preExecute()
+  {
+    $this->user = $this->getUser()->getGuardUser();
+  }
+
   /**
    * List of contacts
-   *
    * @param sfRequest $request A request object
    */
   public function executeList(sfWebRequest $request)
   {
-    $page = $request->getParameter('page');
-    $this->pager = sfSocialContactPeer::getContacts($this->getUser()->getGuardUser(), $page);
+    $page = $request->getParameter('page', 1);
+    $this->pager = sfSocialContactPeer::getContacts($this->user, $page);
   }
 
   /**
    * Search contacts
-   *
    * @param sfRequest $request A request object
    */
   public function executeSearch(sfWebRequest $request)
   {
     $text = $request->getParameter('text');
-    $exclude_ids = $request->getParameter('exclude_ids');
-    $this->contacts = sfSocialContactPeer::search($this->getUser()->getGuardUser(),
-                                                  $text, $exclude_ids);
+    $excludeIds = $request->getParameter('exclude_ids');
+    $this->contacts = sfSocialContactPeer::search($this->user, $text, $excludeIds);
   }
 
   /**
-   * List of request a contacts
-   *
+   * List of received contact requests
    * @param sfRequest $request A request object
    */
   public function executeRequests(sfWebRequest $request)
   {
-    $page = $request->getParameter('page');
-    $this->pager = sfSocialContactRequestPeer::getReceivedRequests($this->getUser()->getGuardUser(), $page);
+    $page = $request->getParameter('page', 1);
+    $this->pager = sfSocialContactRequestPeer::getReceivedRequests($this->user, $page);
   }
 
   /**
-   * Send request
-   *
+   * List of sent contact requests
+   * @param sfRequest $request A request object
+   */
+  public function executeSentrequests(sfWebRequest $request)
+  {
+    $page = $request->getParameter('page', 1);
+    $this->pager = sfSocialContactRequestPeer::getSentRequests($this->user, $page);
+  }
+
+  /**
+   * Send contact request
    * @param sfRequest $request A request object
    */
   public function executeSendrequest(sfWebRequest $request)
   {
-    $this->form = new sfSocialContactRequestForm();
+    $this->form = new sfSocialContactRequestForm(null, array('user' => $this->user));
     if ($request->isMethod('post'))
     {
-      $this->form->bindAndSave($request->getParameter($this->form->getName()));
+      if ($this->form->bindAndSave($request->getParameter($this->form->getName())))
+      {
+        $this->getUser()->setFlash('notice', 'Contact request sent.');
+        $this->redirect('@sf_social_contact_list');
+      }
     }
   }
 
   /**
-   * Accept request
-   *
+   * Accept contact request
    * @param sfRequest $request A request object
    */
   public function executeAcceptrequest(sfWebRequest $request)
   {
-    $id = $request->getParameter('id');
-    $this->forward404Unless($id, 'id not passed');
-    $this->request = sfSocialContactRequestPeer::retrieveByPK($id);
-    $this->forward404Unless($this->request, 'request not found');
-
-    $this->forward404Unless($this->request->checkUserFrom($this->getUser()->getGuardUser()),
-                            'unauthorized');
-
-    $this->request->accepted();
-
-    $this->getUser()->addContact($this->request->getsfGuardUserRelatedByUserFrom());
-
-    $this->redirect('@sf_social_contact_list');
+    $request = sfSocialContactRequestPeer::retrieveByPK($request->getParameter('id'));
+    $this->forward404Unless($request, 'request not found');
+    $this->forwardUnless($request->checkUserTo($this->user), 'sfGuardAuth', 'secure');
+    $request->accept();
+    $this->getUser()->addContact($request->getsfGuardUserRelatedByUserFrom());
+    $this->getUser()->setFlash('notice', 'Contact request accepted.');
+    $this->redirect('@sf_social_contact_requests');
   }
 
   /**
-   * Deny request
-   *
+   * Deny contact request
    * @param sfRequest $request A request object
    */
   public function executeDenyrequest(sfWebRequest $request)
   {
-    $id = $request->getParameter('id');
-    $this->forward404Unless($id, 'id not passed');
-    $this->request = sfSocialContactRequestPeer::retrieveByPK($id);
-    $this->forward404Unless($this->request, 'request not found');
+    $request = sfSocialContactRequestPeer::retrieveByPK($request->getParameter('id'));
+    $this->forward404Unless($request, 'request not found');
+    $this->forwardUnless($request->checkUserTo($this->user), 'sfGuardAuth', 'secure');
+    $request->refuse();
+    $this->getUser()->setFlash('notice', 'Contact request refused.');
+    $this->redirect('@sf_social_contact_requests');
+  }
 
-    $this->forward404Unless($this->request->checkUserFrom($this->getUser()->getGuardUser()),
-                            'unauthorized');
-
-    $this->request->refused();
-
-    $this->redirect('@sf_social_contact_list');
+  /**
+   * Cancel contact request
+   * @param sfRequest $request A request object
+   */
+  public function executeCancelrequest(sfWebRequest $request)
+  {
+    $request = sfSocialContactRequestPeer::retrieveByPK($request->getParameter('id'));
+    $this->forward404Unless($request, 'request not found');
+    $this->forwardUnless($request->checkUserFrom($this->user), 'sfGuardAuth', 'secure');
+    $request->cancel();
+    $this->getUser()->setFlash('notice', 'Contact request canceled.');
+    $this->redirect('@sf_social_contact_sentrequests');
   }
 
   /**
    * Delete a contact
-   *
    * @param sfRequest $request A request object
    */
   public function executeDelete(sfWebRequest $request)
   {
-    $id = $request->getParameter('id');
-    $this->forward404Unless($id, 'id not passed');
-    $this->contact = sfSocialContactPeer::retrieveByPK($id);
-    $this->forward404Unless($this->contact, 'contact not found');
-    $this->forward404Unless($this->contact->checkUserFrom($this->getUser()->getGuardUser()), 'unauthorized');
-
-    $this->contact->delete();
-
+    $contact = sfSocialContactPeer::retrieveByPK($request->getParameter('id'));
+    $this->forward404Unless($contact, 'contact not found');
+    $this->forwardUnless($contact->checkUserFrom($this->user), 'sfGuardAuth', 'secure');
+    $contact->delete();
+    $this->getUser()->setFlash('notice', 'Contact removed.');
     $this->redirect('@sf_social_contact_list');
   }
 }

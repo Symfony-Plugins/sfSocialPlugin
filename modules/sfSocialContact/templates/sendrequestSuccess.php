@@ -1,13 +1,11 @@
 <div id="send_request">
-<form action="<?php echo url_for('@sf_social_contact_send_request') ?>" method="post">
-  <table>
-    <?php echo $form ?>
-    <tr>
-      <td colspan="2">
-        <input type="submit" />
-      </td>
-    </tr>
-  </table>
-</form>
+  <form action="<?php echo url_for('@sf_social_contact_send_request') ?>" method="post">
+    <ul id="form">
+      <?php echo $form ?>
+      <li class="buttons">
+        <?php echo link_to(__('cancel'), '@sf_social_contact_list', 'class=cancel') ?>
+        <input type="submit" value="<?php echo __('send') ?>" />
+      </li>
+    </ul>
+  </form>
 </div>
-<?php echo link_to(__('Return to list'), '@sf_social_contact_list') ?>

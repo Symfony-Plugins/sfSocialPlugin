@@ -67,6 +67,10 @@ sf_social_contact_requests:
   url:   /contacts/requests/*
   param: { module: sfSocialContact, action: requests }
 
+sf_social_contact_sentrequests:
+  url:   /contacts/sentrequests/*
+  param: { module: sfSocialContact, action: sentrequests }
+
 sf_social_contact_list:
   url:   /contacts/*
   param: { module: sfSocialContact, action: list }
@@ -79,6 +83,11 @@ sf_social_contact_accept_request:
 sf_social_contact_deny_request:
   url:   /request/deny/:id
   param: { module: sfSocialContact, action: denyrequest }
+  requirements: { id: \d+ }
+
+sf_social_contact_cancel_request:
+  url:   /request/cancel/:id
+  param: { module: sfSocialContact, action: cancelrequest }
   requirements: { id: \d+ }
 
 sf_social_contact_send_request:

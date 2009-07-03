@@ -45,8 +45,7 @@ class BasesfSocialMessageActions extends sfActions
     $this->message = sfSocialMessagePeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($this->message, 'message not found');
     $this->rcpts = $this->message->getsfSocialMessageRcpts();
-    $this->forward404Unless($this->message->checkUserTo($this->user),
-                            'unauthorized');
+    $this->forwardUnless($this->message->checkUserTo($this->user), 'sfGuardAuth', 'secure');
     $this->message->read($this->user);
   }
 
@@ -58,8 +57,7 @@ class BasesfSocialMessageActions extends sfActions
   {
     $this->message = sfSocialMessagePeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($this->message, 'message not found');
-    $this->forward404Unless($this->message->checkUserFrom($this->user),
-                            'unauthorized');
+    $this->forwardUnless($this->message->checkUserFrom($this->user), 'sfGuardAuth', 'secure');
     $this->rcpts = $this->message->getsfSocialMessageRcpts();
   }
 
@@ -69,27 +67,31 @@ class BasesfSocialMessageActions extends sfActions
    */
   public function executeCompose(sfWebRequest $request)
   {
-    $this->form = new sfSocialMessageForm();
-    // possible reply
-    $reply_to = $request->getParameter('reply_to');
-    if ($reply_to)
+    // checek if it's a reply message
+    $replyTo = $request->getParameter('reply_to');
+    if (null !== $replyTo)
     {
-      $message = sfSocialMessagePeer::retrieveByPK($reply_to);
+      $message = sfSocialMessagePeer::retrieveByPK($replyTo);
       $this->forward404Unless($message, 'message not found');
-      $this->forward404Unless($message->checkUserTo($this->user),
-                              'unauthorized');
-      $this->form->setDefault('to', $message->getsfGuardUser()->getId());
-      $this->form->setDefault('subject', $message->getReplySubject());
+      $this->forwardUnless($message->checkUserTo($this->user), 'sfGuardAuth', 'secure');
+      $this->form = new sfSocialMessageForm(null, array('user' => $this->user,
+                                                        'reply_to' => $message));
     }
+    else
+    {
+      $this->form = new sfSocialMessageForm(null, array('user' => $this->user));
+    }
+    // send message
     if ($request->isMethod('post'))
     {
-      $values = $request->getParameter('sf_social_message');
+      $values = $request->getParameter($this->form->getName());
       if ($this->form->bindAndSave($values))
       {
         $msg = $this->form->getObject();
         $msg->send($values['to']);
         $this->dispatcher->notify(new sfEvent($msg, 'social.write_message'));
-        $this->forward('sfSocialMessage', 'sent');
+        $this->to = sfGuardUserPeer::retrieveByPKs($values['to']);
+        $this->setTemplate('sent');
       }
     }
   }
@@ -100,17 +102,6 @@ class BasesfSocialMessageActions extends sfActions
    */
   public function executeComposejs(sfWebRequest $request)
   {
-  }
-
-  /**
-   * Message successfully sent
-   * @param sfRequest $request A request object
-   */
-  public function executeSent(sfWebRequest $request)
-  {
-    $values = $request->getParameter('sf_social_message', array());
-    $this->forward404Unless($values['to'], 'users not found');
-    $this->to = sfGuardUserPeer::retrieveByPKs($values['to']);
   }
 
 }

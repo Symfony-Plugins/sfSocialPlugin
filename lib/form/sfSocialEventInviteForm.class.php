@@ -16,20 +16,18 @@ class sfSocialEventInviteForm extends BasesfSocialEventInviteForm
     unset($this['created_at'], $this['replied']);
 
     // make user_from hidden
-    $uid = sfContext::getInstance()->getUser()->getAttribute('user_id', 0, 'sfGuardSecurityUser');
     $this->widgetSchema['user_from'] = new sfWidgetFormInputHidden();
-    $this->setDefault('user_from', $uid);
-    $this->setValidator('user_from', new sfValidatorChoice(array('choices' => array($uid))));
+    $this->setDefault('user_from', $this->options['user']->getId());
+    $this->setValidator('user_from', new sfValidatorChoice(array('choices' => array($this->options['user']->getId()))));
 
     // make event_id hidden
-    $eid = sfContext::getInstance()->get('Event')->getId();
     $this->widgetSchema['event_id'] = new sfWidgetFormInputHidden();
-    $this->setDefault('event_id', $eid);
-    $this->setValidator('event_id', new sfValidatorChoice(array('choices' => array($eid))));
+    $this->setDefault('event_id', $this->options['event']->getId());
+    $this->setValidator('event_id', new sfValidatorChoice(array('choices' => array($this->options['event']->getId()))));
 
     // restrict users to invite to user's friends
     $c = new Criteria;
-    $c->add(sfSocialContactPeer::USER_FROM, $uid)->
+    $c->add(sfSocialContactPeer::USER_FROM, $this->options['user']->getId())->
       setLimit(50)->
       addAscendingOrderByColumn(sfGuardUserPeer::USERNAME);
     $this->widgetSchema['user_id']->setOption('model', 'sfSocialContact');

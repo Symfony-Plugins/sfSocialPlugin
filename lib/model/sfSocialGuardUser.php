@@ -20,15 +20,14 @@ class sfSocialGuardUser extends PluginsfGuardUser
 
   /**
    * Returns true if user has contact.
-   *
-   * @param  sfGuardUser $user_to
+   * @param  sfGuardUser $userTo
    * @return boolean
    */
-  public function hasContact($user_to)
+  public function hasContact($userTo)
   {
 		$c = new Criteria();
 		$c->add(sfSocialContactPeer::USER_FROM, $this->getId());
-		$c->add(sfSocialContactPeer::USER_TO, $user_to->getId());
+		$c->add(sfSocialContactPeer::USER_TO, $userTo->getId());
 		$sc = sfSocialContactPeer::doSelectOne($c);
 		if ($sc)
 		{
@@ -40,25 +39,24 @@ class sfSocialGuardUser extends PluginsfGuardUser
 
   /**
    * Send request to contact.
-   *
-   * @param  sfGuardUser $user_to
+   * @param  sfGuardUser $userTo
    * @return boolean
    */
-  public function sendRequestContact(sfGuardUser $user_to, $message = '')
+  public function sendRequestContact(sfGuardUser $userTo, $message = '')
   {
-		if ($user_to->getId() == $this->getId())
+		if ($userTo->getId() == $this->getId())
     {
-      throw new Exception(sprintf("You can't add yourself as a contact", $user_to));
+      throw new Exception(sprintf('You can\'t add yourself as a contact', $userTo));
     }
 
-   	if($this->hasContact($user_to))
+   	if($this->hasContact($userTo))
   	{
-			throw new Exception(sprintf("You can't add a contact that already exist", $user_to));
+			throw new Exception(sprintf('You can\'t add a contact that already exist', $userTo));
 		}
 
 		$scr = new sfSocialContactRequest();
   	$scr->setUserFrom($this->getId());
-  	$scr->setUserTo($user_to->getId());
+  	$scr->setUserTo($userTo->getId());
   	$scr->setMessage($message);
   	$scr->save();
   }
@@ -78,8 +76,7 @@ class sfSocialGuardUser extends PluginsfGuardUser
 
   /**
    * Refused request from contact.
-   *
-   * @param  sfGuardUser $user_to
+   * @param  sfGuardUser $userTo
    * @return boolean
    */
   public function denyRequestContact(sfSocialContactRequest $scr)
@@ -89,106 +86,122 @@ class sfSocialGuardUser extends PluginsfGuardUser
 
   /**
    * Returns an array containing the contacts list.
-   *
-   * @param  int $limit
+   * @param  integer $limit
    * @return array
    */
-  public function getContacts($limit = false)
+  public function getContacts($limit = 0)
   {
-		if (!$this->contacts)
+		if (!is_array($this->contacts))
 		{
+      $this->contacts = array();
 	  	$c = new Criteria();
 	  	$c->add(sfSocialContactPeer::USER_FROM, $this->getId());
-	  	if($limit)
+	  	if ($limit > 0)
+      {
 	   		$c->setLimit($limit);
+      }
 	  	$scs = sfSocialContactPeer::doSelect($c);
-
-	  	foreach ($scs as $sc)
-	  	{
-	    	$this->contacts[] = $sc->getsfGuardUserRelatedByUserTo();
-	  	}
-
-	  	return  $this->contacts;
+      if (!empty($scs))
+      {
+        foreach ($scs as $sc)
+        {
+          $this->contacts[] = $sc->getsfGuardUserRelatedByUserTo();
+        }
+      }
 		}
+    return $this->contacts;
+  }
+
+  /**
+   * Get contact list, plus a sender user (if not already in contacts)
+   * This is useful to reply to a message (see sfSocialMessageForm)
+   * @param  integer $senderId
+   * @return array
+   */
+  public function getContactsAndSender($senderId)
+  {
+    $contacts = $this->getContacts();
+    $sender = sfGuardUserPeer::retrieveByPK($senderId);
+    if (empty($sender) || in_array($sender, $contacts))
+    {
+      return $contacts;
+    }
+    $contacts[] = $sender;
+    return $contacts;
   }
 
 	/**
    * Add contact
-   * @param  sfGuardUser $user_to
+   * @param sfGuardUser $userTo
    */
-	public function addContact(sfGuardUser $user_to)
+	public function addContact(sfGuardUser $userTo)
   {
 		$sc = new sfSocialContact();
 		$sc->setUserFrom($this->getId());
-		$sc->setUserTo($user_to->getId());
+		$sc->setUserTo($userTo->getId());
 		$sc->save();
-
 		$sc = new sfSocialContact();
-		$sc->setUserFrom($user_to->getId());
+		$sc->setUserFrom($userTo->getId());
 		$sc->setUserTo($this->getId());
 		$sc->save();
   }
 
 	/**
    * Remove contact
-   *
-   * @param  sfGuardUser $user_to
-   * @return boolean
+   * @param sfGuardUser $userTo
    */
-  public function removeContact(sfGuardUser $user_to)
+  public function removeContact(sfGuardUser $userTo)
   {
     $c = new Criteria();
 		$c->add(sfSocialContactPeer::USER_FROM, $this->getId());
-		$c->add(sfSocialContactPeer::USER_TO, $user_to->getId());
-		return sfSocialContactPeer::doDelete($c);
+		$c->add(sfSocialContactPeer::USER_TO, $userTo->getId());
+		sfSocialContactPeer::doDelete($c);
+    $c = new Criteria();
+		$c->add(sfSocialContactPeer::USER_TO, $this->getId());
+		$c->add(sfSocialContactPeer::USER_FROM, $userTo->getId());
+		sfSocialContactPeer::doDelete($c);
   }
 
 	/**
    * Add contact by username
-   *
-   * @param  string $username
-   * @return boolean
+   * @param string $username
    */
   public function addContactbyUsername($username)
   {
-		$user_to = sfGuardUserPeer::retrieveByUsername($username);
-    if (!$user_to)
+		$userTo = sfGuardUserPeer::retrieveByUsername($username);
+    if (!$userTo)
     {
-      throw new Exception(sprintf('The user "%s" does not exist.', $user_to));
+      throw new Exception(sprintf('The user "%s" does not exist.', $userTo));
    	}
-
-		$sc = new sfSocialContact();
-		$sc->setUserFrom($this->getId());
-		$sc->setUserTo($user_to->getId());
-		$sc->save();
+    $this->addContact($userTo);
   }
 
 	/**
    * Remove contact by username
    *
-   * @param  string $username
+   * @param  string  $username
    * @return boolean
    */
   public function removeContactByUsername($username)
   {
-    $user_to = sfGuardUserPeer::retrieveByUsername($username);
-    if (!$user_to)
+    $userTo = sfGuardUserPeer::retrieveByUsername($username);
+    if (!$userTo)
     {
-      throw new Exception(sprintf('The user "%s" does not exist.', $user_to));
+      throw new Exception(sprintf('The user "%s" does not exist.', $userTo));
     }
-
-		$this->removeContact($user_to);
+		$this->removeContact($userTo);
   }
 
 	/**
    * Remove all contatcs
-   *
-   * @return boolean
    */
   public function removeAllContacts()
   {
 		$c = new Criteria();
 		$c->add(sfSocialContactPeer::USER_FROM, $this->getId());
-		return sfSocialContactPeer::doDelete($c);
+		sfSocialContactPeer::doDelete($c);
+    $c = new Criteria();
+		$c->add(sfSocialContactPeer::USER_TO, $this->getId());
+		sfSocialContactPeer::doDelete($c);
   }
 }

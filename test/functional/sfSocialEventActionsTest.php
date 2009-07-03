@@ -4,6 +4,8 @@ include dirname(__FILE__).'/../bootstrap/functional.php';
 
 $browser = new loggedTest(new sfBrowser());
 
+$browser->setTester('propel', 'sfTesterPropel');
+
 $browser->
 
   doLogin()->
@@ -52,6 +54,38 @@ $browser->
     followRedirect()->
     with('response')->begin()->
     checkElement('ul#invited li', true)->
+  end()->
+
+  info('create a new event')->
+  get('/event/create')->
+  with('request')->begin()->
+    isParameter('module', 'sfSocialEvent')->
+    isParameter('action', 'create')->
+  end()->
+  click('create', array('sf_social_event' => array(
+    'title'       => '',
+    'description' => '',
+    'location'    => '',
+  )))->
+  with('form')->begin()->hasErrors(3)->
+    isError('title', 'required')->
+    isError('description', 'required')->
+    isError('location', 'required')->
+  end()->
+  click('create', array('sf_social_event' => array(
+    'title'       => 'A new event',
+    'description' => 'What about a new event?',
+    'location'    => 'Just here!',
+  )))->
+  with('form')->begin()->hasErrors(false)->
+  end()->
+  with('propel')->begin()->
+    check('sfSocialEvent', array(
+      'title'       => 'A new event',
+      'description' => 'What about a new event?',
+      'location'    => 'Just here!',
+  ))->
+
   end()
 
 ;

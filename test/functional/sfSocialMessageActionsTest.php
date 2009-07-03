@@ -4,6 +4,8 @@ include dirname(__FILE__) . '/../bootstrap/functional.php';
 
 $browser = new loggedTest(new sfBrowser());
 
+$browser->setTester('propel', 'sfTesterPropel');
+
 $browser->
 
   doLogin()->
@@ -34,10 +36,19 @@ $browser->
   with('response')->begin()->
     checkElement('body h2', '/hello pal/')->
   end()->
-  click('Back to list')
+
+  info('reply to message')->
+  click('Reply')->
+  with('response')->begin()->
+    checkElement('input[name="sf_social_message[subject]"][value="Re: hello pal"]', true)->
+    checkElement('select#sf_social_message_to > option[value="3"][selected="selected"]', true)->
+  end()->
+
+  click('cancel')
 ;
 
-$browser->test()->is($browser->getResponseDom()->getElementsByTagName('li')->item(3)->getAttribute('class'), ' read', 'message is now read');
+
+$browser->test()->is($browser->getResponseDom()->getElementsByTagName('li')->item(2)->getAttribute('class'), 'a read', 'message is now read');
 
 $browser->
 
@@ -63,17 +74,38 @@ $browser->
   click('send', array('sf_social_message' => array(
     'subject' => 'a message from functional test',
     'text'    => 'TDD rulez! I found a lot of bugs doing these nice tests.',
-    'to'      => array(4, 10),
+    'to'      => array(1, 2),
   )))->
-  # TODO!
-  #with('form')->begin()->hasErrors(false)->
-  #with('form')->debug()->
+  with('form')->begin()->hasErrors(false)->
+  end()->
 
   info('sent messages')->
   get('/messages/sent')->
   with('request')->begin()->
     isParameter('module', 'sfSocialMessage')->
     isParameter('action', 'sentlist')->
+  end()->
+
+  with('propel')->begin()->
+    check('sfSocialMessage', array(
+      'user_from' => 8,
+      'subject'   => 'a message from functional test',
+      'text'      => 'TDD rulez! I found a lot of bugs doing these nice tests.',
+  ))->
+  end()->
+  with('propel')->begin()->
+    check('sfSocialMessageRcpt', array(
+      'msg_id'  => 7,
+      'user_to' => 1,
+      'read'    => 0,
+  ))->
+  end()->
+  with('propel')->begin()->
+    check('sfSocialMessageRcpt', array(
+      'msg_id'  => 7,
+      'user_to' => 2,
+      'read'    => 0,
+  ))->
 
   end()
 ;

@@ -3,8 +3,7 @@
 class sfSocialContactRequestPeer extends BasesfSocialContactRequestPeer
 {
 	/**
-   * get request contacts of user
-	 *
+   * get contact request received by user
    * @param  sfGuardUser   $user
    * @param  integer       $page  current page
    * @param  integer       $n     max per page
@@ -21,18 +20,18 @@ class sfSocialContactRequestPeer extends BasesfSocialContactRequestPeer
     $pager->setPeerMethod('doSelectJoinsfGuardUserRelatedByUserFrom');
     $pager->setPage($page);
     $pager->init();
+
     return $pager;
   }
 
 	/**
-   * get send requests contacts of user
-   *
-	 * @param  sfGuardUser   $user
+   * get contact requests sent by user
+   * @param  sfGuardUser   $user
    * @param  integer       $page  current page
    * @param  integer       $n     max per page
    * @return sfPropelPager
    */
-  public static function getSendRequests(sfGuardUser $user, $page = 1, $n = 10)
+  public static function getSentRequests(sfGuardUser $user, $page = 1, $n = 10)
   {
     $c = new Criteria();
     $c->add(self::USER_FROM, $user->getId());
@@ -43,6 +42,7 @@ class sfSocialContactRequestPeer extends BasesfSocialContactRequestPeer
     $pager->setPeerMethod('doSelectJoinsfGuardUserRelatedByUserFrom');
     $pager->setPage($page);
     $pager->init();
+
     return $pager;
   }
 }

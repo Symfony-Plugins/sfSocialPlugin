@@ -22,16 +22,14 @@ class sfSocialEventUserForm extends BasesfSocialEventUserForm
     ));
 
     // make user_id hidden
-    $uid = sfContext::getInstance()->getUser()->getAttribute('user_id', 0, 'sfGuardSecurityUser');
     $this->widgetSchema['user_id'] = new sfWidgetFormInputHidden();
-    $this->setDefault('user_id', $uid);
-    $this->setValidator('user_id', new sfValidatorChoice(array('choices' => array($uid))));
+    $this->setDefault('user_id', $this->options['user']->getId());
+    $this->setValidator('user_id', new sfValidatorChoice(array('choices' => array($this->options['user']->getId()))));
 
     // make event_id hidden
-    $eid = sfContext::getInstance()->get('Event')->getId();
     $this->widgetSchema['event_id'] = new sfWidgetFormInputHidden();
-    $this->setDefault('event_id', $eid);
-    $this->setValidator('event_id', new sfValidatorChoice(array('choices' => array($eid))));
+    $this->setDefault('event_id', $this->options['event']->getId());
+    $this->setValidator('event_id', new sfValidatorChoice(array('choices' => array($this->options['event']->getId()))));
   }
 
 }

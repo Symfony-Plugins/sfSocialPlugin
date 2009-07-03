@@ -15,29 +15,33 @@ class sfSocialMessageForm extends BasesfSocialMessageForm
     unset($this['created_at']);
 
     // hide user_id, binding it to current user's id
-    $uid = sfContext::getInstance()->getUser()->getAttribute('user_id', '',
-                                                             'sfGuardSecurityUser');
+    $user = $this->options['user'];
     $this->widgetSchema['user_from'] = new sfWidgetFormInputHidden();
-    $this->setDefault('user_from', $uid);
+    $this->setDefault('user_from', $user->getId());
     $this->setValidator('user_from',
-                        new sfValidatorChoice(array('choices' => array($uid))));
+                        new sfValidatorChoice(array('choices' => array($user->getId()))));
 
     // add recipients field
-    $c = new Criteria;
-    $c->add(sfSocialContactPeer::USER_FROM, $uid);
-    $c->setLimit(50);
-    $c->addAscendingOrderByColumn(sfGuardUserPeer::USERNAME);
-    $this->widgetSchema['to'] = new sfWidgetFormPropelChoiceMany(array('model'       => 'sfSocialContact',
-                                                                       'add_empty'   => false,
-                                                                       'peer_method' => 'doSelectJoinsfGuardUserRelatedByUserTo',
-                                                                       'criteria'    => $c,
-                                                                       'key_method'  => 'getUserId',
-                                                                       )
-                                                                 );
+    if (!empty($this->options['reply_to']))
+    {
+      $this->widgetSchema['to'] = new sfWidgetFormChoiceMany(array('choices' => $user->getContactsAndSender($this->options['reply_to']->getUserFrom())));
+    }
+    else
+    {
+      $this->widgetSchema['to'] = new sfWidgetFormChoiceMany(array('choices' => $user->getContacts()));
+    }
     $this->setValidator('to',
                         new sfValidatorPropelChoiceMany(array('model'    => 'sfGuardUser',
                                                               'column'   => 'id',
                                                               'required' => true)));
 
+    // if it's a reply message, set defaults
+    if (!empty($this->options['reply_to']))
+    {
+      $this->setDefault('to', $this->options['reply_to']->getsfGuardUser()->getId());
+      $this->setDefault('subject', $this->options['reply_to']->getReplySubject());
+    }
+
   }
+
 }

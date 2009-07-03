@@ -1,10 +1,15 @@
-<?php if (!$pager->getResults()): ?>
-<h2><?php echo __('No messages received yet') ?></h2>
-<?php else: ?>
 <h2><?php echo __('Messages received') ?></h2>
+
+<?php if (!$pager->getResults()): ?>
+<p>
+  <?php echo __('No messages received yet') ?>
+</p>
+<?php else: ?>
+
 <?php if ($unread > 0): ?>
 <?php echo $unread ?> <?php echo __('unread messages') ?>
 <?php endif ?>
+
 <ul id="list">
 <?php foreach ($pager->getResults() as $rcpt): ?>
 <?php $message = $rcpt->getSfSocialMessage() ?>
@@ -19,6 +24,7 @@
   </li>
 <?php endforeach ?>
 </ul>
+
 <?php if ($pager->haveToPaginate()): ?>
 <div id="pager">
 <?php foreach ($pager->getLinks() as $page): ?>

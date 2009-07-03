@@ -82,12 +82,15 @@ class sfSocialMessage extends BasesfSocialMessage
    */
   public function send($rcpts)
   {
-    foreach ($rcpts as $user_to)
+    if (is_array($rcpts))
     {
-      $rcpt = new sfSocialMessageRcpt;
-      $rcpt->setsfSocialMessage($this);
-      $rcpt->setUserTo($user_to);
-      $rcpt->save();
+      foreach ($rcpts as $user_to)
+      {
+        $rcpt = new sfSocialMessageRcpt;
+        $rcpt->setsfSocialMessage($this);
+        $rcpt->setUserTo($user_to);
+        $rcpt->save();
+      }
     }
   }
 

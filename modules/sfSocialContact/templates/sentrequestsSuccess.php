@@ -1,4 +1,4 @@
-<h2><?php echo __('List of received contact requests') ?></h2>
+<h2><?php echo __('List of sent contact requests') ?></h2>
 
 <?php if ($sf_user->getFlash('notice')): ?>
 <div class="notice">
@@ -15,11 +15,10 @@
 <ul>
 <?php foreach ($pager->getResults() as $request): ?>
   <li>
-    <?php echo __('from') ?>
-    <?php echo link_to($request->getsfGuardUserRelatedByUserFrom()->getUsername(), '@sf_social_user?username=' . $request->getsfGuardUserRelatedByUserFrom()->getUsername()) ?>
-		: <?php echo link_to(__('Accept'), '@sf_social_contact_accept_request?id=' . $request->getId()) ?>
-    - <?php echo link_to(__('Deny'), '@sf_social_contact_deny_request?id=' . $request->getId()) ?>
-		<br /><?php echo $request->getMessage() ?>
+		<?php echo __('to') ?>
+    <?php echo link_to($request->getsfGuardUserRelatedByUserTo()->getUsername(), '@sf_social_user?username=' . $request->getsfGuardUserRelatedByUserTo()->getUsername()) ?>
+    (<?php echo link_to(__('cancel'), '@sf_social_contact_cancel_request?id=' . $request->getId()) ?>)
+    <br /><?php echo $request->getMessage() ?>
   </li>
 <?php endforeach ?>
 </ul>

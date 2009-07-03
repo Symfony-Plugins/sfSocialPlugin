@@ -7,6 +7,12 @@ So, in example, your users will be able to mutually add as contact,
 send and receive messages, create groups, manage events, receive
 notifications about all this stuff, and so on.
 
+## Demo
+
+A working demo is online at http://symfony.altervista.org/social/web/index.php
+
+[[Image(http://symfony.altervista.org/_altervista_ht/sfSocial.png)]]
+
 ## Installation
 
 To install:
@@ -15,6 +21,8 @@ To install:
     svn co http://svn.symfony-project.com/plugins/sfSocialPlugin/trunk sfSocialPlugin
 
 The package depends on sfGuardPlugin, as users are managed by it.
+
+
 
 ## Usage
 
@@ -32,16 +40,20 @@ Enable modules in you application settings
 
     [yml]
     # apps/frontend/config/settings.yml
-    enabled_modules: [default, sfGuardAuth, sfSocialContact, sfSocialMessage, sfSocialEvent]
+    enabled_modules: [sfGuardAuth, sfSocialContact, sfSocialMessage, sfSocialEvent]
     # this list is not complete: customize on your needs
+
+In you application `lib/myUser.class.php`, set class to extend `sfSocialSecurityUser`
+
+Edit `plugins/sfGuardPlugin/lib/model/sfGuardUser.php` and set class to extend
+`sfSocialGuardUser` instead of `PluginsfGuardUser`
 
 
 ## Roadmap
 
-For now, there's just a database schema, along with builded models, forms
-and filters.
+Currently Contact, Message, and Event modules are working, with funcional tests.
 
-The project aims to implement:
+The project aims to fully implement:
 
   * **Contact** system (aka friends system): search for other users, request
     contact, accept/deny contact request, see list of your contacts,

@@ -14,6 +14,6 @@
  * @subpackage plugin
  * @author     Lionel Guichard <lionel.guichard@gmail.com>
  */
-class sfGuardUserPeer extends PluginsfGuardUserPeer
+class sfSocialGuardUserPeer extends PluginsfGuardUserPeer
 {
 }
