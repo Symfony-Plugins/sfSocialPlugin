@@ -32,5 +32,14 @@ class sfSocialEvent extends BasesfSocialEvent
     return $from . ' ' . $this->getStart($date . ' ' . $time) . ' ' . $to . ' ' .
            $this->getEnd($date . ' ' . $time);
   }
+  /**
+   * check if an user is admin of event
+   * @param  sfGuardUser $user
+   * @return boolean
+   */
+  public function isAdmin(sfGuardUser $user)
+  {
+    return $this->getUserAdmin() == $user->getId();
+  }
 
 }

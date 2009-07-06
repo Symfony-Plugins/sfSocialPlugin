@@ -1,4 +1,4 @@
-<h2><?php echo __('New event ') ?></h2>
+<h2><?php echo __('New event') ?></h2>
 <form action="<?php echo url_for('@sf_social_event_new') ?>" method="post">
   <ul id="form">
     <?php echo $form ?>

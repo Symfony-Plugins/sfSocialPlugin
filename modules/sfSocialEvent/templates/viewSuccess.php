@@ -1,4 +1,5 @@
 <h2><?php echo __('Event') ?> &quot;<?php echo $event->getTitle() ?>&quot;</h2>
+<?php /* escaping strategy safety */ $_user = $user instanceof sfGuardUser ? $user : $user->getRawValue() ?>
 
 <?php if ($sf_user->getFlash('notice')): ?>
 <div class="notice">
@@ -12,7 +13,7 @@
   <?php echo $event->getDescription() ?>
 </div>
 
-<?php if ($isAdmin): ?>
+<?php if ($event->isAdmin($_user)): ?>
 <div id="event_edit">
   <?php echo link_to(__('Edit event'), '@sf_social_event_edit?id=' . $event->getId()) ?>
 </div>
@@ -29,7 +30,7 @@
 </form>
 </div>
 
-<?php if ($isAdmin): ?>
+<?php if ($event->isAdmin($_user)): ?>
 <h3><?php echo __('Invite:') ?></h3>
 <div id="event_invite">
 <form action="<?php echo url_for('@sf_social_event_invite?id=' . $event->getId()) ?>" method="post">

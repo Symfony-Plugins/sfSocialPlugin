@@ -19,6 +19,7 @@ class sfSocialEventPeer extends BasesfSocialEventPeer
     $pager->setPeerMethod('doSelectJoinsfGuardUser');
     $pager->setPage($page);
     $pager->init();
+    
     return $pager;
   }
 
@@ -38,6 +39,7 @@ class sfSocialEventPeer extends BasesfSocialEventPeer
     $pager->setPeerMethod('doSelectJoinsfGuardUser');
     $pager->setPage($page);
     $pager->init();
+
     return $pager;
   }
 

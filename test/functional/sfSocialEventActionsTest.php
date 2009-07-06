@@ -33,7 +33,40 @@ $browser->
     checkElement('body h2', '/Event "End of the world"/')->
   end()->
 
+  info('edit event')->
+  click('Edit event')->
+    with('request')->begin()->
+    isParameter('module', 'sfSocialEvent')->
+    isParameter('action', 'edit')->
+  end()->
+  click('edit', array('sf_social_event' => array(
+    'title'       => '',
+    'description' => '',
+    'location'    => '',
+  )))->
+  with('form')->begin()->hasErrors(3)->
+    isError('title', 'required')->
+    isError('description', 'required')->
+    isError('location', 'required')->
+  end()->
+  click('edit', array('sf_social_event' => array(
+    'title'       => 'No more end!',
+    'description' => 'I\'m a believer',
+    'location'    => 'Earth',
+  )))->
+  with('form')->begin()->hasErrors(false)->
+  end()->
+  with('propel')->begin()->
+    check('sfSocialEvent', array(
+      'title'       => 'No more end!',
+      'description' => 'I\'m a believer',
+      'location'    => 'Earth',
+  ))->
+  end()->
+
   info('confirm event')->
+  isRedirected()->
+  followRedirect()->
   click('confirm', array('sf_social_event_user' => array(
     'confirm' => '2',
   )))->
@@ -85,7 +118,12 @@ $browser->
       'description' => 'What about a new event?',
       'location'    => 'Just here!',
   ))->
+  end()->
 
+  info('edit forbidden event')->
+  get('/event/2/edit')->
+  with('response')->begin()->
+    isStatusCode(403)->
   end()
 
 ;

@@ -9,19 +9,18 @@ notifications about all this stuff, and so on.
 
 ## Demo
 
-A working demo is online at http://symfony.altervista.org/social/web/index.php
+A working demo is online at [http://social.garak.it/](http://social.garak.it/)
 
 ![Screenshot](http://symfony.altervista.org/_altervista_ht/sfSocial.png "Screenshot")
 
 ## Installation
 
-To install:
+To install (from your project's root):
 
     cd plugins;
     svn co http://svn.symfony-project.com/plugins/sfSocialPlugin/trunk sfSocialPlugin
 
 The package depends on sfGuardPlugin, as users are managed by it.
-
 
 
 ## Usage
@@ -36,14 +35,14 @@ Enable plugins in your `ProjectConfiguration` class
       $this->enablePlugins(array('sfGuardPlugin', 'sfSocialPlugin'));
     }
 
-Enable modules in you application settings
+Enable modules in your application settings
 
     [yml]
     # apps/frontend/config/settings.yml
     enabled_modules: [sfGuardAuth, sfSocialContact, sfSocialMessage, sfSocialEvent]
     # this list is not complete: customize on your needs
 
-In you application `lib/myUser.class.php`, set class to extend `sfSocialSecurityUser`
+In you application's `lib/myUser.class.php`, set class to extend `sfSocialSecurityUser`
 
 Edit `plugins/sfGuardPlugin/lib/model/sfGuardUser.php` and set class to extend
 `sfSocialGuardUser` instead of `PluginsfGuardUser`
@@ -51,7 +50,7 @@ Edit `plugins/sfGuardPlugin/lib/model/sfGuardUser.php` and set class to extend
 
 ## Roadmap
 
-Currently Contact, Message, and Event modules are working, with funcional tests.
+Currently Contact, Message, and Event modules are working, with functional tests.
 
 The project aims to fully implement:
 

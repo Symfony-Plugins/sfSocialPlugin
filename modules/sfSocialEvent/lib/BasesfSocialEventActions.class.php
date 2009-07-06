@@ -15,45 +15,43 @@ class BasesfSocialEventActions extends sfActions
     $this->user = $this->getUser()->getGuardUser();
   }
 
- /**
-  * List of events in which user is invited
-  * @param sfRequest $request A request object
-  */
+  /**
+   * List of events in which user is invited
+   * @param sfRequest $request A request object
+   */
   public function executeInvitedlist(sfWebRequest $request)
   {
     $page = $request->getParameter('page', 1);
     $this->pager = sfSocialEventInvitePeer::getEvents($this->user, $page);
   }
 
- /**
-  * List of future events
-  * @param sfRequest $request A request object
-  */
+  /**
+   * List of future events
+   * @param sfRequest $request A request object
+   */
   public function executeList(sfWebRequest $request)
   {
     $page = $request->getParameter('page', 1);
     $this->pager = sfSocialEventPeer::getEvents($page);
   }
 
- /**
-  * List of past events
-  * @param sfRequest $request A request object
-  */
+  /**
+   * List of past events
+   * @param sfRequest $request A request object
+   */
   public function executePastlist(sfWebRequest $request)
   {
     $page = $request->getParameter('page', 1);
     $this->pager = sfSocialEventPeer::getPastEvents($page);
   }
 
- /**
-  * View an event
-  * @param sfRequest $request A request object
-  */
+  /**
+   * View an event
+   * @param sfRequest $request A request object
+   */
   public function executeView(sfWebRequest $request)
   {
-    $id = $request->getParameter('id');
-    $this->forward404Unless($id, 'id not passed');
-    $this->event = sfSocialEventPeer::retrieveByPK($id);
+    $this->event = sfSocialEventPeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($this->event, 'event not found');
     // confirm form
     $this->getContext()->set('Event', $this->event);
@@ -65,25 +63,23 @@ class BasesfSocialEventActions extends sfActions
       $this->form->bindAndSave($request->getParameter($this->form->getName()));
     }
     // invite form
-    $this->isAdmin = $this->event->getSfGuardUser()->getId() == $this->user->getId();
-    if ($this->isAdmin)
+    if ($this->event->isAdmin($this->user))
     {
       $this->form2 = new sfSocialEventInviteForm(null, array('user' => $this->user,
                                                              'event' => $this->event));
     }
   }
 
- /**
-  * Create a new event
-  * @param sfRequest $request A request object
-  */
+  /**
+   * Create a new event
+   * @param sfRequest $request A request object
+   */
   public function executeCreate(sfWebRequest $request)
   {
     $this->form = new sfSocialEventForm(null, array('user' => $this->user));
     if ($request->isMethod('post'))
     {
-      $values = $request->getParameter($this->form->getName());
-      if ($this->form->bindAndSave($values))
+      if ($this->form->bindAndSave($request->getParameter($this->form->getName())))
       {
         $this->getUser()->setFlash('notice', 'event created');
         $this->redirect('@sf_social_event?id=' . $this->form->getObject()->getId());
@@ -91,41 +87,39 @@ class BasesfSocialEventActions extends sfActions
     }
   }
 
- /**
-  * Edit an event
-  * @param sfRequest $request A request object
-  */
+  /**
+   * Edit an event
+   * @param sfRequest $request A request object
+   */
   public function executeEdit(sfWebRequest $request)
   {
-    $id = $request->getParameter('id');
-    $this->event = sfSocialEventPeer::retrieveByPK($id);
+    $this->event = sfSocialEventPeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($this->event, 'event not found');
+    $this->forwardUnless($this->event->isAdmin($this->user), 'sfGuardAuth', 'secure');
     $this->form = new sfSocialEventForm($this->event, array('user' => $this->user));
     if ($request->isMethod('post'))
     {
-      $values = $request->getParameter($this->form->getName());
-      $created = $this->form->bindAndSave($values);
-      $this->getContext()->set('Event', $this->form->getObject());
-      $this->getContext()->set('isNew', false);
-      $this->forwardIf($created, 'sfSocialEvent', 'created');
+      if ($this->form->bindAndSave($request->getParameter($this->form->getName())))
+      {
+        $this->getUser()->setFlash('notice', 'event modified');
+        $this->redirect('@sf_social_event?id=' . $this->form->getObject()->getId());
+      }
     }
   }
 
- /**
-  * Invite another user to an event
-  * @param sfRequest $request A request object
-  */
+  /**
+   * Invite another user to an event
+   * @param sfRequest $request A request object
+   */
   public function executeInvite(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod('post'), 'invalid request');
     $values = $request->getParameter('sf_social_event_invite');
     $this->event = sfSocialEventPeer::retrieveByPK($values['event_id']);
     $this->forward404Unless($this->event, 'event not found');
-    $this->getContext()->set('Event', $this->event);
+    $this->forwardUnless($this->event->isAdmin($this->user), 'sfGuardAuth', 'secure');
     $this->form = new sfSocialEventInviteForm(null, array('user' => $this->user,
                                                           'event' => $this->event));
-    $this->forwardUnless($this->event->getUserAdmin() == $values['user_from'],
-                         'sfGuardAuth', 'secure');
     if ($this->form->bindAndSave($values))
     {
       $this->getUser()->setFlash('notice', count($this->form->getValue('user_id')) . ' users invited.');

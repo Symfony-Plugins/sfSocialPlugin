@@ -11,12 +11,12 @@ class sfSocialEventInvite extends BasesfSocialEventInvite
   {
     $event = $this->getsfSocialEvent();
     $user = $this->getsfGuardUserRelatedByUserId();
-    $event_user = sfSocialEventUserPeer::retrieveByPK($event->getId(), $user->getId());
-    if (null === $event_user)
+    $eventUser = sfSocialEventUserPeer::retrieveByPK($event->getId(), $user->getId());
+    if (null === $eventUser)
     {
       return null;
     }
-    return sfSocialEventUser::$choices[$event_user->getConfirm()];
+    return sfSocialEventUser::$choices[$eventUser->getConfirm()];
   }
 
 }

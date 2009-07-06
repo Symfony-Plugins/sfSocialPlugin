@@ -116,3 +116,47 @@ sf_social_user:
   url:   /user/:username
   param: { module: sfSocialUser, action: user }
   requirements: { usernam: \w+ }
+
+# groups
+
+sf_social_group_invitedlist:
+  url:   /groups/invited/*
+  param: { module: sfSocialGroup, action: invitedlist }
+
+sf_social_group_list:
+  url:   /groups/*
+  param: { module: sfSocialGroup, action: list }
+
+sf_social_group_edit:
+  url:   /group/:id/edit
+  param: { module: sfSocialGroup, action: edit }
+  requirements: { id: \d+ }
+
+sf_social_group_invite:
+  url:   /group/:id/invite/*
+  param: { module: sfSocialGroup, action: invite }
+  requirements: { id: \d+ }
+
+sf_social_group_join:
+  url:   /group/:id/join
+  param: { module: sfSocialGroup, action: join }
+  requirements: { id: \d+ }
+
+sf_social_group_accept:
+  url:   /group/:id/accept
+  param: { module: sfSocialGroup, action: accept }
+  requirements: { id: \d+ }
+
+sf_social_group_deny:
+  url:   /group/:id/deny
+  param: { module: sfSocialGroup, action: deny }
+  requirements: { id: \d+ }
+
+sf_social_group:
+  url:   /group/:id
+  param: { module: sfSocialGroup, action: view }
+  requirements: { id: \d+ }
+
+sf_social_group_new:
+  url:   /group/create
+  param: { module: sfSocialGroup, action: create }
