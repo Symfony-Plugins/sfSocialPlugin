@@ -1,13 +1,13 @@
-<h2><?php echo __('Messages received') ?></h2>
+<h2><?php echo __('Messages received', null, 'sfSocial') ?></h2>
 
 <?php if (!$pager->getResults()): ?>
 <p>
-  <?php echo __('No messages received yet') ?>
+  <?php echo __('No messages received yet', null, 'sfSocial') ?>
 </p>
 <?php else: ?>
 
 <?php if ($unread > 0): ?>
-<?php echo $unread ?> <?php echo __('unread messages') ?>
+<?php echo $unread ?> <?php echo __('unread messages', null, 'sfSocial') ?>
 <?php endif ?>
 
 <ul id="list">
@@ -19,7 +19,7 @@
       <?php echo link_to($message->getSubject(), '@sf_social_message_read?id=' . $message->getId()) ?>
     </div>
     <div class="from">
-      <?php echo link_to($message->getsfGuardUser(), '@sf_social_user?username=' . $message->getsfGuardUser(), 'class=user') ?>
+      <?php echo link_to(image_tag($message->getsfGuardUser()->getThumb(), 'title=' . $message->getsfGuardUser()), '@sf_social_user?username=' . $message->getsfGuardUser()) ?>
     </div>
   </li>
 <?php endforeach ?>
@@ -32,6 +32,8 @@
 <?php endforeach ?>
 </div>
 <?php endif ?>
+
 <?php endif ?>
-<?php echo link_to(__('Sent messages'), '@sf_social_message_sentlist') ?> |
-<?php echo link_to(__('Compose a new message'), '@sf_social_message_new') ?>
+
+<?php echo link_to(__('Sent messages', null, 'sfSocial'), '@sf_social_message_sentlist') ?> |
+<?php echo link_to(__('Compose a new message', null, 'sfSocial'), '@sf_social_message_new') ?>

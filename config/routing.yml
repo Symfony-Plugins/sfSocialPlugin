@@ -91,7 +91,7 @@ sf_social_contact_cancel_request:
   requirements: { id: \d+ }
 
 sf_social_contact_send_request:
-  url:   /request/send
+  url:   /request/send/*
   param: { module: sfSocialContact, action: sendrequest }
 
 sf_social_contact_delete:
@@ -115,17 +115,31 @@ sf_social_notify:
 sf_social_user:
   url:   /user/:username
   param: { module: sfSocialUser, action: user }
-  requirements: { usernam: \w+ }
+  requirements: { username: \w+ }
+
+sf_social_user_edit:
+  url:   /user/:username/edit
+  param: { module: sfSocialUser, action: edit }
+  requirements: { username: \w+ }
+
+sf_social_user_contacts:
+  url:   /user/:username/contacts
+  param: { module: sfSocialUser, action: contacts }
+  requirements: { username: \w+ }
 
 # groups
-
-sf_social_group_invitedlist:
-  url:   /groups/invited/*
-  param: { module: sfSocialGroup, action: invitedlist }
 
 sf_social_group_list:
   url:   /groups/*
   param: { module: sfSocialGroup, action: list }
+
+sf_social_group_mylist:
+  url:   /mygroups
+  param: { module: sfSocialGroup, action: mylist }
+
+sf_social_group_invitedlist:
+  url:   /groups/invited/*
+  param: { module: sfSocialGroup, action: invitedlist }
 
 sf_social_group_edit:
   url:   /group/:id/edit

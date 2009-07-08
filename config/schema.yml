@@ -108,3 +108,14 @@ propel:
     model_id: { type: integer, required: true }
     read: { type: boolean, default: false }
     created_at: ~
+
+  sf_guard_user_profile:
+    _attributes: { phpName: sfGuardUserProfile, package: plugins.sfGuardPlugin.lib.model }
+    id: ~
+    user_id:     { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    first_name:  varchar(20)
+    last_name:   varchar(20)
+    birthday:    date
+    sex:         { type: char, size: 1 }
+    location:    varchar(255)
+    picture:     varchar(255)

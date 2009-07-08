@@ -17,13 +17,22 @@ abstract class BasesfSocialGroupActions extends sfActions
   }
 
   /**
-   * List of groups
+   * List of all groups
    * @param sfRequest $request A request object
    */
   public function executeList(sfWebRequest $request)
   {
     $page = $request->getParameter('page', 1);
     $this->pager = sfSocialGroupPeer::getGroups($page);
+  }
+
+  /**
+   * List of user's groups
+   * @param sfRequest $request A request object
+   */
+  public function executeMylist(sfWebRequest $request)
+  {
+    $this->groups = $this->user->getsfSocialGroups();
   }
 
   /**

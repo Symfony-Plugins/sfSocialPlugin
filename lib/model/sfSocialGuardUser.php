@@ -19,27 +19,37 @@ class sfSocialGuardUser extends PluginsfGuardUser
   protected $contacts	= null;
 
   /**
-   * Returns true if user has contact.
+   * Check if user has contact.
    * @param  sfGuardUser $userTo
    * @return boolean
    */
-  public function hasContact($userTo)
+  public function hasContact(sfGuardUser $userTo)
   {
 		$c = new Criteria();
 		$c->add(sfSocialContactPeer::USER_FROM, $this->getId());
 		$c->add(sfSocialContactPeer::USER_TO, $userTo->getId());
-		$sc = sfSocialContactPeer::doSelectOne($c);
-		if ($sc)
-		{
-	  	return true;
-		}
 
-		return false;
+    return sfSocialContactPeer::doCount($c) == 1;
+  }
+
+  /**
+   * Check if user has a contact request.
+   * @param  sfGuardUser $userTo
+   * @return boolean
+   */
+  public function hasContactRequest(sfGuardUser $userTo)
+  {
+		$c = new Criteria();
+		$c->add(sfSocialContactRequestPeer::USER_FROM, $this->getId());
+		$c->add(sfSocialContactRequestPeer::USER_TO, $userTo->getId());
+
+		return sfSocialContactRequestPeer::doCount($c) == 1;
   }
 
   /**
    * Send request to contact.
    * @param  sfGuardUser $userTo
+   * @param  string      $message
    * @return boolean
    */
   public function sendRequestContact(sfGuardUser $userTo, $message = '')
@@ -49,43 +59,52 @@ class sfSocialGuardUser extends PluginsfGuardUser
       throw new Exception(sprintf('You can\'t add yourself as a contact', $userTo));
     }
 
-   	if($this->hasContact($userTo))
+   	if ($this->hasContact($userTo))
   	{
 			throw new Exception(sprintf('You can\'t add a contact that already exist', $userTo));
 		}
 
-		$scr = new sfSocialContactRequest();
-  	$scr->setUserFrom($this->getId());
-  	$scr->setUserTo($userTo->getId());
-  	$scr->setMessage($message);
-  	$scr->save();
+		$contactRequest = new sfSocialContactRequest();
+  	$contactRequest->setUserFrom($this->getId());
+  	$contactRequest->setUserTo($userTo->getId());
+  	$contactRequest->setMessage($message);
+  	$contactRequest->save();
   }
 
   /**
    * Accept request from contact.
-   * @param  sfSocialContactRequest $scr
+   * @param sfSocialContactRequest $scr
    */
-  public function acceptRequestContact(sfSocialContactRequest $scr)
+  public function acceptRequestContact(sfSocialContactRequest $contactRequest)
   {
 		// add contact
-		$this->addContact($scr->getUserFrom());
+		$this->addContact($contactRequest->getUserFrom());
 
    	// mark as accept
-		$scr->accepted();
+		$contactRequest->accepted();
   }
 
   /**
-   * Refused request from contact.
+   * Refuse request from contact.
    * @param  sfGuardUser $userTo
    * @return boolean
    */
-  public function denyRequestContact(sfSocialContactRequest $scr)
+  public function denyRequestContact(sfSocialContactRequest $contactRequest)
   {
-		$scr->refused();
+		$contactRequest->refused();
   }
 
   /**
-   * Returns an array containing the contacts list.
+   * Number of contacts.
+   * @return integer
+   */
+  public function countContacts()
+  {
+    return $this->countsfSocialContactsRelatedByUserFrom();
+  }
+
+  /**
+   * Returns contacts list.
    * @param  integer $limit
    * @return array
    */
@@ -95,21 +114,30 @@ class sfSocialGuardUser extends PluginsfGuardUser
 		{
       $this->contacts = array();
 	  	$c = new Criteria();
-	  	$c->add(sfSocialContactPeer::USER_FROM, $this->getId());
 	  	if ($limit > 0)
       {
 	   		$c->setLimit($limit);
       }
-	  	$scs = sfSocialContactPeer::doSelect($c);
-      if (!empty($scs))
+	  	$contacts = $this->getsfSocialContactsRelatedByUserFrom($c);
+      if (!empty($contacts))
       {
-        foreach ($scs as $sc)
+        foreach ($contacts as $contact)
         {
-          $this->contacts[] = $sc->getsfGuardUserRelatedByUserTo();
+          $this->contacts[] = $contact->getsfGuardUserRelatedByUserTo();
         }
       }
 		}
     return $this->contacts;
+  }
+
+  /**
+   * Returns a pager of contacts.
+   * @param  integer $page current page
+   * @return sfPager
+   */
+  public function getContactsPager($page = 1)
+  {
+    return sfSocialContactPeer::getContacts($this, $page);
   }
 
   /**
@@ -136,14 +164,14 @@ class sfSocialGuardUser extends PluginsfGuardUser
    */
 	public function addContact(sfGuardUser $userTo)
   {
-		$sc = new sfSocialContact();
-		$sc->setUserFrom($this->getId());
-		$sc->setUserTo($userTo->getId());
-		$sc->save();
-		$sc = new sfSocialContact();
-		$sc->setUserFrom($userTo->getId());
-		$sc->setUserTo($this->getId());
-		$sc->save();
+		$contact = new sfSocialContact();
+		$contact->setUserFrom($this->getId());
+		$contact->setUserTo($userTo->getId());
+		$contact->save();
+		$contact = new sfSocialContact();
+		$contact->setUserFrom($userTo->getId());
+		$contact->setUserTo($this->getId());
+		$contact->save();
   }
 
 	/**
@@ -178,7 +206,6 @@ class sfSocialGuardUser extends PluginsfGuardUser
 
 	/**
    * Remove contact by username
-   *
    * @param  string  $username
    * @return boolean
    */
@@ -203,5 +230,24 @@ class sfSocialGuardUser extends PluginsfGuardUser
     $c = new Criteria();
 		$c->add(sfSocialContactPeer::USER_TO, $this->getId());
 		sfSocialContactPeer::doDelete($c);
+  }
+
+	/**
+   * Get thumbnail picture path
+   * @return string
+   */
+  public function getThumb()
+  {
+    $path = sfConfig::get('app_sf_social_pic_path', '/sf_social_pics/');
+    $pic = $this->getProfile()->getPicture();
+    if (empty($pic))
+    {
+      return sfConfig::get('app_sf_social_default_pic', '/sfSocialPlugin/images/default.jpg');;
+    }
+    else
+    {
+      $upload = substr(sfConfig::get('sf_upload_dir'), strlen(sfConfig::get('sf_web_dir')));
+      return  $upload . $path . 'thumbnails/' . $pic;
+    }
   }
 }

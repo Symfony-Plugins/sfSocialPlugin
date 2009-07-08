@@ -1,14 +1,14 @@
-<h2><?php echo __('Events') ?></h2>
+<h2><?php echo __('Events', null, 'sfSocial') ?></h2>
 
 <?php if ($sf_user->getFlash('notice')): ?>
 <div class="notice">
-  <?php echo $sf_user->getFlash('notice') ?>
+  <?php echo __($sf_user->getFlash('notice'), null, 'sfSocial') ?>
 </div>
 <?php endif ?>
 
 <?php if (!$pager->getResults()): ?>
 <p>
-  <?php echo __('No events yet') ?>
+  <?php echo __('No events yet', null, 'sfSocial') ?>
 </p>
 <?php else: ?>
 
@@ -17,8 +17,8 @@
   <li class="<?php $bRow = empty($bRow) ? print('a') : false ?>">
     <?php echo link_to($event->getTitle(), '@sf_social_event?id=' . $event->getId()) ?>
     <?php echo $event->getWhen() ?>
-    <?php echo __('in') ?> <?php echo $event->getLocation() ?>
-    - <?php echo __('by') ?> <?php echo link_to($event->getsfGuardUser(), '@sf_social_user?username=' . $event->getsfGuardUser()) ?>
+    <?php echo __('in', null, 'sfSocial') ?> <?php echo $event->getLocation() ?>
+    - <?php echo __('by', null, 'sfSocial') ?> <?php echo link_to($event->getsfGuardUser(), '@sf_social_user?username=' . $event->getsfGuardUser()) ?>
   </li>
 <?php endforeach ?>
 </ul>
@@ -28,6 +28,7 @@
 <?php echo link_to_unless($page == $pager->getPage(), $page, '@sf_social_event_list?page=' . $page) ?>
 <?php endforeach ?>
 <?php endif ?>
+
 <?php endif ?>
 
-<?php echo link_to(__('Create a new event'), '@sf_social_event_new') ?>
+<?php echo link_to(__('Create a new event', null, 'sfSocial'), '@sf_social_event_new') ?>

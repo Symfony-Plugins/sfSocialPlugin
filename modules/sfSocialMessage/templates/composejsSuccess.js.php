@@ -132,7 +132,7 @@ sfsmsg =
     var a = document.createElement('a');
     a.appendChild(document.createTextNode('x'));
     a.setAttribute('href', '#' + id);
-    a.setAttribute('title', 'remove');  // TODO localize!
+    a.setAttribute('title', '<?php echo __('remove', null, 'sfSocial') ?>');
     YAHOO.util.Event.addListener(a, 'click', sfsmsg.remove);
     span.appendChild(a);
     // add hidden input with id inside

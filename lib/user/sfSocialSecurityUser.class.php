@@ -49,8 +49,6 @@ class sfSocialSecurityUser extends sfGuardSecurityUser
    */
   public function addContact($user)
   {
-#var_dump($user);
-#var_dump(($this->getGuardUser()));die;
     return $this->getGuardUser()->addContact($user);
   }
 

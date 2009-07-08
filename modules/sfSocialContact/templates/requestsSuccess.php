@@ -1,4 +1,4 @@
-<h2><?php echo __('List of received contact requests') ?></h2>
+<h2><?php echo __('List of received contact requests', null, 'sfSocial') ?></h2>
 
 <?php if ($sf_user->getFlash('notice')): ?>
 <div class="notice">
@@ -8,18 +8,21 @@
 
 <?php if (!$pager->getResults()): ?>
 <p>
-  <?php echo __('No request') ?>
+  <?php echo __('No request', null, 'sfSocial') ?>
 </p>
 <?php else: ?>
 
-<ul>
+<ul id="list">
 <?php foreach ($pager->getResults() as $request): ?>
-  <li>
-    <?php echo __('from') ?>
-    <?php echo link_to($request->getsfGuardUserRelatedByUserFrom()->getUsername(), '@sf_social_user?username=' . $request->getsfGuardUserRelatedByUserFrom()->getUsername()) ?>
-		: <?php echo link_to(__('Accept'), '@sf_social_contact_accept_request?id=' . $request->getId()) ?>
-    - <?php echo link_to(__('Deny'), '@sf_social_contact_deny_request?id=' . $request->getId()) ?>
-		<br /><?php echo $request->getMessage() ?>
+  <li class="<?php $bRow = empty($bRow) ? print('a') : false ?>">
+    <?php $_user = $request->getsfGuardUserRelatedByUserFrom() ?>
+    <?php echo link_to(image_tag($_user->getThumb(), 'alt=' . $_user . ' title=' . $_user . ' class=left'), '@sf_social_user?username=' . $_user) ?>
+    <div><?php echo $request->getCreatedAt() ?></div>
+		<div class="req_message"><?php echo $request->getMessage() ?></div>
+    <div>
+      <?php echo link_to(__('Accept', null, 'sfSocial'), '@sf_social_contact_accept_request?id=' . $request->getId()) ?>
+      <?php echo link_to(__('Deny', null, 'sfSocial'), '@sf_social_contact_deny_request?id=' . $request->getId()) ?>
+    </div>
   </li>
 <?php endforeach ?>
 </ul>
@@ -29,5 +32,7 @@
 <?php echo link_to_unless($page == $pager->getPage(), $page, '@sf_social_contact_requests?page=' . $page) ?>
 <?php endforeach ?>
 <?php endif ?>
+
 <?php endif ?>
-<?php echo link_to(__('Return to list'), '@sf_social_contact_list') ?>
+
+<?php echo link_to(__('Return to list', null, 'sfSocial'), '@sf_social_contact_list') ?>

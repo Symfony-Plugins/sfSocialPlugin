@@ -13,10 +13,11 @@ function getSfSocialNotifyMessage(sfSocialNotify $notify)
   {
     case 'sfSocialMessage':
       return __('You received a %1% from %2%',
-                array('%1%' => link_to(__('message'),
+                array('%1%' => link_to(__('message', null, 'sfSocial'),
                                           '@sf_social_notify?id=' . $notify->getId()),
                       '%2%' => link_to($notify->getModel()->getSfGuardUser(), '@sf_social_user?username=' . $notify->getModel()->getSfGuardUser())
-                      )
+                    ),
+                'sfSocial'
                 );
       // TODO other models
   }

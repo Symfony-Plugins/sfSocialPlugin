@@ -1,43 +1,83 @@
 sfGuardUser:
   john:
-    username:  john
-    password:  doe
+    username: john
+    password: doe
   mike:
-    username:  mike
-    password:  delfino
+    username: mike
+    password: delfino
   danny:
-    username:  danny
-    password:  zucco
+    username: danny
+    password: zucco
   mario:
-    username:  mario
-    password:  mario
+    username: mario
+    password: mario
   luigi:
-    username:  luigi
-    password:  mario
+    username: luigi
+    password: mario
   anna:
-    username:  anna
-    password:  frank
+    username: anna
+    password: frank
   julie:
-    username:  julie
-    password:  sacco
+    username: julie
+    password: sacco
   max:
-    username:  max
-    password:  garak
+    username: max
+    password: garak
   karl:
-    username:  karl
-    password:  marx
+    username: karl
+    password: marx
   jimmy:
-    username:  jimmy
-    password:  dummy
+    username: jimmy
+    password: dummy
   timmy:
-    username:  timmy
-    password:  dummy
+    username: timmy
+    password: dummy
   tommy:
-    username:  tommy
-    password:  dummy
+    username: tommy
+    password: dummy
   mickey:
-    username:  mickey
-    password:  mouse
+    username: mickey
+    password: mouse
   goofy:
-    username:  goofy
-    password:  boofy
+    username: goofy
+    password: boofy
+
+sfGuardUserProfile:
+  max:
+    user_id: max
+    first_name: Massimiliano
+    last_name: Arione
+    birthday: 1974-04-01
+    sex: M
+    Location: Rome
+    picture: max.jpg
+  john:
+    user_id: john
+    first_name: John
+    sex: M
+    picture: john.png
+  mike:
+    user_id: mike
+    first_name: Michael
+    sex: M
+    Location: Fairview
+    picture: mike.jpg
+  danny:
+    user_id: danny
+    first_name: Daniel
+    sex: M
+    picture: danny.jpg
+  mario:
+    user_id: mario
+    first_name: Mario
+    sex: M
+    picture: mario.jpg
+  jimmy:
+    user_id: jimmy
+    first_name: Practical
+    last_name: Pig
+    sex: M
+    picture: jimmy.jpg
+  anna:
+    user_id: anna
+    sex: F

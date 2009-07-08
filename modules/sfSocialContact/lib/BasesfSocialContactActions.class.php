@@ -62,7 +62,15 @@ class BasesfSocialContactActions extends sfActions
    */
   public function executeSendrequest(sfWebRequest $request)
   {
-    $this->form = new sfSocialContactRequestForm(null, array('user' => $this->user));
+    // possible user already selected
+    $to = $request->getParameter('to');
+    $userTo = null;
+    if (!empty($to))
+    {
+      $userTo = sfSocialGuardUserPeer::retrieveByUsername($to);
+      $this->forward404Unless($userTo, 'user not found');
+    }
+    $this->form = new sfSocialContactRequestForm(null, array('user' => $this->user, 'to' => $userTo));
     if ($request->isMethod('post'))
     {
       if ($this->form->bindAndSave($request->getParameter($this->form->getName())))

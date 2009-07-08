@@ -1,14 +1,14 @@
-<h2><?php echo __('Groups') ?></h2>
+<h2><?php echo __('Groups', null, 'sfSocial') ?></h2>
 
 <?php if ($sf_user->getFlash('notice')): ?>
 <div class="notice">
-  <?php echo $sf_user->getFlash('notice') ?>
+  <?php echo __($sf_user->getFlash('notice'), null, 'sfSocial') ?>
 </div>
 <?php endif ?>
 
 <?php if (!$pager->getResults()): ?>
 <p>
-  <?php echo __('No groups yet') ?>
+  <?php echo __('No groups yet', null, 'sfSocial') ?>
 </p>
 <?php else: ?>
 
@@ -25,6 +25,8 @@
 <?php echo link_to_unless($page == $pager->getPage(), $page, '@sf_social_group_list?page=' . $page) ?>
 <?php endforeach ?>
 <?php endif ?>
+
 <?php endif ?>
 
-<?php echo link_to(__('Create a new group'), '@sf_social_group_new') ?>
+<?php echo link_to(__('Your groups', null, 'sfSocial'), '@sf_social_group_mylist') ?> |
+<?php echo link_to(__('Create a new group', null, 'sfSocial'), '@sf_social_group_new') ?>
