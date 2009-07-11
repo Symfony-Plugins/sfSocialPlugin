@@ -19,7 +19,9 @@
     <?php echo link_to(image_tag($_user->getThumb(), 'alt=' . $_user . ' title=' . $_user . ' class=left'), '@sf_social_user?username=' . $_user) ?>
     <div><?php echo $request->getCreatedAt() ?></div>
     <div class="req_message"><?php echo $request->getMessage() ?></div>
-    <div><?php echo link_to(__('cancel', null, 'sfSocial'), '@sf_social_contact_cancel_request?id=' . $request->getId()) ?></div>
+    <div>
+      <?php echo link_to(__('cancel', null, 'sfSocial'), '@sf_social_contact_cancel_request?id=' . $request->getId()) ?>
+    </div>
   </li>
 <?php endforeach ?>
 </ul>

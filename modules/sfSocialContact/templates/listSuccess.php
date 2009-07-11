@@ -1,3 +1,4 @@
+<?php use_helper('Date') ?>
 <h2><?php echo __('Contacts list', null, 'sfSocial') ?></h2>
 
 <?php if ($sf_user->getFlash('notice')): ?>
@@ -15,10 +16,14 @@
 <ul id="list">
 <?php foreach ($pager->getResults() as $contact): ?>
   <li class="<?php $bRow = empty($bRow) ? print('a') : false ?>">
-    <?php $_user = $contact->getsfGuardUserRelatedByUserFrom() ?>
+    <?php $_user = $contact->getsfGuardUserRelatedByUserTo() ?>
     <?php echo link_to(image_tag($_user->getThumb(), 'alt=' . $_user . ' title=' . $_user . ' class=left'), '@sf_social_user?username=' . $_user) ?>
-		<div><?php echo __('added on', null, 'sfSocial') ?> <?php echo $contact->getCreatedAt() ?></div>
-    <div><?php echo link_to(__('Remove', null, 'sfSocial'), '@sf_social_contact_delete?id=' . $contact->getId()) ?></div>
+		<div>
+      <?php echo __('added %1% ago', array('%1%' => time_ago_in_words($contact->getCreatedAt('U'))), 'sfSocial') ?>
+    </div>
+    <div>
+      <?php echo link_to(__('Remove', null, 'sfSocial'), '@sf_social_contact_delete?id=' . $contact->getId()) ?>
+    </div>
   </li>
 <?php endforeach ?>
 </ul>

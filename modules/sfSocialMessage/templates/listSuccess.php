@@ -1,3 +1,4 @@
+<?php use_helper('Date') ?>
 <h2><?php echo __('Messages received', null, 'sfSocial') ?></h2>
 
 <?php if (!$pager->getResults()): ?>
@@ -14,7 +15,7 @@
 <?php foreach ($pager->getResults() as $rcpt): ?>
 <?php $message = $rcpt->getSfSocialMessage() ?>
   <li class="<?php $bRow = empty($bRow) ? print('a') : false ?> <?php echo $rcpt->getRead() ? 'read' : 'unread' ?>">
-    <div class="date"><?php echo $message->getCreatedAt() ?></div>
+    <div class="date"><?php echo format_datetime($message->getCreatedAt()) ?></div>
     <div class="subject">
       <?php echo link_to($message->getSubject(), '@sf_social_message_read?id=' . $message->getId()) ?>
     </div>

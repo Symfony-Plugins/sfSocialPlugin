@@ -45,10 +45,10 @@ class sfSocialContactRequestForm extends BasesfSocialContactRequestForm
         array(
           new sfValidatorPropelUnique(array('model' => 'sfSocialContactRequest',
                                             'column' => array('user_from', 'user_to')),
-                                      array('invalid'=> 'Request already sent')),
+                                      array('invalid'=> 'Request already sent.')),
           new sfValidatorPropelUnique(array('model' => 'sfSocialContact',
                                             'column' => array('user_from', 'user_to')),
-                                      array('invalid'=> 'User is already a contact'))
+                                      array('invalid'=> 'User is already a contact.'))
     )));
 
   }

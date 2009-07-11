@@ -1,9 +1,10 @@
+<?php use_helper('Date') ?>
 <h2><?php echo $message->getSubject() ?></h2>
 
 <?php $_user = $message->getsfGuardUser() ?>
 <?php echo link_to(image_tag($_user->getThumb(), 'alt=' . $_user . ' title=' . $_user), '@sf_social_user?username=' . $_user) ?>
 
-<?php echo $message->getCreatedAt() ?>
+<?php echo format_datetime($message->getCreatedAt()) ?>
 
 <blockquote>
   <?php echo $message->getText() ?>

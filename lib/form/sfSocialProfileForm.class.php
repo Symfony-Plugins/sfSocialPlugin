@@ -20,11 +20,12 @@ class sfSocialProfileForm extends sfGuardUserForm
     $years = range(date('Y'), 1900);
     $this->widgetSchema['birthday']->setOption('years', array_combine($years, $years));
 
-    // make "sex" a choice
+    // make "sex" a choice (i18n solution is very ugly, is there a better way? TODO)
+    $i18n = sfContext::getInstance()->getI18N();
     $this->widgetSchema['sex'] = new sfWidgetFormChoice(array('expanded' => false,
-                                                              'choices' => array('' => 'Unspecified',
-                                                                                 'M' => 'Male',
-                                                                                 'F' => 'Female')));
+                                                              'choices' => array('' => $i18n->__('Unspecified', null, 'sfSocial'),
+                                                                                 'M' => $i18n->__('Male', null, 'sfSocial'),
+                                                                                 'F' => $i18n->__('Female', null, 'sfSocial'))));
     $this->validatorSchema['sex'] = new sfValidatorChoice(array('required' => false,
                                                                 'choices' => array('', 'M', 'F')));
 
@@ -40,6 +41,9 @@ class sfSocialProfileForm extends sfGuardUserForm
                                                                   'path' => sfConfig::get('sf_upload_dir') . $path));
   }
 
+  /**
+   * ovveride "save" to set user's name as file's name
+   */
   public function save($con = null)
   {
     if ($file = $this->getValue('picture'))

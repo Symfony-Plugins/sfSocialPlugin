@@ -20,7 +20,8 @@ To install (from your project's root):
     cd plugins;
     svn co http://svn.symfony-project.com/plugins/sfSocialPlugin/trunk sfSocialPlugin
 
-The package depends on sfGuardPlugin, as users are managed by it.
+The package depends on sfGuardPlugin, as users are managed by it. There's also an
+optional dependance from sfThumbnailPlugin (to create thumbnails for profile pictures)
 
 
 ## Usage
@@ -32,14 +33,14 @@ Enable plugins in your `ProjectConfiguration` class
     public function setup()
     {
       // possibly add other plugins here...
-      $this->enablePlugins(array('sfGuardPlugin', 'sfSocialPlugin'));
+      $this->enablePlugins(array('sfGuardPlugin', 'sfThumbnailPlugin', 'sfSocialPlugin'));
     }
 
 Enable modules in your application settings
 
     [yml]
     # apps/frontend/config/settings.yml
-    enabled_modules: [sfGuardAuth, sfSocialContact, sfSocialMessage, sfSocialEvent]
+    enabled_modules: [sfGuardAuth, sfSocialMessage, sfSocialEvent, sfSocialContact, sfSocialNotify, sfSocialUser, sfSocialGroup]
     # this list is not complete: customize on your needs
 
 In you application's `lib/myUser.class.php`, set class to extend `sfSocialSecurityUser`
@@ -47,10 +48,27 @@ In you application's `lib/myUser.class.php`, set class to extend `sfSocialSecuri
 Edit `plugins/sfGuardPlugin/lib/model/sfGuardUser.php` and set class to extend
 `sfSocialGuardUser` instead of `PluginsfGuardUser`
 
+Note that plugin comes with full modules templates. To use customized templates, just
+create under your application a module with the same name as the module you want
+to customize, then add your custom templates inside.
+If you prefer to use default templates, be aware that all forms inside are based on
+list formatter (tables are ugly!), so you must add this code:
+
+    [php]
+    // lib/form/BaseFormPropel.class.php
+    public function setup()
+    {
+      // default formatter to list (instead of table)
+      $this->widgetSchema->setDefaultFormFormatterName('list');
+
+      // i18n
+      $this->widgetSchema->getFormFormatter()->setTranslationCatalogue('sfSocial');
+    }
+
 
 ## Roadmap
 
-Currently Contact, Message, and Event modules are working, with functional tests.
+Currently Contact, Message, Event, and User modules are working, with functional tests.
 
 The project aims to fully implement:
 

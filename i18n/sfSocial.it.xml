@@ -5,8 +5,8 @@
     <header/>
     <body>
       <trans-unit id="1">
-        <source>logout</source>
-        <target>esci</target>
+        <source>todo</source>
+        <target>todo</target>
       </trans-unit>
       <trans-unit id="2">
         <source>Send a contact request</source>
@@ -29,8 +29,8 @@
         <target>Nessun contatto</target>
       </trans-unit>
       <trans-unit id="7">
-        <source>added on</source>
-        <target>aggiunto il</target>
+        <source>added %1% ago</source>
+        <target>aggiunto %1% fa</target>
       </trans-unit>
       <trans-unit id="8">
         <source>Remove</source>
@@ -358,7 +358,7 @@
       </trans-unit>
       <trans-unit id="89">
         <source>groups</source>
-        <target>grouppi</target>
+        <target>gruppi</target>
       </trans-unit>
       <trans-unit id="90">
         <source>Title</source>
@@ -403,6 +403,54 @@
       <trans-unit id="100">
         <source>Message</source>
         <target>Messaggio</target>
+      </trans-unit>
+      <trans-unit id="101">
+        <source>Male</source>
+        <target>Maschio</target>
+      </trans-unit>
+      <trans-unit id="102">
+        <source>Feale</source>
+        <target>Femmina</target>
+      </trans-unit>
+      <trans-unit id="103">
+        <source>Unspecified</source>
+        <target>Non specificato</target>
+      </trans-unit>
+      <trans-unit id="104">
+        <source>Invalid.</source>
+        <target>Non valido.</target>
+      </trans-unit>
+      <trans-unit id="105">
+        <source>Required.</source>
+        <target>Obbligatorio.</target>
+      </trans-unit>
+      <trans-unit id="106">
+        <source>Invalid.</source>
+        <target>Non valido.</target>
+      </trans-unit>
+      <trans-unit id="107">
+        <source>Error</source>
+        <target>Errore</target>
+      </trans-unit>
+      <trans-unit id="106">
+        <source>User is already a contact.</source>
+        <target>L'utente è già un tuo contatto.</target>
+      </trans-unit>
+      <trans-unit id="107">
+        <source>Request already sent.</source>
+        <target>Richiesta già inviata.</target>
+      </trans-unit>
+      <trans-unit id="108">
+        <source>received %1% ago</source>
+        <target>ricevuta %1% fa</target>
+      </trans-unit>
+      <trans-unit id="109">
+        <source>You received a %1% from %2%</source>
+        <target>Hai ricevuto un %1% da %2%</target>
+      </trans-unit>
+      <trans-unit id="110">
+        <source>message</source>
+        <target>messaggio</target>
       </trans-unit>
     </body>
   </file>
