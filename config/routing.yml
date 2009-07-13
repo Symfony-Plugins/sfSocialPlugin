@@ -112,6 +112,10 @@ sf_social_notify:
 
 # user
 
+sf_social_user_search:
+  url:   /user/search/*
+  param: { module: sfSocialUser, action: search }
+
 sf_social_user:
   url:   /user/:username
   param: { module: sfSocialUser, action: user }
@@ -126,6 +130,11 @@ sf_social_user_contacts:
   url:   /user/:username/contacts
   param: { module: sfSocialUser, action: contacts }
   requirements: { username: \w+ }
+
+sf_social_user_shared_contacts:
+  url:   /user/sharedcontacts/:user1/:user2
+  param: { module: sfSocialUser, action: sharedcontacts }
+  requirements: { user1: \w+, user2: \w+ }
 
 # groups
 

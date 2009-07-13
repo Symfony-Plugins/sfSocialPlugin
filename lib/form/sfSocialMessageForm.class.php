@@ -35,6 +35,12 @@ class sfSocialMessageForm extends BasesfSocialMessageForm
       $this->setDefault('subject', $this->options['reply_to']->getReplySubject());
     }
 
+    // possible recipient passed via parameter
+    if (!empty($this->options['to']))
+    {
+      $this->setDefault('to', $this->options['to']->getId());
+    }
+
   }
 
   /**
@@ -44,13 +50,18 @@ class sfSocialMessageForm extends BasesfSocialMessageForm
   private function getRcpts()
   {
     // in a reply, we need to be sure that sender is in recipients' list
-    if (empty($this->options['reply_to']))
+    if (!empty($this->options['reply_to']))
     {
-      $contacts = $this->options['user']->getContacts();
+      $contacts = $this->options['user']->getContactsAndSender($this->options['reply_to']->getUserFrom());
+    }
+    // same if a recipient was passed
+    elseif (!empty($this->options['to']))
+    {
+      $contacts = $this->options['user']->getContactsAndSender($this->options['to']->getId());
     }
     else
     {
-      $contacts = $this->options['user']->getContactsAndSender($this->options['reply_to']->getUserFrom());
+      $contacts = $this->options['user']->getContacts();
     }
     if (empty($contacts))
     {

@@ -27,7 +27,7 @@ class sfSocialContact extends BasesfSocialContact
    */
   public function checkUserFrom(sfGuardUser $user)
   {
-		return $this->getUserTo() == $user->getId();
+		return $this->getUserFrom() == $user->getId();
   }
 
   /**

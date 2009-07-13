@@ -46,11 +46,13 @@ Enable modules in your application settings
 In you application's `lib/myUser.class.php`, set class to extend `sfSocialSecurityUser`
 
 Edit `plugins/sfGuardPlugin/lib/model/sfGuardUser.php` and set class to extend
-`sfSocialGuardUser` instead of `PluginsfGuardUser`
+`sfSocialGuardUser` instead of `PluginsfGuardUser`. Do the same for `sfGuardUserPeer`,
+making it extend `sfSocialGuardUserPeer` instead of `PluginsfGuardUserPeer`.
 
 Note that plugin comes with full modules templates. To use customized templates, just
 create under your application a module with the same name as the module you want
-to customize, then add your custom templates inside.
+to customize (don't use `init-module` task, just create the directory), then add your custom
+emplates inside.
 If you prefer to use default templates, be aware that all forms inside are based on
 list formatter (tables are ugly!), so you must add this code:
 
@@ -64,6 +66,12 @@ list formatter (tables are ugly!), so you must add this code:
       // i18n
       $this->widgetSchema->getFormFormatter()->setTranslationCatalogue('sfSocial');
     }
+
+About user's profile, the schema comes with a definition for `sfGuardUserProfile`,
+just to be ready-to-go. You can customize the schema for your needs, or just comment
+that part if you already have `sfGuardUserProfile` defined elsewhere.
+In case you customize, note that some templates from sfSocialUser module should be
+adapted (see above).
 
 
 ## Roadmap

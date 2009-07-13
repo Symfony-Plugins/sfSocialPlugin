@@ -39,6 +39,12 @@ sfSocialContact:
   tommymax:
     user_from: tommy
     user_to: max
+  karlmike:
+    user_from: karl
+    user_to: mike
+  mikekarl:
+    user_from: mike
+    user_to: karl
 
 sfSocialContactGroup:
   maxfriends:

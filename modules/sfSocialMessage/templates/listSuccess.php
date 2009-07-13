@@ -1,4 +1,4 @@
-<?php use_helper('Date') ?>
+<?php use_helper('Date', 'Text') ?>
 <h2><?php echo __('Messages received', null, 'sfSocial') ?></h2>
 
 <?php if (!$pager->getResults()): ?>
@@ -19,8 +19,11 @@
     <div class="subject">
       <?php echo link_to($message->getSubject(), '@sf_social_message_read?id=' . $message->getId()) ?>
     </div>
+    <div class="text">
+      <?php echo link_to(truncate_text($message->getText(), 50), '@sf_social_message_read?id=' . $message->getId()) ?>
+    </div>
     <div class="from">
-      <?php echo link_to(image_tag($message->getsfGuardUser()->getThumb(), 'title=' . $message->getsfGuardUser()), '@sf_social_user?username=' . $message->getsfGuardUser()) ?>
+      <?php echo link_to(image_tag($message->getsfGuardUser()->getThumb(), 'alt=' . $message->getsfGuardUser() . ' title=' . $message->getsfGuardUser()), '@sf_social_user?username=' . $message->getsfGuardUser()) ?>
     </div>
   </li>
 <?php endforeach ?>

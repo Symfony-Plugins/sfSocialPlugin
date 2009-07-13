@@ -10,6 +10,17 @@ $browser->
 
   doLogin()->
 
+  info('search users')->
+  post('/user/search', array('name' => 'i'))->
+    with('request')->begin()->
+    isParameter('module', 'sfSocialUser')->
+    isParameter('action', 'search')->
+  end()->
+    with('response')->begin()->
+    checkElement('body h2', '/Searching "i"/')->
+    checkElement('body ul#list li', 7)->
+  end()->
+
   info('user page')->
   get('/user/max')->
     with('request')->begin()->
@@ -80,6 +91,12 @@ $browser->
   get('/user/goofy')->
     with('response')->begin()->
     checkElement('a[href$="/request/send/to/goofy"]', 'Add goofy to your contacts')->
+  end()->
+
+  info('profile with sared contacts ')->
+  get('/user/karl')->
+    with('response')->begin()->
+    checkElement('div#shared_contacts ul li', 1)->
   end()->
 
   info('edit profile of other user')->

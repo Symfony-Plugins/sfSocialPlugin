@@ -78,14 +78,6 @@ $browser->
   )))->
   with('form')->begin()->hasErrors(false)->
   end()->
-
-  info('sent messages')->
-  get('/messages/sent')->
-  with('request')->begin()->
-    isParameter('module', 'sfSocialMessage')->
-    isParameter('action', 'sentlist')->
-  end()->
-
   with('propel')->begin()->
     check('sfSocialMessage', array(
       'user_from' => 8,
@@ -106,6 +98,19 @@ $browser->
       'user_to' => 2,
       'read'    => 0,
   ))->
+  end()->
+
+  info('compose a message for a specific recipient')->
+  get('/message/compose/to/anna')->
+  with('response')->begin()->
+    checkElement('select#sf_social_message_to > option[value="6"][selected="selected"]', true)->
+  end()->
+
+  info('sent messages')->
+  get('/messages/sent')->
+  with('request')->begin()->
+    isParameter('module', 'sfSocialMessage')->
+    isParameter('action', 'sentlist')->
 
   end()
 ;

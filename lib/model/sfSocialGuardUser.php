@@ -250,4 +250,25 @@ class sfSocialGuardUser extends PluginsfGuardUser
       return  $upload . $path . 'thumbnails/' . $pic;
     }
   }
+
+  /**
+   * Get contacts shared with an user
+   * @param  sfGuardUser $user
+   * @param  integer     $limit
+   * @return array             sfGuardUser objects
+   */
+  public function getSharedContacts(sfGuardUser $user, $limit = 0)
+  {
+    return sfSocialContactPeer::getSharedContacts($this, $user, $limit);
+  }
+
+  /**
+   * Number of shared contacts with an user
+   * @return integer
+   */
+  public function countSharedContacts(sfGuardUser $user)
+  {
+    return sfSocialContactPeer::countSharedContacts($this, $user);
+  }
+
 }

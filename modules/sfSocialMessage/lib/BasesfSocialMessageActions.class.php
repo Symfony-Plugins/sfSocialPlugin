@@ -67,8 +67,9 @@ class BasesfSocialMessageActions extends sfActions
    */
   public function executeCompose(sfWebRequest $request)
   {
-    // checek if it's a reply message
     $replyTo = $request->getParameter('reply_to');
+    $to = $request->getParameter('to');
+    // check if it's a reply message
     if (null !== $replyTo)
     {
       $message = sfSocialMessagePeer::retrieveByPK($replyTo);
@@ -76,6 +77,13 @@ class BasesfSocialMessageActions extends sfActions
       $this->forwardUnless($message->checkUserTo($this->user), 'sfGuardAuth', 'secure');
       $this->form = new sfSocialMessageForm(null, array('user' => $this->user,
                                                         'reply_to' => $message));
+    }
+    // possible recipient passed via parameter
+    elseif (null !== $to)
+    {
+      $rcptUser = sfGuardUserPeer::retrieveByUsername($to);
+      $this->forward404Unless($rcptUser, 'recipient user not found');
+      $this->form = new sfSocialMessageForm(null, array('user' => $this->user, 'to' => $rcptUser));
     }
     else
     {

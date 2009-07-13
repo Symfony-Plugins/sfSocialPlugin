@@ -21,21 +21,47 @@
 <?php endif ?>
 
 <ul class="attrs">
-  <li><?php echo __('Name', null, 'sfSocial') ?>: <?php echo $profile->getFirstName() ?> <?php echo $profile->getLastName() ?></li>
+  <li>
+    <?php echo __('Name', null, 'sfSocial') ?>: <?php echo $profile->getFirstName() ?> <?php echo $profile->getLastName() ?>
+  </li>
+  <li><?php echo __('E-mail', null, 'sfSocial') ?>: <?php echo mail_to($profile->getEmail(), '', 'encode=true') ?></li>
   <li><?php echo __('Birthday', null, 'sfSocial') ?>: <?php echo $profile->getBirthday() ?></li>
   <li><?php echo __('Sex', null, 'sfSocial') ?>: <?php echo $profile->getSex() ?></li>
   <li><?php echo __('Location', null, 'sfSocial') ?>: <?php echo $profile->getLocation() ?></li>
 </ul>
 
+<?php if ($pageUser->getId() != $user->getId()): ?>
+<?php echo link_to(__('Send a message to %1%', array('%1%' => $pageUser), 'sfSocial'), '@sf_social_message_new?to=' . $pageUser) ?>
+<?php $countSharedContacts = $pageUser->countSharedContacts($_user) ?>
+<?php $sharedContacts = $pageUser->getSharedContacts($_user, sfConfig::get('app_sf_social_user_shared_contact_view', 10)) ?>
+<?php if ($countSharedContacts > 0): ?>
+<div id="shared_contacts" class="contacts">
+  <strong><?php echo format_number_choice('[1]1 shared contact[2,+Inf]%1% shared contacts', array('%1%' => $countSharedContacts), $countSharedContacts, 'sfSocial') ?></strong>
+  <ul>
+  <?php foreach ($sharedContacts as $contact): ?>
+    <li>
+      <?php /* escaping strategy safety */ $_shared = $contact instanceof sfSocialContact ? $contact->getsfGuardUserRelatedByUserTo() : $contact->getRawValue()->getsfGuardUserRelatedByUserTo() ?>
+      <?php echo link_to(image_tag($_shared->getThumb(), 'title=' . $_shared), '@sf_social_user?username=' . $_shared) ?>
+    </li>
+  <?php endforeach ?>
+  </ul>
+  <hr />
+  <?php if ($countSharedContacts > count($sharedContacts)): ?>
+  <?php echo link_to(__('See all shared contacts', null, 'sfSocial'), '@sf_social_user_shared_contacts?user1=' . $user . '&user2=' . $pageUser) ?>
+  <?php endif ?>
+</div>
+<?php endif ?>
+<?php endif ?>
+
 <?php $countContacts = $pageUser->countContacts() ?>
-<?php $contacts = $pageUser->getContacts(4) ?>
+<?php $contacts = $pageUser->getContacts(sfConfig::get('app_sf_social_user_contact_view', 20)) ?>
 <?php if ($countContacts > 0): ?>
-<div id="user_contacts">
+<div id="user_contacts" class="contacts">
   <strong><?php echo format_number_choice('[1]1 contact[2,+Inf]%1% contacts', array('%1%' => $countContacts), $countContacts, 'sfSocial') ?></strong>
   <ul>
-  <?php foreach ($contacts as $contact): ?>
+  <?php foreach ($contacts as $cUser): ?>
     <li>
-      <?php echo link_to(image_tag($contact->getThumb(), 'title=' . $contact), '@sf_social_user?username=' . $contact) ?>
+      <?php echo link_to(image_tag($cUser->getThumb(), 'title=' . $cUser), '@sf_social_user?username=' . $cUser) ?>
     </li>
   <?php endforeach ?>
   </ul>

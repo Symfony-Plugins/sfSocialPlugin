@@ -5,8 +5,8 @@
     <header/>
     <body>
       <trans-unit id="1">
-        <source>todo</source>
-        <target>todo</target>
+        <source>[1]1 shared contact[2,+Inf]%1% shared contacts</source>
+        <target>[1]1 contatto in comune[2,+Inf]%1% contatti in comune</target>
       </trans-unit>
       <trans-unit id="2">
         <source>Send a contact request</source>
@@ -451,6 +451,10 @@
       <trans-unit id="110">
         <source>message</source>
         <target>messaggio</target>
+      </trans-unit>
+      <trans-unit id="111">
+        <source>Send a message to %1%</source>
+        <target>Scrivi un messaggio a %1%</target>
       </trans-unit>
     </body>
   </file>

@@ -67,4 +67,15 @@ abstract class BasesfSocialUserActions extends sfActions
     $this->pager = $this->pageUser->getContactsPager($this->page);
   }
 
+  /**
+   * Search for users
+   * @param sfRequest $request A request object
+   */
+  public function executeSearch(sfWebRequest $request)
+  {
+    $this->page = $request->getParameter('page', 1);
+    $this->name = $request->getParameter('name');
+    $this->pager = sfSocialGuardUserPeer::search($this->name, $this->page);
+  }
+
 }
