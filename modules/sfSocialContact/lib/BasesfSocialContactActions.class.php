@@ -75,6 +75,7 @@ class BasesfSocialContactActions extends sfActions
     {
       if ($this->form->bindAndSave($request->getParameter($this->form->getName())))
       {
+        $this->dispatcher->notify(new sfEvent($this->form->getObject(), 'social.contact_request'));
         $this->getUser()->setFlash('notice', 'Contact request sent.');
         $this->redirect('@sf_social_contact_list');
       }

@@ -122,6 +122,7 @@ class BasesfSocialEventActions extends sfActions
                                                           'event' => $this->event));
     if ($this->form->bindAndSave($values))
     {
+      $this->dispatcher->notify(new sfEvent($this->form->getObjects(), 'social.event_invite'));
       $this->getUser()->setFlash('notice', count($this->form->getValue('user_id')) . ' users invited.');
     }
     $this->redirect('@sf_social_event?id=' . $this->event->getId());

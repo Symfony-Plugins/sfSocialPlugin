@@ -10,6 +10,10 @@
  */
 class sfSocialGroupInviteForm extends BasesfSocialGroupInviteForm
 {
+
+  // collection of objects (in case of invite of many users)
+  protected $objects = array();
+
   public function configure()
   {
     // hide unuseful fields
@@ -93,12 +97,23 @@ class sfSocialGroupInviteForm extends BasesfSocialGroupInviteForm
         $obj = clone $this->getObject();
         $obj->setUserId($user_id);
         $obj->save();
+        $this->objects[] = $obj;
       }
     }
     else
     {
       parent::doSave($con);
+      $this->objects[] = $this->getObject();
     }
+  }
+
+  /**
+   * get protected objects
+   * @return array
+   */
+  public function getObjects()
+  {
+    return $this->objects;
   }
 
 }

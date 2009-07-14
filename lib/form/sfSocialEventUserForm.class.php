@@ -15,9 +15,14 @@ class sfSocialEventUserForm extends BasesfSocialEventUserForm
     // hide unuseful fields
     unset($this['created_at']);
 
-    // make confirm a choice
+    // make confirm a choice (i18n solution is very ugly, is there a better way? TODO)
+    $i18n = sfContext::getInstance()->getI18N();
+    foreach (sfSocialEventUser::$choices as $k => $choice)
+    {
+      $i18nChoice[$k] = $i18n->__($choice, null, 'sfSocial');
+    }
     $this->widgetSchema['confirm'] = new sfWidgetFormChoice(array(
-      'choices'  => sfSocialEventUser::$choices,
+      'choices'  => $i18nChoice,
       'expanded' => true,
     ));
 
@@ -32,4 +37,23 @@ class sfSocialEventUserForm extends BasesfSocialEventUserForm
     $this->setValidator('event_id', new sfValidatorChoice(array('choices' => array($this->options['event']->getId()))));
   }
 
+  /**
+   * ovveride: when save, if user previously confirmed and now doesn't,
+   *  it needs to remove it from sfSocialEventUser
+   * @param PropelPDO $con
+   *
+  public function doSave($con = null)
+  {
+    $obj = $this->getObject();
+    if (!$obj->isNew() && $this->getValue('confirm'))
+    {
+
+    }
+    else
+    {
+#var_dump($this->getObject());die;
+      parent::doSave();
+    }
+  }
+*/
 }

@@ -141,8 +141,8 @@
         <target>Nessun utente invitato</target>
       </trans-unit>
       <trans-unit id="35">
-        <source>awaiting reply</source>
-        <target>in attesa di risposta</target>
+        <source>Awaiting reply</source>
+        <target>In attesa di risposta</target>
       </trans-unit>
       <trans-unit id="36">
         <source>Back to list</source>
@@ -409,7 +409,7 @@
         <target>Maschio</target>
       </trans-unit>
       <trans-unit id="102">
-        <source>Feale</source>
+        <source>Female</source>
         <target>Femmina</target>
       </trans-unit>
       <trans-unit id="103">
@@ -455,6 +455,54 @@
       <trans-unit id="111">
         <source>Send a message to %1%</source>
         <target>Scrivi un messaggio a %1%</target>
+      </trans-unit>
+      <trans-unit id="112">
+        <source>%day% from %starttime% to %endtime%</source>
+        <target>il giorno %day% dalle %starttime% alle %endtime%</target>
+      </trans-unit>
+      <trans-unit id="113">
+        <source>from %startdaytime% to %enddatetime%</source>
+        <target>dal %startdaytime% al %enddatetime%</target>
+      </trans-unit>
+      <trans-unit id="114">
+        <source>Will partecipate</source>
+        <target>Parteciperanno</target>
+      </trans-unit>
+      <trans-unit id="115">
+        <source>None yet</source>
+        <target>Ancora nessuno</target>
+      </trans-unit>
+      <trans-unit id="116">
+        <source>Maybe will partecipate</source>
+        <target>Forse parteciperanno</target>
+      </trans-unit>
+      <trans-unit id="117">
+        <source>Will not partecipate</source>
+        <target>Non parteciperanno</target>
+      </trans-unit>
+      <trans-unit id="118">
+        <source>User</source>
+        <target>Utente</target>
+      </trans-unit>
+      <trans-unit id="119">
+        <source>You received a %1% from %2%</source>
+        <target>Hai ricevuto un %1% da %2%</target>
+      </trans-unit>
+      <trans-unit id="120">
+        <source>You received an %1% from %2%</source>
+        <target>Hai ricevuto un %1% da %2%</target>
+      </trans-unit>
+      <trans-unit id="121">
+        <source>contact request</source>
+        <target>richiesta di contatto</target>
+      </trans-unit>
+      <trans-unit id="122">
+        <source>invite to event %event%</source>
+        <target>invito all'evento %event%</target>
+      </trans-unit>
+      <trans-unit id="123">
+        <source>invite to join group %group%</source>
+        <target>invito ad unirti al gruppo %group%</target>
       </trans-unit>
     </body>
   </file>

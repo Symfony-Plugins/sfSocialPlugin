@@ -271,4 +271,25 @@ class sfSocialGuardUser extends PluginsfGuardUser
     return sfSocialContactPeer::countSharedContacts($this, $user);
   }
 
+  /**
+   * Get notifies (only unread ones)
+   * @return array
+   */
+  public function getNotifies()
+  {
+    $c = new Criteria;
+    $c->add(sfSocialNotifyPeer::READ, false);
+
+    return $this->getsfSocialNotifys($c);
+  }
+
+  /**
+   * get ids of contacts
+   * @return array
+   */
+  public function getContactIds()
+  {
+    return sfSocialContactPeer::getContactIds($this);
+  }
+
 }

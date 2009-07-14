@@ -22,8 +22,21 @@ class sfSocialPluginConfiguration extends sfPluginConfiguration
         $this->dispatcher->connect('social.write_message', array('sfSocialNotifyListener',
                                                                  'listenToWriteMessage'));
       }
-      // TODO connect to other listeners here
+      if (in_array('sfSocialEvent', $modules))
+      {
+        $this->dispatcher->connect('social.event_invite', array('sfSocialNotifyListener',
+                                                                'listenToEventInvite'));
+      }
+      if (in_array('sfSocialGroup', $modules))
+      {
+        $this->dispatcher->connect('social.group_invite', array('sfSocialNotifyListener',
+                                                                'listenToGroupInvite'));
+      }
+      if (in_array('sfSocialContact', $modules))
+      {
+        $this->dispatcher->connect('social.contact_request', array('sfSocialNotifyListener',
+                                                                   'listenToContactRequest'));
+      }
     }
-
   }
 }

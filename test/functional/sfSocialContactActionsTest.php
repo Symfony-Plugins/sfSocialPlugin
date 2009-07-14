@@ -36,7 +36,7 @@ $browser->
     isParameter('action', 'sendrequest')->
   end()->
   click('send', array('sf_social_contact_request' => array(
-    'user_to' => '6',
+    'user_to' => 6,
     'message' => 'can I be you friend?'
   )))->
   with('form')->begin()->hasErrors(false)->

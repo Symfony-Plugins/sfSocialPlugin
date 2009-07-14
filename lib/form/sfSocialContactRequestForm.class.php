@@ -25,7 +25,7 @@ class sfSocialContactRequestForm extends BasesfSocialContactRequestForm
 
     // exclude contacts from user_to
     $c = new Criteria;
-    $c->add(sfSocialContactPeer::USER_FROM, $this->options['user']->getId(), Criteria::NOT_EQUAL)->
+    $c->add(sfGuardUserPeer::ID, array_merge($this->options['user']->getContactIds(), array($this->options['user']->getId())), Criteria::NOT_IN)->
       setLimit(50)->
       addAscendingOrderByColumn(sfGuardUserPeer::USERNAME);
     $this->widgetSchema['user_to']->setOption('criteria', $c);

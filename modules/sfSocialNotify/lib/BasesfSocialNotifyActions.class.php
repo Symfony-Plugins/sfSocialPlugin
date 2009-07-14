@@ -10,11 +10,10 @@
 class BasesfSocialNotifyActions extends sfActions
 {
 
-
- /**
-  * get a received notify
-  * @param sfRequest $request A request object
-  */
+  /**
+   * get a received notify
+   * @param sfRequest $request A request object
+   */
   public function executeGet(sfWebRequest $request)
   {
     $notify = sfSocialNotifyPeer::retrieveByPK($request->getParameter('id'));
@@ -26,7 +25,12 @@ class BasesfSocialNotifyActions extends sfActions
     {
       case 'sfSocialMessage':
         return $this->redirect('@sf_social_message_read?id=' . $notify->getModelId());
-      // TODO other models
+      case 'sfSocialContactRequest':
+        return $this->redirect('@sf_social_contact_requests');
+      case 'sfSocialEventInvite':
+        return $this->redirect('@sf_social_event?id=' . $notify->getModel()->getsfSocialEvent()->getId());
+      case 'sfSocialGroupInvite':
+        return $this->redirect('@sf_social_group?id=' . $notify->getModel()->getsfSocialGroup()->getId());
     }
   }
 }

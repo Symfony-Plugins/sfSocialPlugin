@@ -14,24 +14,39 @@ class sfSocialEvent extends BasesfSocialEvent
 
   /**
    * get start and end dates in a fancy format
-   * @param  string $date date format
-   * @param  string $time time format
-   * @param  string $from "from" text
-   * @param  string $to   "to" text
+   * @param  string $dateF date format
+   * @param  string $timeF time format
    * @return string
    */
-  public function getWhen($date = 'd/m/Y', $time = 'H:i', $from = 'from', $to = 'to')
+  public function getWhen($dateF = 'd/m/Y', $timeF = 'H:i')
   {
     // event starts and ends in same day
     if ($this->getStart('zY') == $this->getEnd('zY'))
     {
-      return $this->getStart($date) . ' ' . $from . ' ' . $this->getStart($time) .
-             ' ' . $to . ' ' . $this->getEnd($time);
+      $string = '%day% from %starttime% to %endtime%';
+      $params = array('%day%'       => $this->getStart($dateF),
+                      '%starttime%' => $this->getStart($timeF),
+                      '%endtime%'   => $this->getEnd($timeF));
     }
+    else
+    {
     // event spans in more days
-    return $from . ' ' . $this->getStart($date . ' ' . $time) . ' ' . $to . ' ' .
-           $this->getEnd($date . ' ' . $time);
+      $string = 'from %startdaytime% to %enddatetime%';
+      $params = array('%startdaytime%' => $this->getStart($dateF . ' ' . $timeF),
+                      '%enddatetime%'  => $this->getEnd($dateF . ' ' . $timeF));
+    }
+    // possibly localize string
+    if (sfConfig::get('sf_i18n'))
+    {
+      $i18n = sfContext::getInstance()->getI18N();
+      return $i18n->__($string, $params, 'sfSocial');
+    }
+    else
+    {
+      return strtr($string, $parameters);
+    }
   }
+
   /**
    * check if an user is admin of event
    * @param  sfGuardUser $user
@@ -40,6 +55,51 @@ class sfSocialEvent extends BasesfSocialEvent
   public function isAdmin(sfGuardUser $user)
   {
     return $this->getUserAdmin() == $user->getId();
+  }
+
+  /**
+   * get confirmed users
+   * @return array
+   */
+  public function getConfirmedUsers()
+  {
+    $c = new Criteria;
+    $c->add(sfSocialEventUserPeer::CONFIRM, sfSocialEventUser::REPLY_YES);
+    return $this->getsfSocialEventUsersJoinsfGuardUser($c);
+  }
+
+  /**
+   * get users that replied "maybe"
+   * @return array
+   */
+  public function getMaybeUsers()
+  {
+    $c = new Criteria;
+    $c->add(sfSocialEventUserPeer::CONFIRM, sfSocialEventUser::REPLY_MAYBE);
+    return $this->getsfSocialEventUsersJoinsfGuardUser($c);
+  }
+
+  /**
+   * get users that replied "no"
+   * @return array
+   */
+  public function getNoUsers()
+  {
+    $c = new Criteria;
+    $c->add(sfSocialEventUserPeer::CONFIRM, sfSocialEventUser::REPLY_NO);
+    return $this->getsfSocialEventUsersJoinsfGuardUser($c);
+  }
+
+  /**
+   * get users awaiting reply
+   * @return array
+   */
+  public function getAwaitingReplyUsers()
+  {
+    $c = new Criteria;
+    $c->add(sfSocialEventInvitePeer::REPLIED, false);
+    return $this->getsfSocialEventInvitesJoinsfGuardUserRelatedByUserId($c);
+
   }
 
 }

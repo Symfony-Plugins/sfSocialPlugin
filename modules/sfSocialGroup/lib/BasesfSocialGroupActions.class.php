@@ -103,6 +103,7 @@ abstract class BasesfSocialGroupActions extends sfActions
                                                           'group' => $this->group));
     if ($this->form->bindAndSave($values))
     {
+      $this->dispatcher->notify(new sfEvent($this->form->getObjects(), 'social.group_invite'));
       $this->getUser()->setFlash('notice', count($this->form->getValue('user_id')) . ' users invited.');
     }
     $this->redirect('@sf_social_group?id=' . $this->group->getId());

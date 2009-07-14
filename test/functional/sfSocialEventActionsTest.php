@@ -68,7 +68,7 @@ $browser->
   isRedirected()->
   followRedirect()->
   click('confirm', array('sf_social_event_user' => array(
-    'confirm' => '2',
+    'confirm' => 2,
   )))->
   with('form')->begin()->hasErrors(false)->
   end()
@@ -80,7 +80,7 @@ $browser->
 
   info('invite friend')->
   click('invite', array('sf_social_event_invite' => array(
-    'user_id' => '5',
+    'user_id' => 5,
   )))->
   with('form')->begin()->hasErrors(false)->
   end()->
@@ -118,6 +118,15 @@ $browser->
       'description' => 'What about a new event?',
       'location'    => 'Just here!',
   ))->
+  end()->
+
+  info('check various invite replies')->
+  get('/event/1')->
+  with('response')->begin()->
+    checkElement('ul#confirmed li', 1)->
+    checkElement('ul#maybe li', 1)->
+    checkElement('ul#not li', 1)->
+    checkElement('ul#invited li', 1)->
   end()->
 
   info('edit forbidden event')->

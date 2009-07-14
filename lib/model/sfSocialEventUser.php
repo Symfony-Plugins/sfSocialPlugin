@@ -12,6 +12,13 @@ class sfSocialEventUser extends BasesfSocialEventUser
 {
 
   // possible replies to invite
-  public static $choices = array(1 => 'maybe', 2 => 'yes', 3 => 'no');
+
+  const REPLY_MAYBE = 1;
+  const REPLY_YES   = 2;
+  const REPLY_NO    = 3;
+
+  public static $choices = array(self::REPLY_MAYBE => 'maybe',
+                                 self::REPLY_YES   => 'yes',
+                                 self::REPLY_NO    => 'no');
 
 }

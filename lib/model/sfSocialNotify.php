@@ -4,7 +4,8 @@ class sfSocialNotify extends BasesfSocialNotify
 {
 
   /**
-   * @var mixed sfSocialMessage object, or sfSocialEvent object, etc.
+   * @var mixed object of one type between sfSocialMessage, sfSocialEvent,
+   *             sfSocialGroup, sfSocialContact
    */
   protected $model;
 
@@ -32,13 +33,23 @@ class sfSocialNotify extends BasesfSocialNotify
         $msg = sfSocialMessagePeer::retrieveByPK($this->getModelId());
         $this->model = empty($msg) ? new sfSocialMessage : $msg;
         break;
-      // TODO other models
+      case 'sfSocialContactRequest':
+        $request = sfSocialContactRequestPeer::retrieveByPK($this->getModelId());
+        $this->model = empty($request) ? new sfSocialContactRequest : $request;
+        break;
+      case 'sfSocialEventInvite':
+        $invite = sfSocialEventInvitePeer::retrieveByPK($this->getModelId());
+        $this->model = empty($invite) ? new sfSocialEventInvite : $invite;
+        break;
+      case 'sfSocialGroupInvite':
+        $invite = sfSocialGroupInvitePeer::retrieveByPK($this->getModelId());
+        $this->model = empty($invite) ? new sfSocialGroupInvite : $invite;
     }
   }
 
   /**
    * get model
-   * @return mixed sfSocialMessage object, or sfSocialEvent object, etc.
+   * @return mixed an object (see $model)
    */
   public function getModel()
   {
@@ -51,6 +62,42 @@ class sfSocialNotify extends BasesfSocialNotify
   public function read()
   {
     $this->setRead(true);
+    $this->save();
+  }
+
+  /**
+   * notify a contact request received
+   * @param sfSocialContactRequest $request
+   */
+  public function notifyContactRequest(sfSocialContactRequest $request)
+  {
+    $this->setUserId($request->getUserTo());
+    $this->setModelName('sfSocialContactRequest');
+    $this->setModelId($request->getId());
+    $this->save();
+  }
+
+  /**
+   * notify an event invite received
+   * @param sfSocialEventInvite $invite
+   */
+  public function notifyEventInvite(sfSocialEventInvite $invite)
+  {
+    $this->setUserId($invite->getUserId());
+    $this->setModelName('sfSocialEventInvite');
+    $this->setModelId($invite->getId());
+    $this->save();
+  }
+
+  /**
+   * notify a groupinvite received
+   * @param sfSocialGroupInvite $invite
+   */
+  public function notifyGroupInvite(sfSocialGroupInvite $invite)
+  {
+    $this->setUserId($invite->getUserId());
+    $this->setModelName('sfSocialGroupInvite');
+    $this->setModelId($invite->getId());
     $this->save();
   }
 

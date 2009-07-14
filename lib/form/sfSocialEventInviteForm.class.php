@@ -10,6 +10,9 @@
 class sfSocialEventInviteForm extends BasesfSocialEventInviteForm
 {
 
+  // collection of objects (in case of invite of many users)
+  protected $objects = array();
+
   public function configure()
   {
     // hide unuseful fields
@@ -25,9 +28,11 @@ class sfSocialEventInviteForm extends BasesfSocialEventInviteForm
     $this->setDefault('event_id', $this->options['event']->getId());
     $this->setValidator('event_id', new sfValidatorChoice(array('choices' => array($this->options['event']->getId()))));
 
-    // restrict users to invite to user's friends
+    // invite many users, and restrict invitable users to user's friends (excluding already invited ones)
+    $invited = array_map(create_function('$a', 'return $a->getUserId();'), $this->options['event']->getsfSocialEventInvites());
     $c = new Criteria;
     $c->add(sfSocialContactPeer::USER_FROM, $this->options['user']->getId())->
+      add(sfGuardUserPeer::ID, $invited, Criteria::NOT_IN)->
       setLimit(50)->
       addAscendingOrderByColumn(sfGuardUserPeer::USERNAME);
     $this->widgetSchema['user_id']->setOption('model', 'sfSocialContact');
@@ -39,6 +44,12 @@ class sfSocialEventInviteForm extends BasesfSocialEventInviteForm
     $this->validatorSchema->setPostValidator(
       new sfValidatorCallback(array('callback'  => array($this, 'unique_check')))
     );
+    $this->widgetSchema['user_id']->setLabel('User');
+    // if there's no contact left to invite, remove form
+    if (count($this->widgetSchema['user_id']->getChoices()) == 0)
+    {
+      unset($this->widgetSchema['user_id']);
+    }
   }
 
   /**
@@ -93,12 +104,23 @@ class sfSocialEventInviteForm extends BasesfSocialEventInviteForm
         $obj = clone $this->getObject();
         $obj->setUserId($user_id);
         $obj->save();
+        $this->objects[] = $obj;
       }
     }
     else
     {
       parent::doSave($con);
+      $this->objects[] = $this->getObject();
     }
+  }
+
+  /**
+   * get protected objects
+   * @return array
+   */
+  public function getObjects()
+  {
+    return $this->objects;
   }
 
 }
