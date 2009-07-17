@@ -51,8 +51,8 @@ making it extend `sfSocialGuardUserPeer` instead of `PluginsfGuardUserPeer`.
 
 Note that plugin comes with full modules templates. To use customized templates, just
 create under your application a module with the same name as the module you want
-to customize (don't use `init-module` task, just create the directory), then add your custom
-emplates inside.
+to customize (don't use `generate:module` task, just create the directory), then add your
+custom templates inside.
 If you prefer to use default templates, be aware that all forms inside are based on
 list formatter (tables are ugly!), so you must add this code:
 
@@ -76,7 +76,7 @@ adapted (see above).
 
 ## Roadmap
 
-Currently Contact, Message, Event, and User modules are working, with functional tests.
+Currently Contact, Message, Event, User, and Notify modules are working, with functional tests.
 
 The project aims to fully implement:
 

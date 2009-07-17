@@ -65,7 +65,7 @@ abstract class BasesfSocialGroupActions extends sfActions
     {
       if ($this->form->bindAndSave($request->getParameter($this->form->getName())))
       {
-        $this->getUser()->setFlash('notice', 'group modified');
+        $this->getUser()->setFlash('notice', 'Group modified.');
         $this->redirect('@sf_social_group?id=' . $this->form->getObject()->getId());
       }
     }
@@ -82,7 +82,7 @@ abstract class BasesfSocialGroupActions extends sfActions
     {
       if ($this->form->bindAndSave($request->getParameter($this->form->getName())))
       {
-        $this->getUser()->setFlash('notice', 'group created');
+        $this->getUser()->setFlash('notice', 'Group created.');
         $this->redirect('@sf_social_group?id=' . $this->form->getObject()->getId());
       }
     }
@@ -104,7 +104,8 @@ abstract class BasesfSocialGroupActions extends sfActions
     if ($this->form->bindAndSave($values))
     {
       $this->dispatcher->notify(new sfEvent($this->form->getObjects(), 'social.group_invite'));
-      $this->getUser()->setFlash('notice', count($this->form->getValue('user_id')) . ' users invited.');
+      $this->getUser()->setFlash('notice', '%1% users invited.');
+      $this->getUser()->setFlash('nr', count($this->form->getValue('user_id')));
     }
     $this->redirect('@sf_social_group?id=' . $this->group->getId());
   }
@@ -154,6 +155,14 @@ abstract class BasesfSocialGroupActions extends sfActions
       $this->getUser()->setFlash('notice', 'Invite refused.');
     }
     $this->redirect('@sf_social_group?id=' . $invite->getsfSocialGroup()->getId());
+  }
+
+  /**
+   * Javascript for "Invite users"
+   * @param sfRequest $request A request object
+   */
+  public function executeInvitejs(sfWebRequest $request)
+  {
   }
 
 }

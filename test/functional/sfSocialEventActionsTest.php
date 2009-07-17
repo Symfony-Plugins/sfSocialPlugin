@@ -84,9 +84,31 @@ $browser->
   )))->
   with('form')->begin()->hasErrors(false)->
   end()->
+  with('propel')->begin()->
+    check('sfSocialEventInvite', array(
+      'event_id'  => 4,
+      'user_id'   => 5,
+      'user_from' => 8,
+      'replied'   => false,
+  ))->
+  end()->
     followRedirect()->
     with('response')->begin()->
     checkElement('ul#invited li', true)->
+  end()->
+
+  info('invite an user that already confirmed')->
+  get('/event/1')->
+  click('invite', array('sf_social_event_invite' => array(
+    'user_id' => 2,
+  )))->
+  with('propel')->begin()->
+    check('sfSocialEventInvite', array(
+      'event_id'  => 1,
+      'user_id'   => 2,
+      'user_from' => 8,
+      'replied'   => false,
+  ), false)->
   end()->
 
   info('create a new event')->

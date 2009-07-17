@@ -504,6 +504,58 @@
         <source>invite to join group %group%</source>
         <target>invito ad unirti al gruppo %group%</target>
       </trans-unit>
+      <trans-unit id="124">
+        <source>Contact removed.</source>
+        <target>Contatto rimosso.</target>
+      </trans-unit>
+      <trans-unit id="125">
+        <source>Contact request sent.</source>
+        <target>Richiesta di contatto inviata.</target>
+      </trans-unit>
+      <trans-unit id="126">
+        <source>Contact request accepted.</source>
+        <target>Richiesta di contatto accettata.</target>
+      </trans-unit>
+      <trans-unit id="127">
+        <source>Contact request refused.</source>
+        <target>Richiesta di contatto rifiutata.</target>
+      </trans-unit>
+      <trans-unit id="128">
+        <source>Contact request canceled.</source>
+        <target>Richiesta di contatto annullata.</target>
+      </trans-unit>
+      <trans-unit id="129">
+        <source>Group modified.</source>
+        <target>Gruppo modificato.</target>
+      </trans-unit>
+      <trans-unit id="130">
+        <source>Group created.</source>
+        <target>Gruppo creato.</target>
+      </trans-unit>
+      <trans-unit id="131">
+        <source>%1% users invited.</source>
+        <target>%1% utenti invitati.</target>
+      </trans-unit>
+      <trans-unit id="132">
+        <source>Invite refused.</source>
+        <target>Invito rifiutato.</target>
+      </trans-unit>
+      <trans-unit id="133">
+        <source>Event created</source>
+        <target>Evento creato.</target>
+      </trans-unit>
+      <trans-unit id="134">
+        <source>Event modified.</source>
+        <target>Evento modificato.</target>
+      </trans-unit>
+      <trans-unit id="135">
+        <source>Profile saved.</source>
+        <target>Profilo salvato.</target>
+      </trans-unit>
+      <trans-unit id="136">
+        <source>sent %1% ago</source>
+        <target>inviata %1% fa</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -40,11 +40,11 @@ class sfSocialEventInviteForm extends BasesfSocialEventInviteForm
     $this->widgetSchema['user_id']->addOption('peer_method', 'doSelectJoinsfGuardUserRelatedByUserTo');
     $this->widgetSchema['user_id']->addOption('criteria', $c);
     $this->widgetSchema['user_id']->addOption('key_method', 'getUserId');
+    $this->widgetSchema['user_id']->setLabel('User');
     $this->validatorSchema['user_id']->addOption('multiple', true);
     $this->validatorSchema->setPostValidator(
-      new sfValidatorCallback(array('callback'  => array($this, 'unique_check')))
+      new sfValidatorCallback(array('callback'  => array($this, 'uniqueCheck')))
     );
-    $this->widgetSchema['user_id']->setLabel('User');
     // if there's no contact left to invite, remove form
     if (count($this->widgetSchema['user_id']->getChoices()) == 0)
     {
@@ -55,12 +55,13 @@ class sfSocialEventInviteForm extends BasesfSocialEventInviteForm
   /**
    * callback to clean possible duplicate values on user_id (if multiple submitted),
    * without invalidating the entire form
+   * Also checks if invited user is already member of event
    * @param  sfValidatorCallback $validator
    * @param  array               $values    form's values
    * @param  array               $arguments unused in this case
    * @return array
    */
-  public function unique_check($validator, $values, $arguments)
+  public function uniqueCheck(sfValidatorCallback $validator, array $values, array $arguments)
   {
     if (is_array($values['user_id']))
     {
@@ -70,8 +71,17 @@ class sfSocialEventInviteForm extends BasesfSocialEventInviteForm
         $c->add(sfSocialEventInvitePeer::EVENT_ID, $values['event_id']);
         $c->add(sfSocialEventInvitePeer::USER_FROM, $values['user_from']);
         $c->add(sfSocialEventInvitePeer::USER_ID, $user_id);
-        $invite = sfSocialEventInvitePeer::doSelectOne($c);
-        if (null !== $invite)
+        $invited = sfSocialEventInvitePeer::doCount($c);
+        if ($invited > 0)
+        {
+          unset($values['user_id'][$k]);
+          continue;
+        }
+        $c = new Criteria;
+        $c->add(sfSocialEventUserPeer::EVENT_ID, $values['event_id']);
+        $c->add(sfSocialEventUserPeer::USER_ID, $user_id);
+        $member = sfSocialEventUserPeer::doCount($c);
+        if ($member > 0)
         {
           unset($values['user_id'][$k]);
         }
@@ -80,7 +90,8 @@ class sfSocialEventInviteForm extends BasesfSocialEventInviteForm
     }
     else
     {
-      $validator = new sfValidatorPropelUnique(array('model' => 'sfSocialEventInvite', 'column' => array('event_id', 'user_id', 'user_from')));
+      $validator = new sfValidatorPropelUnique(array('model' => 'sfSocialEventInvite',
+                                                     'column' => array('event_id', 'user_id', 'user_from')));
       return $validator->clean($values);
     }
   }
@@ -115,7 +126,7 @@ class sfSocialEventInviteForm extends BasesfSocialEventInviteForm
   }
 
   /**
-   * get protected objects
+   * get protected "objects"
    * @return array
    */
   public function getObjects()

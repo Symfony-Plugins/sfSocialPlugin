@@ -29,9 +29,11 @@ class sfSocialGroupInviteForm extends BasesfSocialGroupInviteForm
     $this->setDefault('group_id', $this->options['group']->getId());
     $this->setValidator('group_id', new sfValidatorChoice(array('choices' => array($this->options['group']->getId()))));
 
-    // restrict users to invite to user's friends
+    // invite many users, and restrict invitable users to user's friends (excluding already invited ones)
+    $invited = array_map(create_function('$a', 'return $a->getUserId();'), $this->options['group']->getsfSocialGroupInvites());
     $c = new Criteria;
     $c->add(sfSocialContactPeer::USER_FROM, $this->options['user']->getId())->
+      add(sfGuardUserPeer::ID, $invited, Criteria::NOT_IN)->
       setLimit(50)->
       addAscendingOrderByColumn(sfGuardUserPeer::USERNAME);
     $this->widgetSchema['user_id']->setOption('model', 'sfSocialContact');
@@ -39,21 +41,28 @@ class sfSocialGroupInviteForm extends BasesfSocialGroupInviteForm
     $this->widgetSchema['user_id']->addOption('peer_method', 'doSelectJoinsfGuardUserRelatedByUserTo');
     $this->widgetSchema['user_id']->addOption('criteria', $c);
     $this->widgetSchema['user_id']->addOption('key_method', 'getUserId');
+    $this->widgetSchema['user_id']->setLabel('User');
     $this->validatorSchema['user_id']->addOption('multiple', true);
     $this->validatorSchema->setPostValidator(
-      new sfValidatorCallback(array('callback'  => array($this, 'unique_check')))
+      new sfValidatorCallback(array('callback'  => array($this, 'uniqueCheck')))
     );
+    // if there's no contact left to invite, remove form
+    if (count($this->widgetSchema['user_id']->getChoices()) == 0)
+    {
+      unset($this->widgetSchema['user_id']);
+    }
   }
 
   /**
    * callback to clean possible duplicate values on user_id (if multiple submitted),
    * without invalidating the entire form
+   * Also checks if invited user is already member of group
    * @param  sfValidatorCallback $validator
    * @param  array               $values    form's values
    * @param  array               $arguments unused in this case
    * @return array
    */
-  public function unique_check($validator, $values, $arguments)
+  public function uniqueCheck(sfValidatorCallback $validator, array $values, array $arguments)
   {
     if (is_array($values['user_id']))
     {
@@ -63,8 +72,17 @@ class sfSocialGroupInviteForm extends BasesfSocialGroupInviteForm
         $c->add(sfSocialGroupInvitePeer::GROUP_ID, $values['group_id']);
         $c->add(sfSocialGroupInvitePeer::USER_FROM, $values['user_from']);
         $c->add(sfSocialGroupInvitePeer::USER_ID, $user_id);
-        $invite = sfSocialGroupInvitePeer::doSelectOne($c);
-        if (null !== $invite)
+        $invited = sfSocialGroupInvitePeer::doCount($c);
+        if ($invited > 0)
+        {
+          unset($values['user_id'][$k]);
+          continue;
+        }
+        $c = new Criteria;
+        $c->add(sfSocialGroupUserPeer::GROUP_ID, $values['group_id']);
+        $c->add(sfSocialGroupUserPeer::USER_ID, $user_id);
+        $member = sfSocialGroupUserPeer::doCount($c);
+        if ($member > 0)
         {
           unset($values['user_id'][$k]);
         }
@@ -73,7 +91,8 @@ class sfSocialGroupInviteForm extends BasesfSocialGroupInviteForm
     }
     else
     {
-      $validator = new sfValidatorPropelUnique(array('model' => 'sfSocialGroupInvite', 'column' => array('Group_id', 'user_id', 'user_from')));
+      $validator = new sfValidatorPropelUnique(array('model' => 'sfSocialGroupInvite',
+                                                     'column' => array('Group_id', 'user_id', 'user_from')));
       return $validator->clean($values);
     }
   }
@@ -108,7 +127,7 @@ class sfSocialGroupInviteForm extends BasesfSocialGroupInviteForm
   }
 
   /**
-   * get protected objects
+   * get protected "objects"
    * @return array
    */
   public function getObjects()

@@ -81,7 +81,7 @@ class BasesfSocialEventActions extends sfActions
     {
       if ($this->form->bindAndSave($request->getParameter($this->form->getName())))
       {
-        $this->getUser()->setFlash('notice', 'event created');
+        $this->getUser()->setFlash('notice', 'Event created.');
         $this->redirect('@sf_social_event?id=' . $this->form->getObject()->getId());
       }
     }
@@ -101,7 +101,7 @@ class BasesfSocialEventActions extends sfActions
     {
       if ($this->form->bindAndSave($request->getParameter($this->form->getName())))
       {
-        $this->getUser()->setFlash('notice', 'event modified');
+        $this->getUser()->setFlash('notice', 'Event modified.');
         $this->redirect('@sf_social_event?id=' . $this->form->getObject()->getId());
       }
     }
@@ -123,9 +123,18 @@ class BasesfSocialEventActions extends sfActions
     if ($this->form->bindAndSave($values))
     {
       $this->dispatcher->notify(new sfEvent($this->form->getObjects(), 'social.event_invite'));
-      $this->getUser()->setFlash('notice', count($this->form->getValue('user_id')) . ' users invited.');
+      $this->getUser()->setFlash('notice', '%1% users invited.');
+      $this->getUser()->setFlash('nr', count($this->form->getValue('user_id')));
     }
     $this->redirect('@sf_social_event?id=' . $this->event->getId());
+  }
+
+  /**
+   * Javascript for "Invite users"
+   * @param sfRequest $request A request object
+   */
+  public function executeInvitejs(sfWebRequest $request)
+  {
   }
 
 }

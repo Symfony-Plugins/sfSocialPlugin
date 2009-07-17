@@ -1,6 +1,7 @@
+<?php use_helper('Date') ?>
 <h2><?php echo __('List of sent contact requests', null, 'sfSocial') ?></h2>
 
-<?php if ($sf_user->getFlash('notice')): ?>
+<?php if ($sf_user->hasFlash('notice')): ?>
 <div class="notice">
   <?php echo __($sf_user->getFlash('notice'), null, 'sfSocial') ?>
 </div>
@@ -17,10 +18,13 @@
   <li class="<?php $bRow = empty($bRow) ? print('a') : false ?>">
     <?php $_user = $request->getsfGuardUserRelatedByUserTo() ?>
     <?php echo link_to(image_tag($_user->getThumb(), 'alt=' . $_user . ' title=' . $_user . ' class=left'), '@sf_social_user?username=' . $_user) ?>
-    <div><?php echo $request->getCreatedAt() ?></div>
+    <div>
+      <?php echo link_to($_user, '@sf_social_user?username=' . $_user) ?>,
+      <?php echo __('sent %1% ago', array('%1%' => time_ago_in_words($request->getCreatedAt('U'))), 'sfSocial') ?>
+    </div>
     <div class="req_message"><?php echo $request->getMessage() ?></div>
     <div>
-      <?php echo link_to(__('cancel', null, 'sfSocial'), '@sf_social_contact_cancel_request?id=' . $request->getId()) ?>
+      <?php echo link_to(__('cancel', null, 'sfSocial'), '@sf_social_contact_cancel_request?id=' . $request->getId(), 'confirm=' . __('cancel', null, 'sfSocial') . '?') ?>
     </div>
   </li>
 <?php endforeach ?>

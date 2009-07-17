@@ -110,6 +110,20 @@ $browser->
   ), 4)->
   end()->
 
+  info('invite an user that already confirmed')->
+  get('/group/1')->
+  click('invite', array('sf_social_group_invite' => array(
+    'user_id' => 4,
+  )))->
+  with('propel')->begin()->
+    check('sfSocialGroupInvite', array(
+      'group_id'  => 1,
+      'user_id'   => 4,
+      'user_from' => 8,
+      'replied'   => false,
+  ), false)->
+  end()->
+
   info('join a group directly')->
   get('/group/6')->
   click('Join this group')->

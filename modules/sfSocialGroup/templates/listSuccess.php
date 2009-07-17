@@ -1,6 +1,7 @@
+<?php use_helper('Text') ?>
 <h2><?php echo __('Groups', null, 'sfSocial') ?></h2>
 
-<?php if ($sf_user->getFlash('notice')): ?>
+<?php if ($sf_user->hasFlash('notice')): ?>
 <div class="notice">
   <?php echo __($sf_user->getFlash('notice'), null, 'sfSocial') ?>
 </div>
@@ -15,7 +16,10 @@
 <ul id="list">
 <?php foreach ($pager->getResults() as $group): ?>
   <li class="<?php $bRow = empty($bRow) ? print('a') : false ?>">
-    <?php echo link_to($group->getTitle(), '@sf_social_group?id=' . $group->getId()) ?>
+    <strong><?php echo link_to($group->getTitle(), '@sf_social_group?id=' . $group->getId()) ?></strong>
+    <div class="descr">
+      <?php echo link_to(truncate_text($group->getDescription(), 50), '@sf_social_group?id=' . $group->getId()) ?>
+    </div>
   </li>
 <?php endforeach ?>
 </ul>

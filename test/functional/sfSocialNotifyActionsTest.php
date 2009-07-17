@@ -80,7 +80,7 @@ $browser->
   info('notify an event invite')->
   get('/event/1')->
   click('invite', array('sf_social_event_invite' => array(
-    'user_id' => array(1, 3),
+    'user_id' => array(1, 5),
   )))->
   with('form')->begin()->hasErrors(false)->
   end()->
@@ -94,7 +94,7 @@ $browser->
   end()->
   with('propel')->begin()->
     check('sfSocialNotify', array(
-      'user_id'    => 3,
+      'user_id'    => 5,
       'model_name' => 'sfSocialEventInvite',
       'model_id'   => 5,
       'read'       => false,

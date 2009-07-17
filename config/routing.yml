@@ -61,6 +61,10 @@ sf_social_event_new:
   url:   /event/create
   param: { module: sfSocialEvent, action: create }
 
+sf_social_event_js:
+  url:   /event.js
+  param: { module: sfSocialEvent, action: invitejs, sf_format: js }
+
 # contacts
 
 sf_social_contact_requests:
@@ -183,3 +187,7 @@ sf_social_group:
 sf_social_group_new:
   url:   /group/create
   param: { module: sfSocialGroup, action: create }
+
+sf_social_group_js:
+  url:   /group.js
+  param: { module: sfSocialGroup, action: invitejs, sf_format: js }
