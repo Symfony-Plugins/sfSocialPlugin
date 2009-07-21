@@ -24,7 +24,7 @@ $browser->
       'user_id'    => 1,
       'model_name' => 'sfSocialMessage',
       'model_id'   => 7,
-      'read'       => false,
+      'is_read'    => false,
   ))->
   end()->
   with('propel')->begin()->
@@ -32,7 +32,7 @@ $browser->
       'user_id'    => 2,
       'model_name' => 'sfSocialMessage',
       'model_id'   => 7,
-      'read'       => false,
+      'is_read'    => false,
   ))->
   end()->
 
@@ -49,7 +49,7 @@ $browser->
       'user_id'    => 1,
       'model_name' => 'sfSocialContactRequest',
       'model_id'   => 4,
-      'read'       => false,
+      'is_read'    => false,
   ))->
   end()->
 
@@ -65,7 +65,7 @@ $browser->
       'user_id'    => 1,
       'model_name' => 'sfSocialGroupInvite',
       'model_id'   => 5,
-      'read'       => false,
+      'is_read'    => false,
   ))->
   end()->
   with('propel')->begin()->
@@ -73,7 +73,7 @@ $browser->
       'user_id'    => 2,
       'model_name' => 'sfSocialGroupInvite',
       'model_id'   => 6,
-      'read'       => false,
+      'is_read'    => false,
   ))->
   end()->
 
@@ -89,7 +89,7 @@ $browser->
       'user_id'    => 1,
       'model_name' => 'sfSocialEventInvite',
       'model_id'   => 4,
-      'read'       => false,
+      'is_read'    => false,
   ))->
   end()->
   with('propel')->begin()->
@@ -97,7 +97,7 @@ $browser->
       'user_id'    => 5,
       'model_name' => 'sfSocialEventInvite',
       'model_id'   => 5,
-      'read'       => false,
+      'is_read'    => false,
   ))->
   end()->
 
@@ -121,7 +121,7 @@ $browser->
       'user_id'    => 8,
       'model_name' => 'sfSocialMessage',
       'model_id'   => 3,
-      'read'       => true,
+      'is_read'    => true,
   ))->
   end()->
 
@@ -145,7 +145,7 @@ $browser->
       'user_id'    => 8,
       'model_name' => 'sfSocialContactRequest',
       'model_id'   => 1,
-      'read'       => true,
+      'is_read'    => true,
   ))->
   end()->
 
@@ -169,7 +169,7 @@ $browser->
       'user_id'    => 8,
       'model_name' => 'sfSocialGroupInvite',
       'model_id'   => 3,
-      'read'       => true,
+      'is_read'    => true,
   ))->
 
 

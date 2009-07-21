@@ -67,7 +67,7 @@ class BasesfSocialContactActions extends sfActions
     $userTo = null;
     if (!empty($to))
     {
-      $userTo = sfSocialGuardUserPeer::retrieveByUsername($to);
+      $userTo = sfGuardUserPeer::retrieveByUsername($to);
       $this->forward404Unless($userTo, 'user not found');
     }
     $this->form = new sfSocialContactRequestForm(null, array('user' => $this->user, 'to' => $userTo));

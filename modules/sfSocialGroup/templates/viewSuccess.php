@@ -63,14 +63,15 @@
 <?php endif ?>
 
 <h3><?php echo __('Members', null, 'sfSocial') ?>:</h3>
-<?php if (null === $members = $group->getsfSocialGroupInvitesJoinsfGuardUserRelatedByUserId()): ?>
+<?php if (null === $members = $group->getsfSocialGroupUsers()): ?>
 <?php echo __('No members', null, 'sfSocial') ?>
 <?php else: ?>
 <div class="contacts">
   <ul id="members">
-  <?php foreach ($group->getsfSocialGroupUsersJoinsfGuardUser() as $groupUser): ?>
+  <?php foreach ($members as $groupUser): ?>
     <li>
-      <?php echo link_to(image_tag($groupUser->getsfGuardUser()->getThumb(), 'title=' . $groupUser->getsfGuardUser() . ' alt=' . $groupUser->getsfGuardUser()), '@sf_social_user?username=' . $groupUser->getsfGuardUser()) ?>
+      <?php $_groupUser = $groupUser instanceof sfSocialGroup ? $groupUser : $groupUser->getRawValue() ?>
+      <?php echo link_to(image_tag($_groupUser->getsfGuardUser()->getThumb(), 'title=' . $_groupUser->getsfGuardUser() . ' alt=' . $_groupUser->getsfGuardUser()), '@sf_social_user?username=' . $_groupUser->getsfGuardUser()) ?>
     </li>
   <?php endforeach ?>
   </ul>

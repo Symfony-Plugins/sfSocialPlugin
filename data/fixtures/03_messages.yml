@@ -40,14 +40,14 @@ sfSocialMessageRcpt:
   danny_to_mike:
     msg_id: from_danny
     user_to: mike
-    read: true
+    is_read: true
   mario_to_max:
     msg_id: from_mario
     user_to: max
   luigi_to_max:
     msg_id: from_luigi
     user_to: max
-    read: true
+    is_read: true
   jimmy_to_max:
     msg_id: from_jimmy
     user_to: max

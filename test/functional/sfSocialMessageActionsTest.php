@@ -89,14 +89,14 @@ $browser->
     check('sfSocialMessageRcpt', array(
       'msg_id'  => 7,
       'user_to' => 1,
-      'read'    => 0,
+      'is_read' => 0,
   ))->
   end()->
   with('propel')->begin()->
     check('sfSocialMessageRcpt', array(
       'msg_id'  => 7,
       'user_to' => 2,
-      'read'    => 0,
+      'is_read' => 0,
   ))->
   end()->
 

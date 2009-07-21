@@ -104,7 +104,7 @@
 
 <hr />
 
-<?php if ($event->getEnd() > time()): ?>
+<?php if ($event->getEnd('U') < time()): ?>
 <?php echo link_to(__('Back to list', null, 'sfSocial'), '@sf_social_event_pastlist') ?>
 <?php else: ?>
 <?php echo link_to(__('Back to list', null, 'sfSocial'), '@sf_social_event_list') ?>

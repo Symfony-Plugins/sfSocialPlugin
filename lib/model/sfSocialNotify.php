@@ -61,7 +61,7 @@ class sfSocialNotify extends BasesfSocialNotify
    */
   public function read()
   {
-    $this->setRead(true);
+    $this->setIsRead(true);
     $this->save();
   }
 

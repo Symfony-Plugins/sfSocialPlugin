@@ -20,6 +20,7 @@ class sfSocialMessageRcptPeer extends BasesfSocialMessageRcptPeer
     $pager->setPeerMethod('doSelectJoinAll');
     $pager->setPage($page);
     $pager->init();
+
     return $pager;
   }
 
@@ -43,6 +44,7 @@ class sfSocialMessageRcptPeer extends BasesfSocialMessageRcptPeer
     $pager->setPeerMethod('doSelectJoinAll');
     $pager->setPage($page);
     $pager->init();
+
     return $pager;
   }
 
@@ -55,7 +57,8 @@ class sfSocialMessageRcptPeer extends BasesfSocialMessageRcptPeer
   {
     $c = new Criteria();
     $c->add(self::USER_TO, $user->getId());
-    $c->add(self::READ, false);
+    $c->add(self::IS_READ, false);
+    
     return self::doCount($c);
   }
 

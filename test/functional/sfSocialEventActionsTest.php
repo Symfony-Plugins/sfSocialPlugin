@@ -31,6 +31,7 @@ $browser->
   end()->
     with('response')->begin()->
     checkElement('body h2', '/Event "End of the world"/')->
+    checkElement('a[href$="/events"]', '/Back to list/')->
   end()->
 
   info('edit event')->
@@ -149,6 +150,12 @@ $browser->
     checkElement('ul#maybe li', 1)->
     checkElement('ul#not li', 1)->
     checkElement('ul#invited li', 1)->
+  end()->
+
+  info('past event')->
+  get('/event/1')->
+    with('response')->begin()->
+    checkElement('a[href$="/pastevents"]', '/Back to list/')->
   end()->
 
   info('edit forbidden event')->

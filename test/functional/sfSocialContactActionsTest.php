@@ -128,13 +128,13 @@ $browser->
   end()->
 
   info('unauthorized request accepting')->
-  get('/request/accept/2')->
+  get('/request/accept/4')->
   with('response')->begin()->
     isStatusCode(403)->
   end()->
 
   info('unauthorized request denying')->
-  get('/request/deny/2')->
+  get('/request/deny/4')->
   with('response')->begin()->
     isStatusCode(403)->
 

@@ -12,7 +12,7 @@ $t->is($message->getReplySubject(), 'Re: lorem ipsum dolor sit amet', 'add "Re:"
 $message->setSubject('Re: lorem ipsum dolor sit amet');
 $t->is($message->getReplySubject(), 'Re: lorem ipsum dolor sit amet', 'do not duplicate prefix');
 $t->comment('sfSocialMessage->read()');
-$t->is($message->getRead(), false, 'message is unread');
+$t->is($message->getIsRead(), false, 'message is unread');
 $user = new sfGuardUser();
 $user->setId(1);
 $message->setUserFrom($user);

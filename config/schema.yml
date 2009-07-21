@@ -8,19 +8,19 @@ propel:
     user_to:    { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     created_at: ~
     _uniques:   { contact: [user_from, user_to] }
-
+  
   sf_social_contact_group:
     _attributes: { phpName: sfSocialContactGroup }
     id:         ~
     contact_id: { type: integer, required: true, foreignTable: sf_social_contact, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     name:       { type: varchar, size: 255 }
-
+  
   sf_social_contact_group_contact:
     _attributes: { phpName: sfSocialContactGroupContact }
     contact_group_id: { type: integer, primaryKey: true, required: true, foreignTable: sf_social_contact_group, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     contact_id:       { type: integer, primaryKey: true, required: true, foreignTable: sf_social_contact, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     created_at:       ~
-
+  
   sf_social_contact_request:
     _attributes: { phpName: sfSocialContactRequest }
     id:         ~
@@ -30,7 +30,7 @@ propel:
     accepted:   { type: boolean, default: false }
     created_at: ~
     _uniques:   { request: [user_from, user_to] }
-
+  
   sf_social_event:
     _attributes: { phpName: sfSocialEvent }
     id: ~
@@ -42,7 +42,7 @@ propel:
     location:    { type: varchar, size: 255, required: true }
     created_at:  ~
     updated_at:  ~
-
+  
   sf_social_event_invite:
     _attributes: { phpName: sfSocialEventInvite }
     id:         ~
@@ -52,14 +52,14 @@ propel:
     replied:    { type: boolean, default: false }
     created_at: ~
     _uniques:   { invite: [event_id, user_id, user_from] }
-
+  
   sf_social_event_user:
     _attributes: { phpName: sfSocialEventUser }
     event_id:   { type: integer, primaryKey: true, required: true, foreignTable: sf_social_event, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     user_id:    { type: integer, primaryKey: true, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     confirm:    { type: integer, required: true, default: 0 }
     created_at: ~
-
+  
   sf_social_group:
     _attributes: { phpName: sfSocialGroup }
     id:          ~
@@ -68,7 +68,7 @@ propel:
     description: { type: longvarchar, required: true }
     created_at:  ~
     updated_at:  ~
-
+  
   sf_social_group_invite:
     _attributes: { phpName: sfSocialGroupInvite }
     id:         ~
@@ -78,13 +78,13 @@ propel:
     replied:    { type: boolean, default: false }
     created_at: ~
     _uniques:   { invite: [group_id, user_id, user_from] }
-
+  
   sf_social_group_user:
     _attributes: { phpName: sfSocialGroupUser }
     group_id:   { type: integer, primaryKey: true, required: true, foreignTable: sf_social_group, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     user_id:    { type: integer, primaryKey: true, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     created_at: ~
-
+  
   sf_social_message:
     _attributes: { phpName: sfSocialMessage }
     id:         ~
@@ -92,23 +92,23 @@ propel:
     subject:    { type: varchar, size: 255, required: true }
     text:       { type: longvarchar, required: true }
     created_at: ~
-
+  
   sf_social_message_rcpt:
     _attributes: { phpName: sfSocialMessageRcpt }
     id:      ~
     msg_id:  { type: integer, required: true, foreignTable: sf_social_message, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     user_to: { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
-    read:    { type: boolean, default: false }
-
+    is_read: { type: boolean, default: false }
+  
   sf_social_notify:
     _attributes: { phpName: sfSocialNotify }
     id:         ~
     user_id:    { type: integer, required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: cascade, onUpdate: cascade }
     model_name: { type: varchar, size: 255, required: true }
     model_id:   { type: integer, required: true }
-    read:       { type: boolean, default: false }
+    is_read:    { type: boolean, default: false }
     created_at: ~
-
+  
   sf_guard_user_profile:
     _attributes: { phpName: sfGuardUserProfile, package: plugins.sfGuardPlugin.lib.model }
     id:          ~

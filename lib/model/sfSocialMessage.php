@@ -42,7 +42,7 @@ class sfSocialMessage extends BasesfSocialMessage
     {
       if ($rcpt->getUserTo() == $user->getId())
       {
-        $rcpt->setRead(true);
+        $rcpt->setIsRead(true);
         $rcpt->save();
       }
     }

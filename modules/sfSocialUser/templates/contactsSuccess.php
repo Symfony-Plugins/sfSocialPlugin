@@ -11,7 +11,7 @@
 <ul id="list">
 <?php foreach ($pager->getResults() as $contact): ?>
   <li class="<?php $bRow = empty($bRow) ? print('a') : false ?>">
-    <?php $_user = $contact->getsfGuardUserRelatedByUserFrom() ?>
+    <?php $_user = $contact->getsfGuardUserRelatedByUserTo() ?>
     <?php echo link_to(image_tag($_user->getThumb(), 'alt=' . $_user . ' title=' . $_user . ' class=left'), '@sf_social_user?username=' . $_user) ?>
     <div><?php echo link_to($_user, '@sf_social_user?username=' . $_user) ?></div>
   </li>

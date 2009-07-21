@@ -278,7 +278,7 @@ class sfSocialGuardUser extends PluginsfGuardUser
   public function getNotifies()
   {
     $c = new Criteria;
-    $c->add(sfSocialNotifyPeer::READ, false);
+    $c->add(sfSocialNotifyPeer::IS_READ, false);
 
     return $this->getsfSocialNotifys($c);
   }

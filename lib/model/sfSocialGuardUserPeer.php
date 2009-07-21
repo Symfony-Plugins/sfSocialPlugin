@@ -30,7 +30,7 @@ class sfSocialGuardUserPeer extends PluginsfGuardUserPeer
     $c->add(self::USERNAME, '%' . $name . '%', Criteria::LIKE);
     // TODO search in profile's fields too?
     $c->addAscendingOrderByColumn(sfGuardUserPeer::USERNAME);
-    $pager = new sfPropelPager('sfSocialGuardUser', $n);
+    $pager = new sfPropelPager('sfGuardUser', $n);
     $pager->setCriteria($c);
     $pager->setPeerMethod('doSelect');
     $pager->setPage($page);
