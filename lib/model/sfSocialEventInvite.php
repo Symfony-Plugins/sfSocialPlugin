@@ -16,7 +16,8 @@ class sfSocialEventInvite extends BasesfSocialEventInvite
     {
       return null;
     }
-    return sfSocialEventUser::$choices[$eventUser->getConfirm()];
+    $choices = sfSocial::getI18NChoices(sfSocialEventUserPeer::$confirmChoices);
+    return $choices[$eventUser->getConfirm()];
   }
 
   /**

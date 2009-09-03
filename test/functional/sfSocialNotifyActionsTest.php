@@ -48,7 +48,7 @@ $browser->
     check('sfSocialNotify', array(
       'user_id'    => 1,
       'model_name' => 'sfSocialContactRequest',
-      'model_id'   => 4,
+      'model_id'   => 5,
       'is_read'    => false,
   ))->
   end()->

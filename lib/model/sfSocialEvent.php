@@ -43,7 +43,7 @@ class sfSocialEvent extends BasesfSocialEvent
     }
     else
     {
-      return strtr($string, $parameters);
+      return strtr($string, $params);
     }
   }
 
@@ -64,7 +64,7 @@ class sfSocialEvent extends BasesfSocialEvent
   public function getConfirmedUsers()
   {
     $c = new Criteria;
-    $c->add(sfSocialEventUserPeer::CONFIRM, sfSocialEventUser::REPLY_YES);
+    $c->add(sfSocialEventUserPeer::CONFIRM, sfSocialEventUserPeer::REPLY_YES);
     return $this->getsfSocialEventUsersJoinsfGuardUser($c);
   }
 
@@ -75,7 +75,7 @@ class sfSocialEvent extends BasesfSocialEvent
   public function getMaybeUsers()
   {
     $c = new Criteria;
-    $c->add(sfSocialEventUserPeer::CONFIRM, sfSocialEventUser::REPLY_MAYBE);
+    $c->add(sfSocialEventUserPeer::CONFIRM, sfSocialEventUserPeer::REPLY_MAYBE);
     return $this->getsfSocialEventUsersJoinsfGuardUser($c);
   }
 
@@ -86,7 +86,7 @@ class sfSocialEvent extends BasesfSocialEvent
   public function getNoUsers()
   {
     $c = new Criteria;
-    $c->add(sfSocialEventUserPeer::CONFIRM, sfSocialEventUser::REPLY_NO);
+    $c->add(sfSocialEventUserPeer::CONFIRM, sfSocialEventUserPeer::REPLY_NO);
     return $this->getsfSocialEventUsersJoinsfGuardUser($c);
   }
 

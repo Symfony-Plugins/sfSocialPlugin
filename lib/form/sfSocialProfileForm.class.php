@@ -20,14 +20,11 @@ class sfSocialProfileForm extends sfGuardUserForm
     $years = range(date('Y'), 1900);
     $this->widgetSchema['birthday']->setOption('years', array_combine($years, $years));
 
-    // make "sex" a choice (i18n solution is very ugly, is there a better way? TODO)
-    $i18n = sfContext::getInstance()->getI18N();
+    // make "sex" a choice 
     $this->widgetSchema['sex'] = new sfWidgetFormChoice(array('expanded' => false,
-                                                              'choices' => array('' => $i18n->__('Unspecified', null, 'sfSocial'),
-                                                                                 'M' => $i18n->__('Male', null, 'sfSocial'),
-                                                                                 'F' => $i18n->__('Female', null, 'sfSocial'))));
+                                                              'choices' => sfSocial::getI18NChoices(sfSocial::$sexChoices)));
     $this->validatorSchema['sex'] = new sfValidatorChoice(array('required' => false,
-                                                                'choices' => array('', 'M', 'F')));
+                                                                'choices' => array_keys(sfSocial::$sexChoices)));
 
     // make picture editable
     $path = sfConfig::get('app_sf_social_pic_path', '/sf_social_pics/');

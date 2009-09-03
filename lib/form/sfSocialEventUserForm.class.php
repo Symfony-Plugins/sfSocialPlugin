@@ -15,16 +15,11 @@ class sfSocialEventUserForm extends BasesfSocialEventUserForm
     // hide unuseful fields
     unset($this['created_at']);
 
-    // make confirm a choice (i18n solution is very ugly, is there a better way? TODO)
-    $i18n = sfContext::getInstance()->getI18N();
-    foreach (sfSocialEventUser::$choices as $k => $choice)
-    {
-      $i18nChoice[$k] = $i18n->__($choice, null, 'sfSocial');
-    }
-    $this->widgetSchema['confirm'] = new sfWidgetFormChoice(array(
-      'choices'  => $i18nChoice,
-      'expanded' => true,
-    ));
+    // make "confirm" a choice
+    $this->widgetSchema['confirm'] = new sfWidgetFormChoice(array('choices'  => sfSocial::getI18NChoices(sfSocialEventUserPeer::$confirmChoices),
+                                                                  'expanded' => true));
+    $this->validatorSchema['confirm'] = new sfValidatorChoice(array('required' => false,
+                                                                    'choices' => array_keys(sfSocialEventUserPeer::$confirmChoices)));
 
     // make user_id hidden
     $this->widgetSchema['user_id'] = new sfWidgetFormInputHidden();

@@ -4,555 +4,555 @@
   <file source-language="EN" target-language="it" datatype="plaintext" original="messages" date="2009-07-08T15:34:11Z" product-name="messages">
     <header/>
     <body>
-      <trans-unit id="1">
+      <trans-unit>
         <source>[1]1 shared contact[2,+Inf]%1% shared contacts</source>
         <target>[1]1 contatto in comune[2,+Inf]%1% contatti in comune</target>
       </trans-unit>
-      <trans-unit id="2">
+      <trans-unit>
         <source>Send a contact request</source>
         <target>Invia una richiesta di contatto</target>
       </trans-unit>
-      <trans-unit id="3">
+      <trans-unit>
         <source>cancel</source>
         <target>annulla</target>
       </trans-unit>
-      <trans-unit id="4">
+      <trans-unit>
         <source>send</source>
         <target>invia</target>
       </trans-unit>
-      <trans-unit id="5">
+      <trans-unit>
         <source>Contacts list</source>
         <target>Lista contatti</target>
       </trans-unit>
-      <trans-unit id="6">
+      <trans-unit>
         <source>No contacts</source>
         <target>Nessun contatto</target>
       </trans-unit>
-      <trans-unit id="7">
+      <trans-unit>
         <source>added %1% ago</source>
         <target>aggiunto %1% fa</target>
       </trans-unit>
-      <trans-unit id="8">
+      <trans-unit>
         <source>Remove</source>
         <target>Rimuovi</target>
       </trans-unit>
-      <trans-unit id="9">
+      <trans-unit>
         <source>List of received requests</source>
         <target>Elenco delle richieste ricevute</target>
       </trans-unit>
-      <trans-unit id="10">
+      <trans-unit>
         <source>List of sent requests</source>
         <target>Elenco delle richieste inviate</target>
       </trans-unit>
-      <trans-unit id="11">
+      <trans-unit>
         <source>Send request</source>
         <target>Invia richiesta</target>
       </trans-unit>
-      <trans-unit id="12">
+      <trans-unit>
         <source>List of received contact requests</source>
         <target>Elenco delle richieste di contatto ricevute</target>
       </trans-unit>
-      <trans-unit id="13">
+      <trans-unit>
         <source>No request</source>
         <target>Nessuna richiesta</target>
       </trans-unit>
-      <trans-unit id="14">
+      <trans-unit>
         <source>Accept</source>
         <target>Accetta</target>
       </trans-unit>
-      <trans-unit id="15">
+      <trans-unit>
         <source>Deny</source>
         <target>Rifiuta</target>
       </trans-unit>
-      <trans-unit id="16">
+      <trans-unit>
         <source>Return to list</source>
         <target>Torna alla lista</target>
       </trans-unit>
-      <trans-unit id="17">
+      <trans-unit>
         <source>List of sent contact requests</source>
         <target>Elenco delle richieste di contatto inviate</target>
       </trans-unit>
-      <trans-unit id="18">
+      <trans-unit>
         <source>Events</source>
         <target>Eventi</target>
       </trans-unit>
-      <trans-unit id="19">
+      <trans-unit>
         <source>No events yet</source>
         <target>Nessun evento presente</target>
       </trans-unit>
-      <trans-unit id="20">
+      <trans-unit>
         <source>in</source>
         <target>a</target>
       </trans-unit>
-      <trans-unit id="21">
+      <trans-unit>
         <source>by</source>
         <target>di</target>
       </trans-unit>
-      <trans-unit id="22">
+      <trans-unit>
         <source>Create a new event</source>
         <target>Crea nuovo evento</target>
       </trans-unit>
-      <trans-unit id="23">
+      <trans-unit>
         <source>New event</source>
         <target>Nuovo evento</target>
       </trans-unit>
-      <trans-unit id="24">
+      <trans-unit>
         <source>create</source>
         <target>crea</target>
       </trans-unit>
-      <trans-unit id="25">
+      <trans-unit>
         <source>No past events yet</source>
         <target>Nessun evento passato</target>
       </trans-unit>
-      <trans-unit id="26">
+      <trans-unit>
         <source>Past events</source>
         <target>Eventi passati</target>
       </trans-unit>
-      <trans-unit id="27">
+      <trans-unit>
         <source>Event &amp;quot;%1%&amp;quot;</source>
         <target>Evento &amp;quot;%1%&amp;quot;</target>
       </trans-unit>
-      <trans-unit id="28">
+      <trans-unit>
         <source>When</source>
         <target>Quando</target>
       </trans-unit>
-      <trans-unit id="29">
+      <trans-unit>
         <source>Edit event</source>
         <target>Modifica evento</target>
       </trans-unit>
-      <trans-unit id="30">
+      <trans-unit>
         <source>confirm</source>
         <target>conferma</target>
       </trans-unit>
-      <trans-unit id="31">
+      <trans-unit>
         <source>Invite</source>
         <target>Invita</target>
       </trans-unit>
-      <trans-unit id="32">
+      <trans-unit>
         <source>invite</source>
         <target>invita</target>
       </trans-unit>
-      <trans-unit id="33">
+      <trans-unit>
         <source>Invited users</source>
         <target>Utenti invitati</target>
       </trans-unit>
-      <trans-unit id="34">
+      <trans-unit>
         <source>No invited users</source>
         <target>Nessun utente invitato</target>
       </trans-unit>
-      <trans-unit id="35">
+      <trans-unit>
         <source>Awaiting reply</source>
         <target>In attesa di risposta</target>
       </trans-unit>
-      <trans-unit id="36">
+      <trans-unit>
         <source>Back to list</source>
         <target>Torna alla lista</target>
       </trans-unit>
-      <trans-unit id="37">
+      <trans-unit>
         <source>No invite received yet</source>
         <target>Nessun invito ricevuto</target>
       </trans-unit>
-      <trans-unit id="38">
+      <trans-unit>
         <source>Invites received for events</source>
         <target>Inviti ricevuto per gli eventi</target>
       </trans-unit>
-      <trans-unit id="39">
+      <trans-unit>
         <source>from</source>
         <target>da</target>
       </trans-unit>
-      <trans-unit id="40">
+      <trans-unit>
         <source>Invite to event &amp;quot;%1%&amp;quot;</source>
         <target>Invit all'evento &amp;quot;%1%&amp;quot;</target>
       </trans-unit>
-      <trans-unit id="41">
+      <trans-unit>
         <source>User invited</source>
         <target>Utente invitato</target>
       </trans-unit>
-      <trans-unit id="42">
+      <trans-unit>
         <source>Edit event &amp;quot;%1%&amp;quot;</source>
         <target>Modifica evento &amp;quot;%1%&amp;quot;</target>
       </trans-unit>
-      <trans-unit id="43">
+      <trans-unit>
         <source>edit</source>
         <target>modifica</target>
       </trans-unit>
-      <trans-unit id="44">
+      <trans-unit>
         <source>Groups</source>
         <target>Gruppi</target>
       </trans-unit>
-      <trans-unit id="45">
+      <trans-unit>
         <source>No groups yet</source>
         <target>Nessun gruppo presente</target>
       </trans-unit>
-      <trans-unit id="46">
+      <trans-unit>
         <source>Your groups</source>
         <target>I tuoi gruppi</target>
       </trans-unit>
-      <trans-unit id="47">
+      <trans-unit>
         <source>Create a new group</source>
         <target>Crea un nuovo gruppo</target>
       </trans-unit>
-      <trans-unit id="48">
+      <trans-unit>
         <source>Group &amp;quot;%1%&amp;quot;</source>
         <target>Gruppo &amp;quot;%1%&amp;quot;</target>
       </trans-unit>
-      <trans-unit id="49">
+      <trans-unit>
         <source>Edit group</source>
         <target>Modifica gruppo</target>
       </trans-unit>
-      <trans-unit id="50">
+      <trans-unit>
         <source>Accept invite</source>
         <target>Accetta invito</target>
       </trans-unit>
-      <trans-unit id="51">
+      <trans-unit>
         <source>Deny invite</source>
         <target>Rifiuta invito</target>
       </trans-unit>
-      <trans-unit id="52">
+      <trans-unit>
         <source>Join this group</source>
         <target>Entra in questo gruppo</target>
       </trans-unit>
-      <trans-unit id="53">
+      <trans-unit>
         <source>Members</source>
         <target>Membri</target>
       </trans-unit>
-      <trans-unit id="54">
+      <trans-unit>
         <source>No members</source>
         <target>Nessun membro</target>
       </trans-unit>
-      <trans-unit id="55">
+      <trans-unit>
         <source>Edit group &amp;quot;%1%&amp;quot;</source>
         <target>Modifica gruppo &amp;quot;%1%&amp;quot;</target>
       </trans-unit>
-      <trans-unit id="56">
+      <trans-unit>
         <source>New group</source>
         <target>Nuovo gruppo</target>
       </trans-unit>
-      <trans-unit id="57">
+      <trans-unit>
         <source>You're not member of any group</source>
         <target>Non sei membro di nessun gruppo</target>
       </trans-unit>
-      <trans-unit id="58">
+      <trans-unit>
         <source>All groups</source>
         <target>Tutti i grupppi</target>
       </trans-unit>
-      <trans-unit id="59">
+      <trans-unit>
         <source>Message successfully sent to</source>
         <target>Messaggio inviato a</target>
       </trans-unit>
-      <trans-unit id="60">
+      <trans-unit>
         <source>Messages received</source>
         <target>Messaggi ricevuti</target>
       </trans-unit>
-      <trans-unit id="61">
+      <trans-unit>
         <source>No messages received yet</source>
         <target>Nessun messaggio ricevuto</target>
       </trans-unit>
-      <trans-unit id="62">
+      <trans-unit>
         <source>unread messages</source>
         <target>messaggi da leggere</target>
       </trans-unit>
-      <trans-unit id="63">
+      <trans-unit>
         <source>Sent messages</source>
         <target>Messaggi inviati</target>
       </trans-unit>
-      <trans-unit id="64">
+      <trans-unit>
         <source>Compose a new message</source>
         <target>Scrivi un nuovo messaggio</target>
       </trans-unit>
-      <trans-unit id="65">
+      <trans-unit>
         <source>Reply</source>
         <target>Rispondi</target>
       </trans-unit>
-      <trans-unit id="66">
+      <trans-unit>
         <source>No sent messages yet</source>
         <target>Nessun messaggio inviato</target>
       </trans-unit>
-      <trans-unit id="67">
+      <trans-unit>
         <source>Received messages</source>
         <target>Messaggi ricevuti</target>
       </trans-unit>
-      <trans-unit id="68">
+      <trans-unit>
         <source>Message sent from you to</source>
         <target>Messaggio inviato da te a</target>
       </trans-unit>
-      <trans-unit id="69">
+      <trans-unit>
         <source>Date</source>
         <target>Data</target>
       </trans-unit>
-      <trans-unit id="70">
+      <trans-unit>
         <source>Subject</source>
         <target>Oggetto</target>
       </trans-unit>
-      <trans-unit id="71">
+      <trans-unit>
         <source>remove</source>
         <target>rimuovi</target>
       </trans-unit>
-      <trans-unit id="72">
+      <trans-unit>
         <source>it's you!</source>
         <target>sei tu!</target>
       </trans-unit>
-      <trans-unit id="73">
+      <trans-unit>
         <source>is your contact</source>
         <target>è tuo contatto</target>
       </trans-unit>
-      <trans-unit id="74">
+      <trans-unit>
         <source>A contact request is pending</source>
         <target>Una richiesta di contatto in attesa</target>
       </trans-unit>
-      <trans-unit id="75">
+      <trans-unit>
         <source>Add %1% to your contacts</source>
         <target>Aggiungi %1% ai tuoi contatti</target>
       </trans-unit>
-      <trans-unit id="76">
+      <trans-unit>
         <source>Name</source>
         <target>Nome</target>
       </trans-unit>
-      <trans-unit id="77">
+      <trans-unit>
         <source>Birthday</source>
         <target>Data di nascita</target>
       </trans-unit>
-      <trans-unit id="78">
+      <trans-unit>
         <source>Sex</source>
         <target>Sesso</target>
       </trans-unit>
-      <trans-unit id="79">
+      <trans-unit>
         <source>Location</source>
         <target>Località</target>
       </trans-unit>
-      <trans-unit id="80">
+      <trans-unit>
         <source>[1]1 contact[2,+Inf]%1% contacts</source>
         <target>[1]1 contatto[2,+Inf]%1% contatti</target>
       </trans-unit>
-      <trans-unit id="81">
+      <trans-unit>
         <source>See all contacts</source>
         <target>Vedi tutti i contatti</target>
       </trans-unit>
-      <trans-unit id="82">
+      <trans-unit>
         <source>member of groups</source>
         <target>membro dei gruppi</target>
       </trans-unit>
-      <trans-unit id="83">
+      <trans-unit>
         <source>Edit profile</source>
         <target>Modifica profilo</target>
       </trans-unit>
-      <trans-unit id="84">
+      <trans-unit>
         <source>Contacts of %1%</source>
         <target>Contatti di %1%</target>
       </trans-unit>
-      <trans-unit id="85">
+      <trans-unit>
         <source>Back to %1%'s profile</source>
         <target>Torna al profilo di %1%</target>
       </trans-unit>
-      <trans-unit id="86">
+      <trans-unit>
         <source>messages</source>
         <target>messaggi</target>
       </trans-unit>
-      <trans-unit id="87">
+      <trans-unit>
         <source>contacts</source>
         <target>contatti</target>
       </trans-unit>
-      <trans-unit id="88">
+      <trans-unit>
         <source>events</source>
         <target>eventi</target>
       </trans-unit>
-      <trans-unit id="89">
+      <trans-unit>
         <source>groups</source>
         <target>gruppi</target>
       </trans-unit>
-      <trans-unit id="90">
+      <trans-unit>
         <source>Title</source>
         <target>Titolo</target>
       </trans-unit>
-      <trans-unit id="91">
+      <trans-unit>
         <source>Description</source>
         <target>Descrizione</target>
       </trans-unit>
-      <trans-unit id="92">
+      <trans-unit>
         <source>Confirm</source>
         <target>Conferma</target>
       </trans-unit>
-      <trans-unit id="93">
+      <trans-unit>
         <source>maybe</source>
         <target>forse</target>
       </trans-unit>
-      <trans-unit id="94">
+      <trans-unit>
         <source>yes</source>
         <target>sì</target>
       </trans-unit>
-      <trans-unit id="95">
+      <trans-unit>
         <source>no</source>
         <target>no</target>
       </trans-unit>
-      <trans-unit id="96">
+      <trans-unit>
         <source>Start</source>
         <target>Inizio</target>
       </trans-unit>
-      <trans-unit id="97">
+      <trans-unit>
         <source>End</source>
         <target>Fine</target>
       </trans-unit>
-      <trans-unit id="98">
+      <trans-unit>
         <source>Text</source>
         <target>Testo</target>
       </trans-unit>
-      <trans-unit id="99">
+      <trans-unit>
         <source>To</source>
         <target>A</target>
       </trans-unit>
-      <trans-unit id="100">
+      <trans-unit>
         <source>Message</source>
         <target>Messaggio</target>
       </trans-unit>
-      <trans-unit id="101">
+      <trans-unit>
         <source>Male</source>
         <target>Maschio</target>
       </trans-unit>
-      <trans-unit id="102">
+      <trans-unit>
         <source>Female</source>
         <target>Femmina</target>
       </trans-unit>
-      <trans-unit id="103">
+      <trans-unit>
         <source>Unspecified</source>
         <target>Non specificato</target>
       </trans-unit>
-      <trans-unit id="104">
+      <trans-unit>
         <source>Invalid.</source>
         <target>Non valido.</target>
       </trans-unit>
-      <trans-unit id="105">
+      <trans-unit>
         <source>Required.</source>
         <target>Obbligatorio.</target>
       </trans-unit>
-      <trans-unit id="106">
+      <trans-unit>
         <source>Invalid.</source>
         <target>Non valido.</target>
       </trans-unit>
-      <trans-unit id="107">
+      <trans-unit>
         <source>Error</source>
         <target>Errore</target>
       </trans-unit>
-      <trans-unit id="106">
+      <trans-unit>
         <source>User is already a contact.</source>
         <target>L'utente è già un tuo contatto.</target>
       </trans-unit>
-      <trans-unit id="107">
+      <trans-unit>
         <source>Request already sent.</source>
         <target>Richiesta già inviata.</target>
       </trans-unit>
-      <trans-unit id="108">
+      <trans-unit>
         <source>received %1% ago</source>
         <target>ricevuta %1% fa</target>
       </trans-unit>
-      <trans-unit id="109">
+      <trans-unit>
         <source>You received a %1% from %2%</source>
         <target>Hai ricevuto un %1% da %2%</target>
       </trans-unit>
-      <trans-unit id="110">
+      <trans-unit>
         <source>message</source>
         <target>messaggio</target>
       </trans-unit>
-      <trans-unit id="111">
+      <trans-unit>
         <source>Send a message to %1%</source>
         <target>Scrivi un messaggio a %1%</target>
       </trans-unit>
-      <trans-unit id="112">
+      <trans-unit>
         <source>%day% from %starttime% to %endtime%</source>
         <target>il giorno %day% dalle %starttime% alle %endtime%</target>
       </trans-unit>
-      <trans-unit id="113">
+      <trans-unit>
         <source>from %startdaytime% to %enddatetime%</source>
         <target>dal %startdaytime% al %enddatetime%</target>
       </trans-unit>
-      <trans-unit id="114">
+      <trans-unit>
         <source>Will partecipate</source>
         <target>Parteciperanno</target>
       </trans-unit>
-      <trans-unit id="115">
+      <trans-unit>
         <source>None yet</source>
         <target>Ancora nessuno</target>
       </trans-unit>
-      <trans-unit id="116">
+      <trans-unit>
         <source>Maybe will partecipate</source>
         <target>Forse parteciperanno</target>
       </trans-unit>
-      <trans-unit id="117">
+      <trans-unit>
         <source>Will not partecipate</source>
         <target>Non parteciperanno</target>
       </trans-unit>
-      <trans-unit id="118">
+      <trans-unit>
         <source>User</source>
         <target>Utente</target>
       </trans-unit>
-      <trans-unit id="119">
+      <trans-unit>
         <source>You received a %1% from %2%</source>
         <target>Hai ricevuto un %1% da %2%</target>
       </trans-unit>
-      <trans-unit id="120">
+      <trans-unit>
         <source>You received an %1% from %2%</source>
         <target>Hai ricevuto un %1% da %2%</target>
       </trans-unit>
-      <trans-unit id="121">
+      <trans-unit>
         <source>contact request</source>
         <target>richiesta di contatto</target>
       </trans-unit>
-      <trans-unit id="122">
+      <trans-unit>
         <source>invite to event %event%</source>
         <target>invito all'evento %event%</target>
       </trans-unit>
-      <trans-unit id="123">
+      <trans-unit>
         <source>invite to join group %group%</source>
         <target>invito ad unirti al gruppo %group%</target>
       </trans-unit>
-      <trans-unit id="124">
+      <trans-unit>
         <source>Contact removed.</source>
         <target>Contatto rimosso.</target>
       </trans-unit>
-      <trans-unit id="125">
+      <trans-unit>
         <source>Contact request sent.</source>
         <target>Richiesta di contatto inviata.</target>
       </trans-unit>
-      <trans-unit id="126">
+      <trans-unit>
         <source>Contact request accepted.</source>
         <target>Richiesta di contatto accettata.</target>
       </trans-unit>
-      <trans-unit id="127">
+      <trans-unit>
         <source>Contact request refused.</source>
         <target>Richiesta di contatto rifiutata.</target>
       </trans-unit>
-      <trans-unit id="128">
+      <trans-unit>
         <source>Contact request canceled.</source>
         <target>Richiesta di contatto annullata.</target>
       </trans-unit>
-      <trans-unit id="129">
+      <trans-unit>
         <source>Group modified.</source>
         <target>Gruppo modificato.</target>
       </trans-unit>
-      <trans-unit id="130">
+      <trans-unit>
         <source>Group created.</source>
         <target>Gruppo creato.</target>
       </trans-unit>
-      <trans-unit id="131">
+      <trans-unit>
         <source>%1% users invited.</source>
         <target>%1% utenti invitati.</target>
       </trans-unit>
-      <trans-unit id="132">
+      <trans-unit>
         <source>Invite refused.</source>
         <target>Invito rifiutato.</target>
       </trans-unit>
-      <trans-unit id="133">
+      <trans-unit>
         <source>Event created</source>
         <target>Evento creato.</target>
       </trans-unit>
-      <trans-unit id="134">
+      <trans-unit>
         <source>Event modified.</source>
         <target>Evento modificato.</target>
       </trans-unit>
-      <trans-unit id="135">
+      <trans-unit>
         <source>Profile saved.</source>
         <target>Profilo salvato.</target>
       </trans-unit>
-      <trans-unit id="136">
+      <trans-unit>
         <source>sent %1% ago</source>
         <target>inviata %1% fa</target>
       </trans-unit>
