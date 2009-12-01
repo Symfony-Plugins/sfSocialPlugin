@@ -22,11 +22,12 @@ class sfSocialMessageForm extends BasesfSocialMessageForm
                         new sfValidatorChoice(array('choices' => array($user->getId()))));
 
     // add recipients field
-    $this->widgetSchema['to'] = new sfWidgetFormChoiceMany(array('choices' => $this->getRcpts()));
+    $this->widgetSchema['to'] = new sfWidgetFormChoice(array('multiple' => true, 'choices' => $this->getRcpts()));
     $this->setValidator('to',
-                        new sfValidatorPropelChoiceMany(array('model'    => 'sfGuardUser',
-                                                              'column'   => 'id',
-                                                              'required' => true)));
+                        new sfValidatorPropelChoice(array('model'    => 'sfGuardUser',
+                                                          'column'   => 'id',
+                                                          'multiple' => true,
+                                                          'required' => true)));
 
     // if it's a reply message, set defaults
     if (!empty($this->options['reply_to']))

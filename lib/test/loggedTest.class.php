@@ -37,8 +37,7 @@ class loggedTest extends sfTestFunctional
         isParameter('action', 'signin')->
       end()->
 
-      isRedirected()->
-      followRedirect()->
+      with('response')->isRedirected()->followRedirect()->
       with('response')->begin()->
         isStatusCode(200)->
       end();

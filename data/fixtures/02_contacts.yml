@@ -1,81 +1,81 @@
 sfSocialContact:
   annajulie:
     user_from: anna
-    user_to: julie
+    user_to:   julie
   julieanna:
     user_from: julie
-    user_to: anna
+    user_to:   anna
   maxmike:
-    user_from: max
-    user_to: mike
+    user_from:  max
+    user_to:    mike
     created_at: 2009-07-07 12:25:00
   mikemax:
-    user_from: mike
-    user_to: max
+    user_from:  mike
+    user_to:    max
     created_at: 2009-07-07 12:25:00
   maxmario:
-    user_from: max
-    user_to: mario
+    user_from:  max
+    user_to:    mario
     created_at: 2009-07-08 12:25:00
   mariomax:
-    user_from: mario
-    user_to: max
+    user_from:  mario
+    user_to:    max
     created_at: 2009-07-08 12:25:00
   maxjimmy:
-    user_from: max
-    user_to: jimmy
+    user_from:  max
+    user_to:    jimmy
   jimmymax:
-    user_from: jimmy
-    user_to: max
+    user_from:  jimmy
+    user_to:    max
   maxtimmy:
-    user_from: max
-    user_to: timmy
+    user_from:  max
+    user_to:    timmy
   timmymax:
-    user_from: timmy
-    user_to: max
+    user_from:  timmy
+    user_to:    max
   maxtommy:
-    user_from: max
-    user_to: tommy
+    user_from:  max
+    user_to:    tommy
   tommymax:
-    user_from: tommy
-    user_to: max
+    user_from:  tommy
+    user_to:    max
   karlmike:
-    user_from: karl
-    user_to: mike
+    user_from:  karl
+    user_to:    mike
   mikekarl:
-    user_from: mike
-    user_to: karl
+    user_from:  mike
+    user_to:    karl
 
 sfSocialContactGroup:
   maxfriends:
     contact_id: maxmike
-    name: friends
+    name:       friends
 
 sfSocialContactGroupContact:
   maxfriend1:
     contact_group_id: maxfriends
-    contact_id: maxmike
+    contact_id:       maxmike
   maxfriend2:
     contact_group_id: maxfriends
-    contact_id: maxmario
+    contact_id:       maxmario
 
 sfSocialContactRequest:
   dannymax:
-    user_from: danny
-    user_to: max
-    message: Hello Max, I would like to be your friend :-)
+    user_from:  danny
+    user_to:    max
+    message:    Hello Max, I would like to be your friend :-)
     created_at: 2009-01-08 10:23:00
   maxluigi:
-    user_from: max
-    user_to: luigi
-    message: Hi bro, remember of me?
+    user_from:  max
+    user_to:    luigi
+    message:    Hi bro, remember of me?
     created_at: 2009-01-07 11:01:01
   johnmax:
-    user_from: john
-    user_to: max
-    message: Dear Max, wanna be your contact
+    user_from:  john
+    user_to:    max
+    message:    Dear Max, wanna be your contact
     created_at: 2009-07-03 11:49:10
   ohnanna:
-    user_from: john
-    user_to: anna
-    message: You are so beautiful
+    user_from:  john
+    user_to:    anna
+    message:    You are so beautiful

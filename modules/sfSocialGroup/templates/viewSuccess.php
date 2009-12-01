@@ -70,7 +70,7 @@
   <ul id="members">
   <?php foreach ($members as $groupUser): ?>
     <li>
-      <?php $_groupUser = $groupUser instanceof sfSocialGroup ? $groupUser : $groupUser->getRawValue() ?>
+      <?php $_groupUser = $groupUser instanceof sfSocialGroupUser ? $groupUser : $groupUser->getRawValue() ?>
       <?php echo link_to(image_tag($_groupUser->getsfGuardUser()->getThumb(), 'title=' . $_groupUser->getsfGuardUser() . ' alt=' . $_groupUser->getsfGuardUser()), '@sf_social_user?username=' . $_groupUser->getsfGuardUser()) ?>
     </li>
   <?php endforeach ?>

@@ -1,59 +1,59 @@
 sfSocialMessage:
   from_max:
-    user_from: max
-    subject: lorem ipsum
-    text: dolor sit amet, consectetur adipiscing elit. Sed accumsan laoreet sapien. Maecenas et nisl et mi imperdiet auctor.
+    user_from:  max
+    subject:    lorem ipsum
+    text:       dolor sit amet, consectetur adipiscing elit. Sed accumsan laoreet sapien. Maecenas et nisl et mi imperdiet auctor.
     created_at: 2009-01-07 12:13:14
   from_danny:
-    user_from: danny
-    subject: hello pal
-    text: Duis aliquam, diam consequat varius condimentum, nulla tortor tincidunt enim, sed faucibus pede ipsum a tortor. Curabitur posuere metus ac nisl. Sed porta feugiat ipsum.
+    user_from:  danny
+    subject:    hello pal
+    text:       Duis aliquam, diam consequat varius condimentum, nulla tortor tincidunt enim, sed faucibus pede ipsum a tortor. Curabitur posuere metus ac nisl. Sed porta feugiat ipsum.
     created_at: 2009-01-08 13:13:14
   from_mario:
-    user_from: mario
-    subject: how do you do?
-    text: are you happy? I'm fine. Hooga appa loopa. Eeny, meeny, miny, moe
+    user_from:  mario
+    subject:    how do you do?
+    text:       are you happy? I'm fine. Hooga appa loopa. Eeny, meeny, miny, moe
     created_at: 2009-01-09 20:55:24
   from_luigi:
     user_from: luigi
-    subject: a message
-    text: a text for a message. Clever, uhu?
+    subject:    a message
+    text:       a text for a message. Clever, uhu?
     created_at: 2009-01-10 09:43:14
   from_jimmy:
-    user_from: jimmy
-    subject: 3 little pigs
-    text: who's afraid of big bad wolf, big bad wolf, big bad wolf.
+    user_from:  jimmy
+    subject:    3 little pigs
+    text:       who's afraid of big bad wolf, big bad wolf, big bad wolf.
     created_at: 2009-01-14 18:13:14
   from_goofy:
-    user_from: goofy
-    subject: yup
-    text: I don't know what to say, but I say it.
+    user_from:  goofy
+    subject:    yup
+    text:       I don't know what to say, but I say it.
     created_at: 2009-07-02 13:22:04
 
 sfSocialMessageRcpt:
   max_to_mike:
-    msg_id: from_max
+    msg_id:  from_max
     user_to: mike
   max_to_anna:
-    msg_id: from_max
+    msg_id:  from_max
     user_to: anna
   danny_to_mike:
-    msg_id: from_danny
+    msg_id:  from_danny
     user_to: mike
     is_read: true
   mario_to_max:
-    msg_id: from_mario
+    msg_id:  from_mario
     user_to: max
   luigi_to_max:
-    msg_id: from_luigi
+    msg_id:  from_luigi
     user_to: max
     is_read: true
   jimmy_to_max:
-    msg_id: from_jimmy
+    msg_id:  from_jimmy
     user_to: max
   danny_to_max:
-    msg_id: from_danny
+    msg_id:  from_danny
     user_to: max
   goofy_to_max:
-    msg_id: from_goofy
+    msg_id:  from_goofy
     user_to: max

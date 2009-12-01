@@ -1,62 +1,62 @@
 sfSocialEvent:
   maxbirthday:
-    user_admin: max
-    title: let's party!
+    user_admin:  max
+    title:       let's party!
     description: guess what? I'm going to turn 35! Wanna party with me?
-    start: 2009-04-01 19:00:00
-    end: 2009-04-01 22:30:00
-    location: Rome, Italy
-    created_at: 2009-03-02 12:44:01
+    start:       2009-04-01 19:00:00
+    end:         2009-04-01 22:30:00
+    location:    Rome, Italy
+    created_at:  2009-03-02 12:44:01
   pizzaparty:
-    user_admin: anna
-    title: I love pizza
+    user_admin:  anna
+    title:       I love pizza
     description: Come together and eat a slice of pizza or two.
-    start: 2009-02-01 20:00:00
-    end: 2009-02-02 11:15:00
-    location: Naples, Italy
-    created_at: 2009-01-15 15:31:22
+    start:       2009-02-01 20:00:00
+    end:         2009-02-02 11:15:00
+    location:    Naples, Italy
+    created_at:  2009-01-15 15:31:22
   nerdconvention:
-    user_admin: max
-    title: Looking for geeks
+    user_admin:  max
+    title:       Looking for geeks
     description: A convention for every geek on the earth
-    start: 2009-09-09 10:00:00
-    end: 2009-09-10 22:00:00
-    location: Paris, France
-    created_at: 2009-07-02 13:17:21
+    start:       2009-09-09 10:00:00
+    end:         2009-09-10 22:00:00
+    location:    Paris, France
+    created_at:  2009-07-02 13:17:21
   endofworld:
-    user_admin: max
-    title: End of the world
+    user_admin:  max
+    title:       End of the world
     description: It is the end of the world and we know it
-    start: 2012-12-21 00:00:01
-    end: 2012-12-21 22:00:02
-    location: Earth, Milky Way
-    created_at: 2009-07-02 13:19:43
+    start:       2012-12-21 00:00:01
+    end:         2012-12-21 22:00:02
+    location:    Earth, Milky Way
+    created_at:  2009-07-02 13:19:43
 
 sfSocialEventInvite:
   mike:
-    event_id: maxbirthday
-    user_id: mike
+    event_id:  maxbirthday
+    user_id:   mike
     user_from: max
-    replied: true
+    replied:   true
   mario:
-    event_id: maxbirthday
-    user_id: mario
+    event_id:  maxbirthday
+    user_id:   mario
     user_from: max
   max:
-    event_id: pizzaparty
-    user_id: max
+    event_id:  pizzaparty
+    user_id:   max
     user_from: anna
 
 sfSocialEventUser:
   mikemaybe:
     event_id: maxbirthday
-    user_id: mike
-    confirm: 1
+    user_id:  mike
+    confirm:  1
   annayes:
     event_id: maxbirthday
-    user_id: anna
-    confirm: 2
+    user_id:  anna
+    confirm:  2
   dannyno:
     event_id: maxbirthday
-    user_id: danny
-    confirm: 3
+    user_id:  danny
+    confirm:  3

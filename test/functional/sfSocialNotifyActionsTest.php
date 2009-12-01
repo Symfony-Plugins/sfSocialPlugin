@@ -108,10 +108,7 @@ $browser->
     isParameter('module', 'sfSocialNotify')->
     isParameter('action', 'get')->
   end()->
-  with('response')->begin()->
-    isRedirected()->
-    followRedirect()->
-  end()->
+  with('response')->isRedirected()->followRedirect()->
   with('request')->begin()->
     isParameter('module', 'sfSocialMessage')->
     isParameter('action', 'read')->
@@ -132,10 +129,7 @@ $browser->
     isParameter('module', 'sfSocialNotify')->
     isParameter('action', 'get')->
   end()->
-  with('response')->begin()->
-    isRedirected()->
-    followRedirect()->
-  end()->
+  with('response')->isRedirected()->followRedirect()->
   with('request')->begin()->
     isParameter('module', 'sfSocialContact')->
     isParameter('action', 'requests')->
@@ -156,10 +150,7 @@ $browser->
     isParameter('module', 'sfSocialNotify')->
     isParameter('action', 'get')->
   end()->
-  with('response')->begin()->
-    isRedirected()->
-    followRedirect()->
-  end()->
+  with('response')->isRedirected()->followRedirect()->
   with('request')->begin()->
     isParameter('module', 'sfSocialGroup')->
     isParameter('action', 'view')->

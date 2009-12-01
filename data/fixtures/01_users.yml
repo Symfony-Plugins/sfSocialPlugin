@@ -44,47 +44,47 @@ sfGuardUser:
 
 sfGuardUserProfile:
   max:
-    user_id: max
-    email: garakkio@gmail.com
+    user_id:    max
+    email:      garakkio@gmail.com
     first_name: Massimiliano
-    last_name: Arione
-    birthday: 1974-04-01
-    sex: M
-    Location: Rome
-    picture: max.jpg
+    last_name:  Arione
+    birthday:   1974-04-01
+    sex:        M
+    Location:   Rome
+    picture:    max.jpg
   john:
-    user_id: john
-    email: john@example.org
+    user_id:    john
+    email:      john@example.org
     first_name: John
-    sex: M
-    picture: john.png
+    sex:        M
+    picture:    john.png
   mike:
-    user_id: mike
-    email: mike@example.org
+    user_id:    mike
+    email:      mike@example.org
     first_name: Michael
-    sex: M
-    Location: Fairview
-    picture: mike.jpg
+    sex:        M
+    Location:   Fairview
+    picture:    mike.jpg
   danny:
-    user_id: danny
-    email: danny@example.org
+    user_id:    danny
+    email:      danny@example.org
     first_name: Daniel
-    sex: M
-    picture: danny.jpg
+    sex:        M
+    picture:    danny.jpg
   mario:
-    user_id: mario
-    email: mario@example.org
+    user_id:    mario
+    email:      mario@example.org
     first_name: Mario
-    sex: M
-    picture: mario.jpg
+    sex:        M
+    picture:    mario.jpg
   jimmy:
-    user_id: jimmy
-    email: jimmy@example.org
+    user_id:    jimmy
+    email:      jimmy@example.org
     first_name: Practical
-    last_name: Pig
-    sex: M
-    picture: jimmy.jpg
+    last_name:  Pig
+    sex:        M
+    picture:    jimmy.jpg
   anna:
-    user_id: anna
-    email: anna@example.org
-    sex: F
+    user_id:    anna
+    email:      anna@example.org
+    sex:        F

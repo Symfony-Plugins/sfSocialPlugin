@@ -62,8 +62,7 @@ $browser->
     isParameter('module', 'sfSocialContact')->
     isParameter('action', 'acceptrequest')->
   end()->
-  isRedirected()->
-  followRedirect()->
+  with('response')->isRedirected()->followRedirect()->
   with('propel')->begin()->
     check('sfSocialContactRequest', array(
       'user_from' => 1,
@@ -84,8 +83,7 @@ $browser->
     isParameter('module', 'sfSocialContact')->
     isParameter('action', 'denyrequest')->
   end()->
-  isRedirected()->
-  followRedirect()->
+  with('response')->isRedirected()->followRedirect()->
   with('propel')->begin()->
     check('sfSocialContactRequest', array(
       'user_from' => 3,
@@ -112,8 +110,7 @@ $browser->
     isParameter('module', 'sfSocialContact')->
     isParameter('action', 'cancelrequest')->
   end()->
-  isRedirected()->
-  followRedirect()->
+  with('response')->isRedirected()->followRedirect()->
   with('propel')->begin()->
     check('sfSocialContactRequest', array(
       'user_from' => 8,

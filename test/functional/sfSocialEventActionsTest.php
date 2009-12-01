@@ -66,8 +66,7 @@ $browser->
   end()->
 
   info('confirm event')->
-  isRedirected()->
-  followRedirect()->
+  with('response')->isRedirected()->followRedirect()->
   click('confirm', array('sf_social_event_user' => array(
     'confirm' => 2,
   )))->

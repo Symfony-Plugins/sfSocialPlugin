@@ -7,7 +7,6 @@
  */
 function getSfSocialNotifyMessage(sfSocialNotify $notify)
 {
-#var_dump($notify->getModel())  ;die;
   $notify->setModel();
   switch ($notify->getModelName())
   {

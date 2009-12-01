@@ -1,13 +1,13 @@
 sfSocialNotify:
   message_to_max:
-    user_id: max
+    user_id:    max
     model_name: sfSocialMessage
-    model_id: 3
+    model_id:   3
   request_to_max:
-    user_id: max
+    user_id:    max
     model_name: sfSocialContactRequest
-    model_id: 1
+    model_id:   1
   group_invite_for_max:
-    user_id: max
+    user_id:    max
     model_name: sfSocialGroupInvite
-    model_id: 3
+    model_id:   3
