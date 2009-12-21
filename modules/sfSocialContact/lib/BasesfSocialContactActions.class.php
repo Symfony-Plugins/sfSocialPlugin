@@ -31,8 +31,8 @@ class BasesfSocialContactActions extends sfActions
    */
   public function executeSearch(sfWebRequest $request)
   {
-    $text = $request->getParameter('text');
-    $excludeIds = $request->getParameter('exclude_ids');
+    $text = $request->getParameter('q');
+    $excludeIds = urldecode($request->getParameter('exclude_ids'));
     $this->contacts = sfSocialContactPeer::search($this->user, $text, $excludeIds);
   }
 

@@ -104,12 +104,4 @@ class BasesfSocialMessageActions extends sfActions
     }
   }
 
-  /**
-   * Javascript for "Compose a new message"
-   * @param sfRequest $request A request object
-   */
-  public function executeComposejs(sfWebRequest $request)
-  {
-  }
-
 }

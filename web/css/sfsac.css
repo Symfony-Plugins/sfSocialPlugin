@@ -1,5 +1,10 @@
 /* sfSocial AutoComplete */
 
+div#users
+{
+  display: inline;
+}
+
 div#users span
 {
   border: 1px solid #00f;

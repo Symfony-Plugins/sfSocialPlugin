@@ -26,18 +26,18 @@ class sfSocialContactPeer extends BasesfSocialContactPeer
 	/**
    * search user's contacts (possibly exlcuding someones)
    * @param  sfGuardUser $user
-   * @param  string      $text        text to search
-   * @param  string      $exclude_ids ids to exclude (e.g. "4,10,15")
-   * @return array                    sfGuardUser objects
+   * @param  string      $text       text to search
+   * @param  string      $excludeIds ids to exclude (e.g. "4,10,15")
+   * @return array                   sfGuardUser objects
    */
-  public static function search(sfGuardUser $user, $text, $exclude_ids = array())
+  public static function search(sfGuardUser $user, $text, $excludeIds = null)
   {
     $c = new Criteria();
     $c->add(self::USER_FROM , $user->getId());
     $c->add(sfGuardUserPeer::USERNAME, '%' . $text . '%', Criteria::LIKE);
-    if (!empty($exclude_ids))
+    if (!empty($excludeIds) && is_array($ids = explode(',', $excludeIds)))
     {
-      $c->add(sfGuardUserPeer::ID, $exclude_ids, Criteria::NOT_IN);
+      $c->add(sfGuardUserPeer::ID, $ids, Criteria::NOT_IN);
     }
     $c->addAscendingOrderByColumn(sfGuardUserPeer::USERNAME);
     $c->setLimit(30);

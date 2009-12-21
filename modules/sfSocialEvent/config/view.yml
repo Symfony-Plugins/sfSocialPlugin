@@ -1,11 +1,9 @@
 viewSuccess:
   stylesheets:
-    - http://yui.yahooapis.com/2.7.0/build/autocomplete/assets/skins/sam/autocomplete.css
     - /sfSocialPlugin/css/sfsac
+    - /sfSocialPlugin/css/jquery-ac
   javascripts:
-    - http://yui.yahooapis.com/2.7.0/build/yahoo-dom-event/yahoo-dom-event.js
-    - http://yui.yahooapis.com/2.7.0/build/datasource/datasource-min.js
-    - http://yui.yahooapis.com/2.7.0/build/connection/connection-min.js
-    - http://yui.yahooapis.com/2.7.0/build/autocomplete/autocomplete-min.js
+    - /sfSocialPlugin/js/jquery
+    - /sfSocialPlugin/js/jquery-ac
     - /sfSocialPlugin/js/sfsac
-    - /event
+    - /sfSocialPlugin/js/sfsevt

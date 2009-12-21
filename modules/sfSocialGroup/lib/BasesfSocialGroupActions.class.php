@@ -157,12 +157,4 @@ abstract class BasesfSocialGroupActions extends sfActions
     $this->redirect('@sf_social_group?id=' . $invite->getsfSocialGroup()->getId());
   }
 
-  /**
-   * Javascript for "Invite users"
-   * @param sfRequest $request A request object
-   */
-  public function executeInvitejs(sfWebRequest $request)
-  {
-  }
-
 }

@@ -129,12 +129,4 @@ class BasesfSocialEventActions extends sfActions
     $this->redirect('@sf_social_event?id=' . $this->event->getId());
   }
 
-  /**
-   * Javascript for "Invite users"
-   * @param sfRequest $request A request object
-   */
-  public function executeInvitejs(sfWebRequest $request)
-  {
-  }
-
 }

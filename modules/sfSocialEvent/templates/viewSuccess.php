@@ -30,6 +30,8 @@
     <?php echo $form['confirm'] ?>
     <input type="submit" value="<?php echo __('confirm', null, 'sfSocial') ?>" />
     <?php echo $form->renderHiddenFields() ?>
+    <input type="hidden" id="ajax_search" value="<?php echo url_for('@sf_social_contact_search') ?>" />
+    <input type="hidden" id="remove_text" value="<?php echo __('remove', null, 'sfSocial') ?>" />
   </form>
 </div>
 

@@ -23,7 +23,6 @@ To install (from your project's root):
 The package depends on sfGuardPlugin, as users are managed by it. There's also an
 optional dependance from sfThumbnailPlugin (to create thumbnails for profile pictures)
 
-
 ## Usage
 
 Enable plugins in your `ProjectConfiguration` class
@@ -33,7 +32,7 @@ Enable plugins in your `ProjectConfiguration` class
     public function setup()
     {
       // possibly add other plugins here...
-      $this->enablePlugins(array('sfGuardPlugin', 'sfThumbnailPlugin', 'sfSocialPlugin'));
+      $this->enablePlugins(array('sfPropelPlugin', 'sfGuardPlugin', 'sfThumbnailPlugin', 'sfSocialPlugin'));
     }
 
 Enable modules in your application settings
@@ -72,7 +71,6 @@ just to be ready-to-go. You can customize the schema for your needs, or just com
 that part if you already have `sfGuardUserProfile` defined elsewhere.
 In case you customize, note that some templates from sfSocialUser module should be
 adapted (see above).
-
 
 ## Roadmap
 

@@ -41,6 +41,8 @@
     <?php echo $form['user_id'] ?>
     <input type="submit" value="<?php echo __('invite', null, 'sfSocial') ?>" />
     <?php echo $form->renderHiddenFields() ?>
+    <input type="hidden" id="ajax_search" value="<?php echo url_for('@sf_social_contact_search') ?>" />
+    <input type="hidden" id="remove_text" value="<?php echo __('remove', null, 'sfSocial') ?>" />
   </form>
 </div>
 <?php endif ?>
