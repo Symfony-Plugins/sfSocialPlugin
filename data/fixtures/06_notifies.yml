@@ -1,3 +1,12 @@
+<?php
+/* this is needed because of lack of foreign key in sfSocialNotify model */
+$danny = sfGuardUserPeer::retrieveByUsername('danny');
+$anna = sfGuardUserPeer::retrieveByUsername('anna');
+$max = sfGuardUserPeer::retrieveByUsername('max');
+$group4 = sfSocialGroupPeer::retrieveByTitle('webgrrls');
+$crToMax = sfSocialContactRequestPeer::retrieveByUsers($danny, $max);
+$giToMax = sfSocialGroupInvitePeer::retrieveByInvite($group4, $max, $anna);
+?>
 sfSocialNotify:
   message_to_max:
     user_id:    max
@@ -6,8 +15,8 @@ sfSocialNotify:
   request_to_max:
     user_id:    max
     model_name: sfSocialContactRequest
-    model_id:   1
+    model_id:   <?php echo ($crToMax ? $crToMax->getId() : '0') . PHP_EOL ?>
   group_invite_for_max:
     user_id:    max
     model_name: sfSocialGroupInvite
-    model_id:   3
+    model_id:   <?php echo ($giToMax ? $giToMax->getId() : '0') . PHP_EOL ?>

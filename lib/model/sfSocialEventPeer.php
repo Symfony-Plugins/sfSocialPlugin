@@ -19,7 +19,7 @@ class sfSocialEventPeer extends BasesfSocialEventPeer
     $pager->setPeerMethod('doSelectJoinsfGuardUser');
     $pager->setPage($page);
     $pager->init();
-    
+
     return $pager;
   }
 
@@ -41,6 +41,19 @@ class sfSocialEventPeer extends BasesfSocialEventPeer
     $pager->init();
 
     return $pager;
+  }
+
+  /**
+   * get event by its title (warning: title is NOT unique)
+   * @param  string        $title
+   * @return sfSocialEvent
+   */
+  public static function retrieveByTitle($title)
+  {
+    $c = new Criteria;
+    $c->add(self::TITLE, $title);
+
+    return self::doSelectOne($c);
   }
 
 }

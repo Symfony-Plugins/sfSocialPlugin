@@ -9,6 +9,15 @@
  */
 class sfSocialProfileForm extends sfGuardUserForm
 {
+
+  // "sex" choices
+  const SEX_UNKNOWN = '';
+  const SEX_MALE    = 'M';
+  const SEX_FEMALE  = 'F';
+  static public $sexChoices = array(self::SEX_UNKNOWN => 'Unspecified',
+                                    self::SEX_MALE    => 'Male',
+                                    self::SEX_FEMALE  => 'Female');
+
   public function configure()
   {
     parent::configure();
@@ -20,11 +29,11 @@ class sfSocialProfileForm extends sfGuardUserForm
     $years = range(date('Y'), 1900);
     $this->widgetSchema['birthday']->setOption('years', array_combine($years, $years));
 
-    // make "sex" a choice 
+    // make "sex" a choice
     $this->widgetSchema['sex'] = new sfWidgetFormChoice(array('expanded' => false,
-                                                              'choices' => sfSocial::getI18NChoices(sfSocial::$sexChoices)));
+                                                              'choices' => self::$sexChoices));
     $this->validatorSchema['sex'] = new sfValidatorChoice(array('required' => false,
-                                                                'choices' => array_keys(sfSocial::$sexChoices)));
+                                                                'choices' => array_keys(self::$sexChoices)));
 
     // make picture editable
     $path = sfConfig::get('app_sf_social_pic_path', '/sf_social_pics/');

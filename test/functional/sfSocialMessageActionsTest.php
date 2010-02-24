@@ -6,6 +6,16 @@ $browser = new loggedTest(new sfBrowser());
 
 $browser->setTester('propel', 'sfTesterPropel');
 
+$john = sfGuardUserPeer::retrieveByUsername('john');
+$mike = sfGuardUserPeer::retrieveByUsername('mike');
+$danny = sfGuardUserPeer::retrieveByUsername('danny');
+$anna = sfGuardUserPeer::retrieveByUsername('anna');
+$max = sfGuardUserPeer::retrieveByUsername('max');
+
+$c = new Criteria;
+$c->addDescendingOrderByColumn(sfSocialMessagePeer::CREATED_AT);
+$lastMessage = sfSocialMessagePeer::doSelectOne($c);
+
 $browser->
 
   doLogin()->
@@ -41,7 +51,7 @@ $browser->
   click('Reply')->
   with('response')->begin()->
     checkElement('input[name="sf_social_message[subject]"][value="Re: hello pal"]', true)->
-    checkElement('select#sf_social_message_to > option[value="3"][selected="selected"]', true)->
+    checkElement('select#sf_social_message_to > option[value="' . $danny->getId() . '"][selected="selected"]', true)->
   end()->
 
   click('cancel')
@@ -66,7 +76,8 @@ $browser->
     'text'    => '',
     'to'      => array(),
   )))->
-  with('form')->begin()->hasErrors(3)->
+  with('form')->begin()->
+    hasErrors(3)->
     isError('subject', 'required')->
     isError('text', 'required')->
     isError('to', 'required')->
@@ -74,36 +85,32 @@ $browser->
   click('send', array('sf_social_message' => array(
     'subject' => 'a message from functional test',
     'text'    => 'TDD rulez! I found a lot of bugs doing these nice tests.',
-    'to'      => array(1, 2),
+    'to'      => array($john->getId(), $mike->getId()),
   )))->
   with('form')->begin()->hasErrors(false)->
   end()->
   with('propel')->begin()->
     check('sfSocialMessage', array(
-      'user_from' => 8,
+      'user_from' => $max->getId(),
       'subject'   => 'a message from functional test',
       'text'      => 'TDD rulez! I found a lot of bugs doing these nice tests.',
-  ))->
-  end()->
-  with('propel')->begin()->
+    ))->
     check('sfSocialMessageRcpt', array(
-      'msg_id'  => 7,
-      'user_to' => 1,
-      'is_read' => 0,
-  ))->
-  end()->
-  with('propel')->begin()->
+      'msg_id'  => $lastMessage->getId() + 1,
+      'user_to' => $john->getId(),
+      'is_read' => false,
+    ))->
     check('sfSocialMessageRcpt', array(
-      'msg_id'  => 7,
-      'user_to' => 2,
-      'is_read' => 0,
-  ))->
+      'msg_id'  => $lastMessage->getId() + 1,
+      'user_to' => $mike->getId(),
+      'is_read' => false,
+    ))->
   end()->
 
   info('compose a message for a specific recipient')->
   get('/message/compose/to/anna')->
   with('response')->begin()->
-    checkElement('select#sf_social_message_to > option[value="6"][selected="selected"]', true)->
+    checkElement('select#sf_social_message_to > option[value="' . $anna->getId() . '"][selected="selected"]', true)->
   end()->
 
   info('sent messages')->

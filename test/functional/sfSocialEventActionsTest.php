@@ -6,6 +6,13 @@ $browser = new loggedTest(new sfBrowser());
 
 $browser->setTester('propel', 'sfTesterPropel');
 
+$mike = sfGuardUserPeer::retrieveByUsername('mike');
+$luigi = sfGuardUserPeer::retrieveByUsername('luigi');
+$max = sfGuardUserPeer::retrieveByUsername('max');
+$event1 = sfSocialEventPeer::retrieveByTitle('let\'s party!');
+$event2 = sfSocialEventPeer::retrieveByTitle('I love pizza');
+$event4 = sfSocialEventPeer::retrieveByTitle('End of the world');
+
 $browser->
 
   doLogin()->
@@ -25,18 +32,18 @@ $browser->
 
   info('single event')->
   click('End of the world')->
-    with('request')->begin()->
+  with('request')->begin()->
     isParameter('module', 'sfSocialEvent')->
     isParameter('action', 'view')->
   end()->
-    with('response')->begin()->
+  with('response')->begin()->
     checkElement('body h2', '/Event "End of the world"/')->
     checkElement('a[href$="/events"]', '/Back to list/')->
   end()->
 
   info('edit event')->
   click('Edit event')->
-    with('request')->begin()->
+  with('request')->begin()->
     isParameter('module', 'sfSocialEvent')->
     isParameter('action', 'edit')->
   end()->
@@ -45,7 +52,8 @@ $browser->
     'description' => '',
     'location'    => '',
   )))->
-  with('form')->begin()->hasErrors(3)->
+  with('form')->begin()->
+    hasErrors(3)->
     isError('title', 'required')->
     isError('description', 'required')->
     isError('location', 'required')->
@@ -55,14 +63,13 @@ $browser->
     'description' => 'I\'m a believer',
     'location'    => 'Earth',
   )))->
-  with('form')->begin()->hasErrors(false)->
-  end()->
+  with('form')->hasErrors(false)->
   with('propel')->begin()->
     check('sfSocialEvent', array(
       'title'       => 'No more end!',
       'description' => 'I\'m a believer',
       'location'    => 'Earth',
-  ))->
+    ))->
   end()->
 
   info('confirm event')->
@@ -80,35 +87,35 @@ $browser->
 
   info('invite friend')->
   click('invite', array('sf_social_event_invite' => array(
-    'user_id' => 5,
+    'user_id' => $luigi->getId(),
   )))->
   with('form')->begin()->hasErrors(false)->
   end()->
   with('propel')->begin()->
     check('sfSocialEventInvite', array(
-      'event_id'  => 4,
-      'user_id'   => 5,
-      'user_from' => 8,
+      'event_id'  => $event4->getId(),
+      'user_id'   => $luigi->getId(),
+      'user_from' => $max->getId(),
       'replied'   => false,
-  ))->
+    ))->
   end()->
-    followRedirect()->
-    with('response')->begin()->
+  with('response')->isRedirected()->followRedirect()->
+  with('response')->begin()->
     checkElement('ul#invited li', true)->
   end()->
 
   info('invite an user that already confirmed')->
-  get('/event/1')->
+  get('/event/' . $event1->getId())->
   click('invite', array('sf_social_event_invite' => array(
-    'user_id' => 2,
+    'user_id' => $mike->getId(),
   )))->
   with('propel')->begin()->
     check('sfSocialEventInvite', array(
-      'event_id'  => 1,
-      'user_id'   => 2,
-      'user_from' => 8,
+      'event_id'  => $event1->getId(),
+      'user_id'   => $mike->getId(),
+      'user_from' => $max->getId(),
       'replied'   => false,
-  ), false)->
+    ), false)->
   end()->
 
   info('create a new event')->
@@ -122,7 +129,8 @@ $browser->
     'description' => '',
     'location'    => '',
   )))->
-  with('form')->begin()->hasErrors(3)->
+  with('form')->begin()->
+    hasErrors(3)->
     isError('title', 'required')->
     isError('description', 'required')->
     isError('location', 'required')->
@@ -139,11 +147,11 @@ $browser->
       'title'       => 'A new event',
       'description' => 'What about a new event?',
       'location'    => 'Just here!',
-  ))->
+    ))->
   end()->
 
   info('check various invite replies')->
-  get('/event/1')->
+  get('/event/' . $event1->getId())->
   with('response')->begin()->
     checkElement('ul#confirmed li', 1)->
     checkElement('ul#maybe li', 1)->
@@ -152,13 +160,13 @@ $browser->
   end()->
 
   info('past event')->
-  get('/event/1')->
-    with('response')->begin()->
+  get('/event/' . $event1->getId())->
+  with('response')->begin()->
     checkElement('a[href$="/pastevents"]', '/Back to list/')->
   end()->
 
   info('edit forbidden event')->
-  get('/event/2/edit')->
+  get('/event/' . $event2->getId() . '/edit')->
   with('response')->begin()->
     isStatusCode(403)->
   end()

@@ -16,7 +16,7 @@ class sfSocialEventUserForm extends BasesfSocialEventUserForm
     unset($this['created_at']);
 
     // make "confirm" a choice
-    $this->widgetSchema['confirm'] = new sfWidgetFormChoice(array('choices'  => sfSocial::getI18NChoices(sfSocialEventUserPeer::$confirmChoices),
+    $this->widgetSchema['confirm'] = new sfWidgetFormChoice(array('choices'  => sfSocialEventUserPeer::$confirmChoices,
                                                                   'expanded' => true));
     $this->validatorSchema['confirm'] = new sfValidatorChoice(array('required' => false,
                                                                     'choices' => array_keys(sfSocialEventUserPeer::$confirmChoices)));

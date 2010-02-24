@@ -35,6 +35,7 @@
 <?php if ($group->isMember($_user)): ?>
 <h3><?php echo __('Invite', null, 'sfSocial') ?>:</h3>
 <div id="group_invite">
+  <?php if (isset($form['user_id'])): ?>
   <form id="invites" action="<?php echo url_for('@sf_social_group_invite?id=' . $group->getId()) ?>" method="post">
     <?php echo $form['user_id']->renderError() ?>
     <?php echo $form['user_id']->renderLabel() ?>
@@ -44,6 +45,9 @@
     <input type="hidden" id="ajax_search" value="<?php echo url_for('@sf_social_contact_search') ?>" />
     <input type="hidden" id="remove_text" value="<?php echo __('remove', null, 'sfSocial') ?>" />
   </form>
+  <?php else: ?>
+  <?php echo __('You can\'t invite any other user') ?>
+  <?php endif ?>
 </div>
 <?php endif ?>
 

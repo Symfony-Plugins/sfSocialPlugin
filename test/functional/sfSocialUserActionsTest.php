@@ -6,6 +6,8 @@ $browser = new loggedTest(new sfBrowser());
 
 $browser->setTester('propel', 'sfTesterPropel');
 
+$max = sfGuardUserPeer::retrieveByUsername('max');
+
 $browser->
 
   doLogin()->
@@ -42,7 +44,8 @@ $browser->
     'sex'            => 'Z',
     'picture'        => dirname(__FILE__) . '/../fixtures/image_too_big.png',
   )))->
-  with('form')->begin()->hasErrors(4)->
+  with('form')->begin()->
+    hasErrors(4)->
     isError('password', 'invalid')->
     isError('birthday', 'invalid')->
     isError('sex', 'invalid')->
@@ -55,17 +58,16 @@ $browser->
     'location'   => 'Rome',
     'picture'    => dirname(__FILE__) . '/../fixtures/image_ok.png',
   )))->
-  with('form')->begin()->hasErrors(false)->
-  end()->
+  with('form')->hasErrors(false)->
   with('propel')->begin()->
     check('sfGuardUserProfile', array(
-      'user_id'    => 8,
+      'user_id'    => $max->getId(),
       'first_name' => 'Massimiliano',
       'birthday'   => '1974-04-01',
       'sex'        => 'M',
       'location'   => 'Rome',
       'picture'    => 'max.png',
-  ))->
+    ))->
   end()->
 
   info('profile of one of your contacts')->
@@ -103,6 +105,6 @@ $browser->
   get('/user/danny/edit')->
   with('response')->begin()->
     isStatusCode(403)->
-  end()
 
+  end()
 ;

@@ -17,8 +17,21 @@ class sfSocialGroupPeer extends BasesfSocialGroupPeer
     $pager->setPeerMethod('doSelectJoinsfGuardUser');
     $pager->setPage($page);
     $pager->init();
-    
+
     return $pager;
+  }
+
+  /**
+   * get group by its title
+   * @param  string        $title
+   * @return sfSocialGroup
+   */
+  public static function retrieveByTitle($title)
+  {
+    $c = new Criteria;
+    $c->add(self::TITLE, $title);
+
+    return self::doSelectOne($c);
   }
 
 }

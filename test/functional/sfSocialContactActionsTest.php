@@ -6,6 +6,15 @@ $browser = new loggedTest(new sfBrowser());
 
 $browser->setTester('propel', 'sfTesterPropel');
 
+$john = sfGuardUserPeer::retrieveByUsername('john');
+$danny = sfGuardUserPeer::retrieveByUsername('danny');
+$anna = sfGuardUserPeer::retrieveByUsername('anna');
+$julie = sfGuardUserPeer::retrieveByUsername('julie');
+$max = sfGuardUserPeer::retrieveByUsername('max');
+$contact1 = sfSocialContactPeer::retrieveByUsers($anna, $julie);
+$request1 = sfSocialContactRequestPeer::retrieveByUsers($danny, $max);
+$request4 = sfSocialContactRequestPeer::retrieveByUsers($john, $anna);
+
 $browser->
 
   doLogin()->
@@ -36,17 +45,16 @@ $browser->
     isParameter('action', 'sendrequest')->
   end()->
   click('send', array('sf_social_contact_request' => array(
-    'user_to' => 6,
+    'user_to' => $anna->getId(),
     'message' => 'can I be you friend?'
   )))->
-  with('form')->begin()->hasErrors(false)->
-  end()->
+  with('form')->hasErrors(false)->
   with('propel')->begin()->
     check('sfSocialContactRequest', array(
-      'user_from' => 8,
-      'user_to'   => 6,
-      'accepted'  => 0,
-  ))->
+      'user_from' => $max->getId(),
+      'user_to'   => $anna->getId(),
+      'accepted'  => false,
+    ))->
   end()->
 
   info('list of received requests')->
@@ -65,16 +73,14 @@ $browser->
   with('response')->isRedirected()->followRedirect()->
   with('propel')->begin()->
     check('sfSocialContactRequest', array(
-      'user_from' => 1,
-      'user_to'   => 8,
-      'accepted'  => 1,
-  ))->
-  end()->
-  with('propel')->begin()->
+      'user_from' => $john->getId(),
+      'user_to'   => $max->getId(),
+      'accepted'  => true,
+    ))->
     check('sfSocialContact', array(
-      'user_from' => 8,
-      'user_to'   => 1,
-  ))->
+      'user_from' => $max->getId(),
+      'user_to'   => $john->getId(),
+    ))->
   end()->
 
   info('deny a request')->
@@ -86,15 +92,13 @@ $browser->
   with('response')->isRedirected()->followRedirect()->
   with('propel')->begin()->
     check('sfSocialContactRequest', array(
-      'user_from' => 3,
-      'user_to'   => 8,
-  ), false)->
-  end()->
-  with('propel')->begin()->
+      'user_from' => $danny->getId(),
+      'user_to'   => $max->getId(),
+    ), false)->
     check('sfSocialContact', array(
-      'user_from' => 8,
-      'user_to'   => 3,
-  ), false)->
+      'user_from' => $max->getId(),
+      'user_to'   => $danny->getId(),
+    ), false)->
   end()->
 
   info('list of sent requests')->
@@ -113,25 +117,25 @@ $browser->
   with('response')->isRedirected()->followRedirect()->
   with('propel')->begin()->
     check('sfSocialContactRequest', array(
-      'user_from' => 8,
-      'user_to'   => 6,
-  ), false)->
+      'user_from' => $max->getId(),
+      'user_to'   => $anna->getId(),
+    ), false)->
   end()->
 
   info('unauthorized contact removing')->
-  get('/contact/delete/1')->
+  get('/contact/delete/' . $contact1->getId())->
   with('response')->begin()->
     isStatusCode(403)->
   end()->
 
   info('unauthorized request accepting')->
-  get('/request/accept/4')->
+  get('/request/accept/' .  $request4->getId())->
   with('response')->begin()->
     isStatusCode(403)->
   end()->
 
   info('unauthorized request denying')->
-  get('/request/deny/4')->
+  get('/request/deny/' . $request4->getId())->
   with('response')->begin()->
     isStatusCode(403)->
 
