@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="en" target-language="es" datatype="plaintext" original="sfSocial" date="2010-03-12T15:34:11Z" product-name="messages">
+    <header/>
+    <body>
+      <trans-unit>
+        <source>[1]1 shared contact[2,+Inf]%1% shared contacts</source>
+        <target>[1]1 contacto en común[2,+Inf]%1% contactos en común</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Send a contact request</source>
+        <target>Envia una solicitud de contacto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>cancel</source>
+        <target>anula</target>
+      </trans-unit>
+      <trans-unit>
+        <source>send</source>
+        <target>envia</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Contacts list</source>
+        <target>Lista de contactos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>No contacts</source>
+        <target>Ningún contacto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>added %1% ago</source>
+        <target>añadido hace %1%</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Remove</source>
+        <target>Elimina</target>
+      </trans-unit>
+      <trans-unit>
+        <source>List of received requests</source>
+        <target>Lista de peticiones recibidas</target>
+      </trans-unit>
+      <trans-unit>
+        <source>List of sent requests</source>
+        <target>Lista de peticiones enviadas</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Send request</source>
+        <target>Envia petición</target>
+      </trans-unit>
+      <trans-unit>
+        <source>List of received contact requests</source>
+        <target>Lista de peticiones de contacto recibidas</target>
+      </trans-unit>
+      <trans-unit>
+        <source>No request</source>
+        <target>Ninguna petición</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Accept</source>
+        <target>Acepta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Deny</source>
+        <target>Rechaza</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Return to list</source>
+        <target>Vuelve a la lista</target>
+      </trans-unit>
+      <trans-unit>
+        <source>List of sent contact requests</source>
+        <target>Lista de peticiones de contacto enviadas</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Events</source>
+        <target>Eventos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>No events yet</source>
+        <target>No hay eventos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>in</source>
+        <target>en??</target>
+      </trans-unit>
+      <trans-unit>
+        <source>by</source>
+        <target>de</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Create a new event</source>
+        <target>Crea nuevo evento</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New event</source>
+        <target>Nuevo evento</target>
+      </trans-unit>
+      <trans-unit>
+        <source>create</source>
+        <target>crea</target>
+      </trans-unit>
+      <trans-unit>
+        <source>No past events yet</source>
+        <target>No hay eventos pasados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Past events</source>
+        <target>Eventos pasados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Event &amp;quot;%1%&amp;quot;</source>
+        <target>Evento &amp;quot;%1%&amp;quot;</target>
+      </trans-unit>
+      <trans-unit>
+        <source>When</source>
+        <target>Cuando</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Edit event</source>
+        <target>Modifica evento</target>
+      </trans-unit>
+      <trans-unit>
+        <source>confirm</source>
+        <target>confirma</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Invite</source>
+        <target>Invita</target>
+      </trans-unit>
+      <trans-unit>
+        <source>invite</source>
+        <target>invita</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Invited users</source>
+        <target>Usuarios invitados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>No invited users</source>
+        <target>Ningún usuario invitado</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Awaiting reply</source>
+        <target>Esperando respuesta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Back to list</source>
+        <target>Vuelve a la lista</target>
+      </trans-unit>
+      <trans-unit>
+        <source>No invite received yet</source>
+        <target>Ninguna invitación recibida</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Invites received for events</source>
+        <target>Invitaciones recibidas para eventos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>from</source>
+        <target>de??</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Invite to event &amp;quot;%1%&amp;quot;</source>
+        <target>Invitación al evento &amp;quot;%1%&amp;quot;</target>
+      </trans-unit>
+      <trans-unit>
+        <source>User invited</source>
+        <target>Usuario invitado</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Edit event &amp;quot;%1%&amp;quot;</source>
+        <target>Modifica evento &amp;quot;%1%&amp;quot;</target>
+      </trans-unit>
+      <trans-unit>
+        <source>edit</source>
+        <target>modifica</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Groups</source>
+        <target>Grupos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>No groups yet</source>
+        <target>No hay grupos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Your groups</source>
+        <target>Tus grupos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Create a new group</source>
+        <target>Crea un nuevo grupo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Group &amp;quot;%1%&amp;quot;</source>
+        <target>Grupo &amp;quot;%1%&amp;quot;</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Edit group</source>
+        <target>Modifica grupo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Accept invite</source>
+        <target>Acepta invitación</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Deny invite</source>
+        <target>Rechaza invitación</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Join this group</source>
+        <target>Unete a este grupo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Members</source>
+        <target>Miembros</target>
+      </trans-unit>
+      <trans-unit>
+        <source>No members</source>
+        <target>Ningún miembro</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Edit group &amp;quot;%1%&amp;quot;</source>
+        <target>Modifica grupo &amp;quot;%1%&amp;quot;</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New group</source>
+        <target>Nuevo grupo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>You're not member of any group</source>
+        <target>No eres miembro de ningún grupo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>All groups</source>
+        <target>Todos los grupos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Message successfully sent to</source>
+        <target>Mensaje enviado a</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Messages received</source>
+        <target>Mensajes recibidos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>No messages received yet</source>
+        <target>Ningún mensaje recibido</target>
+      </trans-unit>
+      <trans-unit>
+        <source>unread messages</source>
+        <target>mensajes para leer</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Sent messages</source>
+        <target>Mensajes enviados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Compose a new message</source>
+        <target>Escribe un nuevo mensaje</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Reply</source>
+        <target>Responde</target>
+      </trans-unit>
+      <trans-unit>
+        <source>No sent messages yet</source>
+        <target>Ningún mensaje enviado</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Received messages</source>
+        <target>Mensajes recibidos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Message sent from you to</source>
+        <target>Mensaje enviado por tí para</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Date</source>
+        <target>Fecha</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Subject</source>
+        <target>Asunto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>remove</source>
+        <target>elimina</target>
+      </trans-unit>
+      <trans-unit>
+        <source>it's you!</source>
+        <target>¡eres tu!</target>
+      </trans-unit>
+      <trans-unit>
+        <source>is your contact</source>
+        <target>es tu contacto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>A contact request is pending</source>
+        <target>Una petición de contacto pendiente</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Add %1% to your contacts</source>
+        <target>Añade a %1% en tus contactos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Name</source>
+        <target>Nombre</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Birthday</source>
+        <target>Fecha de nacimiento</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Sex</source>
+        <target>Sexo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Location</source>
+        <target>Localidad</target>
+      </trans-unit>
+      <trans-unit>
+        <source>[1]1 contact[2,+Inf]%1% contacts</source>
+        <target>[1]1 contacto[2,+Inf]%1% contactos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>See all contacts</source>
+        <target>Mira todos los contactos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>member of groups</source>
+        <target>miembro de los grupos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Edit profile</source>
+        <target>Modifica perfil</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Contacts of %1%</source>
+        <target>Contactos de %1%</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Back to %1%'s profile</source>
+        <target>Vuelve al perfil de %1%</target>
+      </trans-unit>
+      <trans-unit>
+        <source>messages</source>
+        <target>mensajes</target>
+      </trans-unit>
+      <trans-unit>
+        <source>contacts</source>
+        <target>contactos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>events</source>
+        <target>eventos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>groups</source>
+        <target>grupos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Title</source>
+        <target>Título</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Description</source>
+        <target>Descripción</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Confirm</source>
+        <target>Confirma</target>
+      </trans-unit>
+      <trans-unit>
+        <source>maybe</source>
+        <target>puede ser</target>
+      </trans-unit>
+      <trans-unit>
+        <source>yes</source>
+        <target>si</target>
+      </trans-unit>
+      <trans-unit>
+        <source>no</source>
+        <target>no</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Start</source>
+        <target>Inicio</target>
+      </trans-unit>
+      <trans-unit>
+        <source>End</source>
+        <target>Fin</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Text</source>
+        <target>Texto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>To</source>
+        <target>A</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Message</source>
+        <target>Mensaje</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Male</source>
+        <target>Hombre</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Female</source>
+        <target>Mujer</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Unspecified</source>
+        <target>No especificado</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Invalid.</source>
+        <target>No válido.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Required.</source>
+        <target>Obligatorio.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Invalid.</source>
+        <target>No válido.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Error</source>
+        <target>Error</target>
+      </trans-unit>
+      <trans-unit>
+        <source>User is already a contact.</source>
+        <target>El usuario ya es tu contacto.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Request already sent.</source>
+        <target>Petición ya enviada.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>received %1% ago</source>
+        <target>recibida hace %1%</target>
+      </trans-unit>
+      <trans-unit>
+        <source>You received a %1% from %2%</source>
+        <target>Has recibido un %1% de %2%</target>
+      </trans-unit>
+      <trans-unit>
+        <source>message</source>
+        <target>mensaje</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Send a message to %1%</source>
+        <target>Escribe un mensaje a %1%</target>
+      </trans-unit>
+      <trans-unit>
+        <source>%day% from %starttime% to %endtime%</source>
+        <target>el dia %day% desde las %starttime% hasta las %endtime%</target>
+      </trans-unit>
+      <trans-unit>
+        <source>from %startdaytime% to %enddatetime%</source>
+        <target>del %startdaytime% al %enddatetime%</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Will partecipate</source>
+        <target>Participarán</target>
+      </trans-unit>
+      <trans-unit>
+        <source>None yet</source>
+        <target>Todavía ninguno</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Maybe will partecipate</source>
+        <target>Puede que participen</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Will not partecipate</source>
+        <target>No participarán</target>
+      </trans-unit>
+      <trans-unit>
+        <source>User</source>
+        <target>Usuario</target>
+      </trans-unit>
+      <trans-unit>
+        <source>You received a %1% from %2%</source>
+        <target>Has recibido un %1% de %2%</target>
+      </trans-unit>
+      <trans-unit>
+        <source>You received an %1% from %2%</source>
+        <target>Has recibido un %1% de %2%</target>
+      </trans-unit>
+      <trans-unit>
+        <source>contact request</source>
+        <target>petición de contacto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>invite to event %event%</source>
+        <target>invitación al evento %event%</target>
+      </trans-unit>
+      <trans-unit>
+        <source>invite to join group %group%</source>
+        <target>invitación para unirte al grupo %group%</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Contact removed.</source>
+        <target>Contacto eliminado.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Contact request sent.</source>
+        <target>Petición de contacto enviada.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Contact request accepted.</source>
+        <target>Petición de contacto aceptada.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Contact request refused.</source>
+        <target>Petición de contacto rechazada.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Contact request canceled.</source>
+        <target>Petición de contacto cancelada.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Group modified.</source>
+        <target>Grupo modificado.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Group created.</source>
+        <target>Grupo creado.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>%1% users invited.</source>
+        <target>%1% usuarios invitados.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Invite refused.</source>
+        <target>Invitación rechazada.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Event created.</source>
+        <target>Evento creado.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Event modified.</source>
+        <target>Evento modificado.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Profile saved.</source>
+        <target>Perfil guardado.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>sent %1% ago</source>
+        <target>enviada hace %1%</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -119,7 +119,7 @@ $browser->
 
   info('click on notify of message')->
   get('/')->
-  click('message')->
+  click('ul#notifies a')->
   with('request')->begin()->
     isParameter('module', 'sfSocialNotify')->
     isParameter('action', 'get')->
@@ -139,7 +139,7 @@ $browser->
 
   info('click on notify of contact request')->
   get('/')->
-  click('contact request')->
+  click('ul#notifies a')->
   with('request')->begin()->
     isParameter('module', 'sfSocialNotify')->
     isParameter('action', 'get')->
@@ -159,7 +159,7 @@ $browser->
 
   info('click on notify of group invite')->
   get('/')->
-  click('invite to join group webgrrls')->
+  click('ul#notifies a')->
   with('request')->begin()->
     isParameter('module', 'sfSocialNotify')->
     isParameter('action', 'get')->

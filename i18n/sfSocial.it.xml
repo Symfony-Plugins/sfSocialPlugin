@@ -154,7 +154,7 @@
       </trans-unit>
       <trans-unit>
         <source>Invites received for events</source>
-        <target>Inviti ricevuto per gli eventi</target>
+        <target>Inviti ricevuti per gli eventi</target>
       </trans-unit>
       <trans-unit>
         <source>from</source>
@@ -162,7 +162,7 @@
       </trans-unit>
       <trans-unit>
         <source>Invite to event &amp;quot;%1%&amp;quot;</source>
-        <target>Invit all'evento &amp;quot;%1%&amp;quot;</target>
+        <target>Invito all'evento &amp;quot;%1%&amp;quot;</target>
       </trans-unit>
       <trans-unit>
         <source>User invited</source>
@@ -425,10 +425,6 @@
         <target>Obbligatorio.</target>
       </trans-unit>
       <trans-unit>
-        <source>Invalid.</source>
-        <target>Non valido.</target>
-      </trans-unit>
-      <trans-unit>
         <source>Error</source>
         <target>Errore</target>
       </trans-unit>
@@ -541,7 +537,7 @@
         <target>Invito rifiutato.</target>
       </trans-unit>
       <trans-unit>
-        <source>Event created</source>
+        <source>Event created.</source>
         <target>Evento creato.</target>
       </trans-unit>
       <trans-unit>
