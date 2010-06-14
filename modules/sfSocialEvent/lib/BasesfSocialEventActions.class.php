@@ -95,7 +95,7 @@ class BasesfSocialEventActions extends sfActions
   {
     $this->event = sfSocialEventPeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($this->event, 'event not found');
-    $this->forwardUnless($this->event->isAdmin($this->user), 'sfGuardAuth', 'secure');
+    $this->forwardUnless($this->event->isAdmin($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     $this->form = new sfSocialEventForm($this->event, array('user' => $this->user));
     if ($request->isMethod('post'))
     {
@@ -117,7 +117,7 @@ class BasesfSocialEventActions extends sfActions
     $values = $request->getParameter('sf_social_event_invite');
     $this->event = sfSocialEventPeer::retrieveByPK($values['event_id']);
     $this->forward404Unless($this->event, 'event not found');
-    $this->forwardUnless($this->event->isAdmin($this->user), 'sfGuardAuth', 'secure');
+    $this->forwardUnless($this->event->isAdmin($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     $this->form = new sfSocialEventInviteForm(null, array('user' => $this->user,
                                                           'event' => $this->event));
     if ($this->form->bindAndSave($values))

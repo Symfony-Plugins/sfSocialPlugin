@@ -93,7 +93,7 @@ sfsac =
     span.append(name);
     // add a remove link ("X") with id inside
     var a = $('<a href="#' + id + '" title="' + sfsac.remove_txt +'">');
-    a.append(document.createTextNode('x'));
+    a.append('x');
     a.click(sfsac.remove);
     span.append(a);
     // add hidden input with id inside

@@ -2,7 +2,7 @@
 
 require_once dirname(__FILE__) . '/../bootstrap/unit.php';
 
-$t = new lime_test(2, new lime_output_color());
+$t = new lime_test(2, array('options' => new lime_output_color(), 'error_reporting' => true));
 $t->comment('sfSocialEvent->getWhen()');
 $event = new sfSocialEvent;
 $event->setStart('2009-01-10 11:00:00');

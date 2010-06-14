@@ -16,7 +16,7 @@
       <?php echo link_to($message->getSubject(), '@sf_social_message_sentread?id=' . $message->getId()) ?>
     </div>
     <div class="text">
-      <?php echo link_to(truncate_text($message->getText(), 50), '@sf_social_message_read?id=' . $message->getId()) ?>
+      <?php echo link_to(truncate_text($message->getText(), 50), '@sf_social_message_sentread?id=' . $message->getId()) ?>
     </div>
     <div class="to">
       <?php echo link_to(image_tag($rcpt->getsfGuardUser()->getThumb(), 'title=' . $rcpt->getsfGuardUser()), '@sf_social_user?username=' . $rcpt->getsfGuardUser()) ?>

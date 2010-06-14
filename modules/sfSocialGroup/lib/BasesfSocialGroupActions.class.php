@@ -59,7 +59,7 @@ abstract class BasesfSocialGroupActions extends sfActions
   {
     $this->group = sfSocialGroupPeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($this->group, 'group not found');
-    $this->forwardUnless($this->group->isAdmin($this->user), 'sfGuardAuth', 'secure');
+    $this->forwardUnless($this->group->isAdmin($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     $this->form = new sfSocialGroupForm($this->group, array('user' => $this->user));
     if ($request->isMethod('post'))
     {
@@ -98,7 +98,7 @@ abstract class BasesfSocialGroupActions extends sfActions
     $values = $request->getParameter('sf_social_group_invite');
     $this->group = sfSocialGroupPeer::retrieveByPK($values['group_id']);
     $this->forward404Unless($this->group, 'group not found');
-    $this->forwardUnless($this->group->isAdmin($this->user), 'sfGuardAuth', 'secure');
+    $this->forwardUnless($this->group->isAdmin($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     $this->form = new sfSocialGroupInviteForm(null, array('user' => $this->user,
                                                           'group' => $this->group));
     if ($this->form->bindAndSave($values))
@@ -133,7 +133,7 @@ abstract class BasesfSocialGroupActions extends sfActions
   {
     $invite = sfSocialGroupInvitePeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($invite, 'invite not found');
-    $this->forwardUnless($invite->getUserId() == $this->user->getId(), 'sfGuardAuth', 'secure');
+    $this->forwardUnless($invite->getUserId() == $this->user->getId(), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     if ($invite->getsfSocialGroup()->join($this->user, $invite))
     {
       $this->getUser()->setFlash('notice', 'Group joined.');
@@ -149,7 +149,7 @@ abstract class BasesfSocialGroupActions extends sfActions
   {
     $invite = sfSocialGroupInvitePeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($invite, 'invite not found');
-    $this->forwardUnless($invite->getUserId() == $this->user->getId(), 'sfGuardAuth', 'secure');
+    $this->forwardUnless($invite->getUserId() == $this->user->getId(), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     if ($invite->refuse())
     {
       $this->getUser()->setFlash('notice', 'Invite refused.');

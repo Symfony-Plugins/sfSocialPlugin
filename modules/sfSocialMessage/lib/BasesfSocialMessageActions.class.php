@@ -44,8 +44,8 @@ class BasesfSocialMessageActions extends sfActions
   {
     $this->message = sfSocialMessagePeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($this->message, 'message not found');
+    $this->forwardUnless($this->message->checkUserTo($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     $this->rcpts = $this->message->getsfSocialMessageRcpts();
-    $this->forwardUnless($this->message->checkUserTo($this->user), 'sfGuardAuth', 'secure');
     $this->message->read($this->user);
   }
 
@@ -57,7 +57,7 @@ class BasesfSocialMessageActions extends sfActions
   {
     $this->message = sfSocialMessagePeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($this->message, 'message not found');
-    $this->forwardUnless($this->message->checkUserFrom($this->user), 'sfGuardAuth', 'secure');
+    $this->forwardUnless($this->message->checkUserFrom($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     $this->rcpts = $this->message->getsfSocialMessageRcpts();
   }
 
@@ -74,7 +74,7 @@ class BasesfSocialMessageActions extends sfActions
     {
       $message = sfSocialMessagePeer::retrieveByPK($replyTo);
       $this->forward404Unless($message, 'message not found');
-      $this->forwardUnless($message->checkUserTo($this->user), 'sfGuardAuth', 'secure');
+      $this->forwardUnless($message->checkUserTo($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
       $this->form = new sfSocialMessageForm(null, array('user' => $this->user,
                                                         'reply_to' => $message));
     }

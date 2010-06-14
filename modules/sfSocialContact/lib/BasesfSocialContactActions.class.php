@@ -90,7 +90,7 @@ class BasesfSocialContactActions extends sfActions
   {
     $request = sfSocialContactRequestPeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($request, 'request not found');
-    $this->forwardUnless($request->checkUserTo($this->user), 'sfGuardAuth', 'secure');
+    $this->forwardUnless($request->checkUserTo($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     $request->accept();
     $this->getUser()->addContact($request->getsfGuardUserRelatedByUserFrom());
     $this->getUser()->setFlash('notice', 'Contact request accepted.');
@@ -105,7 +105,7 @@ class BasesfSocialContactActions extends sfActions
   {
     $request = sfSocialContactRequestPeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($request, 'request not found');
-    $this->forwardUnless($request->checkUserTo($this->user), 'sfGuardAuth', 'secure');
+    $this->forwardUnless($request->checkUserTo($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     $request->refuse();
     $this->getUser()->setFlash('notice', 'Contact request refused.');
     $this->redirect('@sf_social_contact_requests');
@@ -119,7 +119,7 @@ class BasesfSocialContactActions extends sfActions
   {
     $request = sfSocialContactRequestPeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($request, 'request not found');
-    $this->forwardUnless($request->checkUserFrom($this->user), 'sfGuardAuth', 'secure');
+    $this->forwardUnless($request->checkUserFrom($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     $request->cancel();
     $this->getUser()->setFlash('notice', 'Contact request canceled.');
     $this->redirect('@sf_social_contact_sentrequests');
@@ -133,7 +133,7 @@ class BasesfSocialContactActions extends sfActions
   {
     $contact = sfSocialContactPeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($contact, 'contact not found');
-    $this->forwardUnless($contact->checkUserFrom($this->user), 'sfGuardAuth', 'secure');
+    $this->forwardUnless($contact->checkUserFrom($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     $contact->delete();
     $this->getUser()->setFlash('notice', 'Contact removed.');
     $this->redirect('@sf_social_contact_list');

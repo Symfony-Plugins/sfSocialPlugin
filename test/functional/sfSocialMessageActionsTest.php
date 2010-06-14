@@ -30,12 +30,8 @@ $browser->
     isStatusCode(200)->
     checkElement('body h2', '/Messages received/')->
     checkElement('ul#list li', 5)->
-    #checkElement('ul#list li[class*="unread"]', true, array('position' => 2))->
-  end();
-
-$browser->test()->is($browser->getResponseDom()->getElementsByTagName('li')->item(3)->getAttribute('class'), ' unread', 'message is unread');
-
-$browser->
+    checkElement('ul#list li.unread', true, array('position' => 2))->
+  end()->
 
   info('click on a message')->
   click('hello pal')->
@@ -53,14 +49,10 @@ $browser->
     checkElement('input[name="sf_social_message[subject]"][value="Re: hello pal"]', true)->
     checkElement('select#sf_social_message_to > option[value="' . $danny->getId() . '"][selected="selected"]', true)->
   end()->
-
-  click('cancel')
-;
-
-
-$browser->test()->is($browser->getResponseDom()->getElementsByTagName('li')->item(2)->getAttribute('class'), 'a read', 'message is now read');
-
-$browser->
+  click('cancel')->
+  with('response')->begin()->
+    checkElement('ul#list li.read', true, array('position' => 2))->
+  end()->
 
   info('compose a new message')->
   click('Compose a new message')->

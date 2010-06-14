@@ -78,8 +78,7 @@ $browser->
   click('invite', array('sf_social_group_invite' => array(
     'user_id' => array($john->getId(), $mike->getId()),
   )))->
-  with('form')->begin()->hasErrors(false)->
-  end()->
+  with('form')->hasErrors(false)->
   with('propel')->begin()->
     check('sfSocialNotify', array(
       'user_id'    => $john->getId(),
@@ -100,8 +99,7 @@ $browser->
   click('invite', array('sf_social_event_invite' => array(
     'user_id' => array($john->getId(), $luigi->getId()),
   )))->
-  with('form')->begin()->hasErrors(false)->
-  end()->
+  with('form')->hasErrors(false)->
   with('propel')->begin()->
     check('sfSocialNotify', array(
       'user_id'    => $john->getId(),

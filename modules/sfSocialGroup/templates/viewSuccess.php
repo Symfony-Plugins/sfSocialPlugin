@@ -46,7 +46,7 @@
     <input type="hidden" id="remove_text" value="<?php echo __('remove', null, 'sfSocial') ?>" />
   </form>
   <?php else: ?>
-  <?php echo __('You can\'t invite any other user') ?>
+  <?php echo __('You can\'t invite any other user', null, 'sfSocial') ?>
   <?php endif ?>
 </div>
 <?php endif ?>

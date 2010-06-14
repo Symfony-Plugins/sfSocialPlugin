@@ -15,8 +15,8 @@ sfSocialNotify:
   request_to_max:
     user_id:    max
     model_name: sfSocialContactRequest
-    model_id:   <?php echo ($crToMax ? $crToMax->getId() : '0') . PHP_EOL ?>
+    model_id:   '<?php echo ($crToMax ? $crToMax->getId() : '0') ?>'
   group_invite_for_max:
     user_id:    max
     model_name: sfSocialGroupInvite
-    model_id:   <?php echo ($giToMax ? $giToMax->getId() : '0') . PHP_EOL ?>
+    model_id:   '<?php echo ($giToMax ? $giToMax->getId() : '0') ?>'

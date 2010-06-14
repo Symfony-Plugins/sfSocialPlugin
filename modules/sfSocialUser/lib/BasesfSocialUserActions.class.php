@@ -41,7 +41,7 @@ abstract class BasesfSocialUserActions extends sfActions
   {
     $pageUser = sfGuardUserPeer::retrieveByUsername($request->getParameter('username'));
     $this->forward404Unless($pageUser, 'user not found');
-    $this->forwardUnless($this->user->getId() == $pageUser->getId(), 'sfGuardAuth', 'secure');
+    $this->forwardUnless($this->user->getId() == $pageUser->getId(), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     $this->form = new sfSocialProfileForm($this->user);
     if ($request->isMethod('post'))
     {
