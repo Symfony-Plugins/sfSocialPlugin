@@ -42,10 +42,9 @@ class BasesfSocialMessageActions extends sfActions
    */
   public function executeRead(sfWebRequest $request)
   {
-    $this->message = sfSocialMessagePeer::retrieveByPK($request->getParameter('id'));
-    $this->forward404Unless($this->message, 'message not found');
+    $this->message = $this->getRoute()->getObject();
     $this->forwardUnless($this->message->checkUserTo($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
-    $this->rcpts = $this->message->getsfSocialMessageRcpts();
+    $this->rcpts = $this->message->getRcpts();
     $this->message->read($this->user);
   }
 
@@ -55,10 +54,9 @@ class BasesfSocialMessageActions extends sfActions
    */
   public function executeSentread(sfWebRequest $request)
   {
-    $this->message = sfSocialMessagePeer::retrieveByPK($request->getParameter('id'));
-    $this->forward404Unless($this->message, 'message not found');
+    $this->message = $this->getRoute()->getObject();
     $this->forwardUnless($this->message->checkUserFrom($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
-    $this->rcpts = $this->message->getsfSocialMessageRcpts();
+    $this->rcpts = $this->message->getRcpts();
   }
 
   /**
@@ -90,7 +88,7 @@ class BasesfSocialMessageActions extends sfActions
       $this->form = new sfSocialMessageForm(null, array('user' => $this->user));
     }
     // send message
-    if ($request->isMethod('post'))
+    if ($request->isMethod(sfRequest::POST))
     {
       $values = $request->getParameter($this->form->getName());
       if ($this->form->bindAndSave($values))

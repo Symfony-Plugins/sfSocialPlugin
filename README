@@ -21,7 +21,7 @@ To install (from your project's root):
     svn co http://svn.symfony-project.com/plugins/sfSocialPlugin/trunk sfSocialPlugin
 
 The package depends on sfGuardPlugin, as users are managed by it. There's also an
-optional dependance from sfThumbnailPlugin (to create thumbnails for profile pictures)
+optional dependance on sfThumbnailPlugin (to create thumbnails for profile pictures)
 
 ## Usage
 

@@ -10,9 +10,9 @@
 <?php foreach ($pager->getResults() as $user): ?>
   <li class="<?php $bRow = empty($bRow) ? print('a') : false ?>">
     <?php /* escaping strategy safety */ $_user = $user instanceof sfGuardUser ? $user : $user->getRawValue() ?>
-    <?php echo link_to(image_tag($_user->getThumb(), 'alt=' . $_user . ' title=' . $_user . ' class=left'), '@sf_social_user?username=' . $_user) ?>
+    <?php echo link_to(image_tag($_user->getThumb(), 'alt=' . $_user . ' title=' . $_user . ' class=left'), 'sf_social_user', $_user) ?>
     <div>
-      <?php echo link_to($_user, '@sf_social_user?username=' . $_user) ?>
+      <?php echo link_to($_user, 'sf_social_user', $_user) ?>
     </div>
   </li>
 <?php endforeach ?>

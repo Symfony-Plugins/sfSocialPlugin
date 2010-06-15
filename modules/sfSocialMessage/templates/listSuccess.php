@@ -13,17 +13,17 @@
 
 <ul id="list">
 <?php foreach ($pager->getResults() as $rcpt): ?>
-<?php $message = $rcpt->getSfSocialMessage() ?>
+<?php $message = $rcpt->getMessage() ?>
   <li class="<?php $bRow = empty($bRow) ? print('a') : false ?> <?php echo $rcpt->getIsRead() ? 'read' : 'unread' ?>">
     <div class="date"><?php echo format_datetime($message->getCreatedAt()) ?></div>
     <div class="subject">
-      <?php echo link_to($message->getSubject(), '@sf_social_message_read?id=' . $message->getId()) ?>
+      <?php echo link_to($message->getSubject(), 'sf_social_message_read', $message) ?>
     </div>
     <div class="text">
-      <?php echo link_to(truncate_text($message->getText(), 50), '@sf_social_message_read?id=' . $message->getId()) ?>
+      <?php echo link_to(truncate_text($message->getText(), 50), 'sf_social_message_read', $message) ?>
     </div>
     <div class="from">
-      <?php echo link_to(image_tag($message->getsfGuardUser()->getThumb(), 'alt=' . $message->getsfGuardUser() . ' title=' . $message->getsfGuardUser()), '@sf_social_user?username=' . $message->getsfGuardUser()) ?>
+      <?php echo link_to(image_tag($message->getFrom()->getThumb(), 'alt=' . $message->getFrom() . ' title=' . $message->getFrom()), 'sf_social_user', $message->getFrom()) ?>
     </div>
   </li>
 <?php endforeach ?>

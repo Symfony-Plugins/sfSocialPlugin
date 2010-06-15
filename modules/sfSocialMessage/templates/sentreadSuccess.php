@@ -1,7 +1,7 @@
 <h2>
   <?php echo __('Message sent from you to', null, 'sfSocial') ?>:
   <?php foreach ($rcpts as $rcpt): ?>
-  <?php echo link_to($rcpt->getSfGuardUser(), '@sf_social_user?username=' . $rcpt->getSfGuardUser()) ?>
+  <?php echo link_to($rcpt->getTo(), 'sf_social_user', $rcpt->getTo()) ?>
   <?php endforeach ?>
 </h2>
 <h3><?php echo __('Date', null, 'sfSocial') ?>: <?php echo $message->getCreatedAt() ?></h3>

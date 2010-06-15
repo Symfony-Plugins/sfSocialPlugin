@@ -112,4 +112,11 @@ class sfSocialGroup extends BasesfSocialGroup
     return $this->getsfSocialGroupInvitesJoinsfGuardUserRelatedByUserId($c);
   }
 
+  /**
+   * @return array
+   */
+  public function getUsers()
+  {
+    return $this->getsfSocialGroupUsers();
+  }
 }

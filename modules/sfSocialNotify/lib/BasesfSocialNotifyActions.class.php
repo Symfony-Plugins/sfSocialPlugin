@@ -16,21 +16,20 @@ class BasesfSocialNotifyActions extends sfActions
    */
   public function executeGet(sfWebRequest $request)
   {
-    $notify = sfSocialNotifyPeer::retrieveByPK($request->getParameter('id'));
-    $this->forward404Unless($notify, 'notify not found');
+    $notify = $this->getRoute()->getObject();
     $notify->setModel();
     $notify->read();
     // this is really ugly! Refactoring needed
     switch ($notify->getModelName())
     {
       case 'sfSocialMessage':
-        return $this->redirect('@sf_social_message_read?id=' . $notify->getModelId());
+        return $this->redirect('sf_social_message_read', $notify->getModel());
       case 'sfSocialContactRequest':
         return $this->redirect('@sf_social_contact_requests');
       case 'sfSocialEventInvite':
-        return $this->redirect('@sf_social_event?id=' . $notify->getModel()->getsfSocialEvent()->getId());
+        return $this->redirect('sf_social_event', $notify->getModel()->getEvent());
       case 'sfSocialGroupInvite':
-        return $this->redirect('@sf_social_group?id=' . $notify->getModel()->getsfSocialGroup()->getId());
+        return $this->redirect('sf_social_group', $notify->getModel()->getGroup());
     }
   }
 }

@@ -49,22 +49,22 @@ sfsac =
     var input = $('<input id="usrinput">');
     prnt.append(input);
     // add auto-complete to new input field
-    input.autocomplete(sfsac.ajax_url,
-      {
+    input.autocomplete(sfsac.ajax_url, {
         width: 320,
         max: 5,
         scroll: true,
         scrollHeight: 300,
-        cacheLength: 1, /* not working :-( */
+      cacheLength: 0,
         extraParams: { exclude_ids: function() { return sfsac.users.join(','); } },
+      parse: sfsac.parse,
         formatItem: function(data, i, n, value) {
-          if (data[2])
+        if (data.img)
           {
-            return '<img src="' + sfsac.img_path + data[2] + '" /> ' + data[1];
+          return '<img src="' + sfsac.img_path + data.img + '" /> ' + data.name;
           }
           else
           {
-            return '<img src="' + sfsac.img_def + '" /> ' + data[1];
+          return '<img src="' + sfsac.img_def + '" /> ' + data.name;
           }
         }
       });
@@ -72,11 +72,25 @@ sfsac =
     {
       if (data)
       {
-        sfsac.add(data[0], data[1]);
+        sfsac.add(data.id, data.name);
         this.value = '';
       }
     });
+  },
 
+  // redefine original autocomplete parse function
+  parse: function(qdata)
+  {
+    var parsed = [];
+    for (var i in qdata)
+    {
+      parsed[parsed.length] = {
+        data: qdata[i],
+        value: qdata[i].name,
+        result: qdata[i].name
+      };
+    }
+    return parsed;
   },
 
   // add selected id/name to users' list
@@ -97,7 +111,7 @@ sfsac =
     a.click(sfsac.remove);
     span.append(a);
     // add hidden input with id inside
-    var ih = $('<input id="sfsm_to" type="hidden" name="' + sfsac.toname + '" value="' + id + '">');
+    var ih = $('<input type="hidden" name="' + sfsac.toname + '" value="' + id + '">');
     span.append(ih);
     // insert span in div
     users.append(span);

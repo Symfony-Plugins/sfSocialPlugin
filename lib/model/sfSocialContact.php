@@ -67,4 +67,20 @@ class sfSocialContact extends BasesfSocialContact
     return $this->getsfGuardUserRelatedByUserTo()->getId();
   }
 
+  /**
+   * @return sfGuardUser
+   */
+  public function getFrom()
+  {
+    return $this->getsfGuardUserRelatedByUserFrom();
+  }
+
+  /**
+   * @return sfGuardUser
+   */
+  public function getTo()
+  {
+    return $this->getsfGuardUserRelatedByUserTo();
+  }
+
 }

@@ -77,13 +77,10 @@ $browser->
   click('confirm', array('sf_social_event_user' => array(
     'confirm' => 2,
   )))->
-  with('form')->begin()->hasErrors(false)->
-  end()
-;
-
-$browser->test()->is($browser->getResponseDom()->getElementById('sf_social_event_user_confirm_2')->getAttribute('checked'), 'checked', '"yes" is now checked');
-
-$browser->
+  with('form')->hasErrors(false)->
+  with('response')->begin()->
+    checkElement('input[id=sf_social_event_user_confirm_2][checked=checked]')->
+  end()->
 
   info('invite friend')->
   click('invite', array('sf_social_event_invite' => array(

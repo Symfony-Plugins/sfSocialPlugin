@@ -14,7 +14,7 @@ sfsgrp =
   validate: function(e)
   {
     // recipients
-    if ($('#sfsm_to').length < 1)
+    if ($('div#users span').length < 1)
     {
       alert('Error: recipients missing');
       return false;

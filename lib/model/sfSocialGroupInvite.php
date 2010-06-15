@@ -10,7 +10,6 @@
 
 class sfSocialGroupInvite extends BasesfSocialGroupInvite
 {
-
   /**
    * refuse invite
    * @return boolean
@@ -19,6 +18,22 @@ class sfSocialGroupInvite extends BasesfSocialGroupInvite
   {
     $this->setReplied(true);
     return $this->save() == 1;
+  }
+
+  /**
+   * @return sfSocialGroup
+   */
+  public function getGroup()
+  {
+    return $this->getsfSocialGroup();
+  }
+
+  /**
+   * @return sfGuardUser
+   */
+  public function getFrom()
+  {
+    return $this->getsfGuardUserRelatedByUserFrom();
   }
 
 }

@@ -40,8 +40,8 @@
   <ul>
   <?php foreach ($sharedContacts as $contact): ?>
     <li>
-      <?php /* escaping strategy safety */ $_shared = $contact instanceof sfSocialContact ? $contact->getsfGuardUserRelatedByUserTo() : $contact->getRawValue()->getsfGuardUserRelatedByUserTo() ?>
-      <?php echo link_to(image_tag($_shared->getThumb(), 'title=' . $_shared), '@sf_social_user?username=' . $_shared) ?>
+      <?php /* escaping strategy safety */ $_shared = $contact instanceof sfSocialContact ? $contact->getTo() : $contact->getRawValue()->getTo() ?>
+      <?php echo link_to(image_tag($_shared->getThumb(), 'title=' . $_shared), 'sf_social_user', $_shared) ?>
     </li>
   <?php endforeach ?>
   </ul>
@@ -61,29 +61,29 @@
   <ul>
   <?php foreach ($contacts as $cUser): ?>
     <li>
-      <?php echo link_to(image_tag($cUser->getThumb(), 'title=' . $cUser), '@sf_social_user?username=' . $cUser) ?>
+      <?php echo link_to(image_tag($cUser->getThumb(), 'title=' . $cUser), 'sf_social_user', $cUser) ?>
     </li>
   <?php endforeach ?>
   </ul>
   <hr />
   <?php if ($countContacts > count($contacts)): ?>
-  <?php echo link_to(__('See all contacts', null, 'sfSocial'), '@sf_social_user_contacts?username=' . $user) ?>
+  <?php echo link_to(__('See all contacts', null, 'sfSocial'), 'sf_social_user_contacts', $user) ?>
   <?php endif ?>
 </div>
 <?php endif ?>
 
-<?php $groups = $pageUser->getsfSocialGroups() ?>
+<?php $groups = $pageUser->getGroups() ?>
 <?php if (count($groups) > 0): ?>
 <div id="user_groups">
   <strong><?php echo __('member of groups', null, 'sfSocial') ?>:</strong>
   <ul>
   <?php foreach ($groups as $group): ?>
-    <li><?php echo link_to($group, '@sf_social_group?id=' . $group->getId()) ?></li>
+    <li><?php echo link_to($group, 'sf_social_group', $group) ?></li>
   <?php endforeach ?>
   </ul>
   </div>
 <?php endif ?>
 
 <?php if ($pageUser->getId() == $user->getId()): ?>
-<?php echo link_to(__('Edit profile', null, 'sfSocial'), '@sf_social_user_edit?username=' . $user) ?>
+<?php echo link_to(__('Edit profile', null, 'sfSocial'), '@sf_social_user_edit') ?>
 <?php endif ?>

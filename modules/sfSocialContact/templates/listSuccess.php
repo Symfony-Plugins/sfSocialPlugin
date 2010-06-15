@@ -16,16 +16,16 @@
 <ul id="list">
 <?php foreach ($pager->getResults() as $contact): ?>
   <li class="<?php $bRow = empty($bRow) ? print('a') : false ?>">
-    <?php /* escaping strategy safety */ $_user = $contact->getsfGuardUserRelatedByUserTo() ?>
-    <?php echo link_to(image_tag($_user->getThumb(), 'alt=' . $_user . ' title=' . $_user . ' class=left'), '@sf_social_user?username=' . $_user) ?>
+    <?php $_user = $contact->getTo() ?>
+    <?php echo link_to(image_tag($_user->getThumb(), 'alt=' . $_user . ' title=' . $_user . ' class=left'), 'sf_social_user', $_user) ?>
     <div>
-      <?php echo link_to($_user, '@sf_social_user?username=' . $_user) ?>
+      <?php echo link_to($_user, 'sf_social_user', $_user) ?>
     </div>
 		<div>
       <?php echo __('added %1% ago', array('%1%' => time_ago_in_words($contact->getCreatedAt('U'))), 'sfSocial') ?>
     </div>
     <div>
-      <?php echo link_to(__('Remove', null, 'sfSocial'), '@sf_social_contact_delete?id=' . $contact->getId(), 'confirm=' . __('Remove', null, 'sfSocial') . ' ' . $_user . '?') ?>
+      <?php echo link_to(__('Remove', null, 'sfSocial'), 'sf_social_contact_delete', $contact, array('method' => 'delete', 'confirm' => __('Remove', null, 'sfSocial') . ' ' . $_user . '?')) ?>
     </div>
   </li>
 <?php endforeach ?>

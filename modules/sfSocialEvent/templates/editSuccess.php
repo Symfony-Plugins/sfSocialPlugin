@@ -1,5 +1,5 @@
 <h2><?php echo __('Edit event &quot;%1%&quot;', array('%1%' => $event->getTitle()), 'sfSocial') ?></h2>
-<form action="<?php echo url_for('@sf_social_event_edit?id=' . $event->getId()) ?>" method="post">
+<form action="<?php echo url_for('sf_social_event_edit', $event) ?>" method="post">
   <ul class="form">
     <?php echo $form ?>
     <li class="buttons">

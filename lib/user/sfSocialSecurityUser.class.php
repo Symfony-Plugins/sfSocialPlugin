@@ -47,7 +47,7 @@ class sfSocialSecurityUser extends sfGuardSecurityUser
    * @return booelan
    * @access public
    */
-  public function addContact($user)
+  public function addContact(sfGuardUser $user)
   {
     return $this->getGuardUser()->addContact($user);
   }

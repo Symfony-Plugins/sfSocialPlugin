@@ -9,17 +9,17 @@
 
 <ul id="list">
 <?php foreach ($pager->getResults() as $rcpt): ?>
-<?php $message = $rcpt->getSfSocialMessage() ?>
+<?php $message = $rcpt->getMessage() ?>
   <li class="<?php $bRow = empty($bRow) ? print('a') : false ?> read">
     <div class="date"><?php echo format_datetime($message->getCreatedAt()) ?></div>
     <div class="subject">
-      <?php echo link_to($message->getSubject(), '@sf_social_message_sentread?id=' . $message->getId()) ?>
+      <?php echo link_to($message->getSubject(), 'sf_social_message_sentread', $message) ?>
     </div>
     <div class="text">
-      <?php echo link_to(truncate_text($message->getText(), 50), '@sf_social_message_sentread?id=' . $message->getId()) ?>
+      <?php echo link_to(truncate_text($message->getText(), 50), 'sf_social_message_sentread', $message) ?>
     </div>
     <div class="to">
-      <?php echo link_to(image_tag($rcpt->getsfGuardUser()->getThumb(), 'title=' . $rcpt->getsfGuardUser()), '@sf_social_user?username=' . $rcpt->getsfGuardUser()) ?>
+      <?php echo link_to(image_tag($rcpt->getTo()->getThumb(), 'title=' . $rcpt->getTo()), 'sf_social_user', $rcpt->getTo()) ?>
     </div>
   </li>
 <?php endforeach ?>

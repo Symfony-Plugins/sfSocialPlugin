@@ -32,7 +32,7 @@ abstract class BasesfSocialGroupActions extends sfActions
    */
   public function executeMylist(sfWebRequest $request)
   {
-    $this->groups = $this->user->getsfSocialGroups();
+    $this->groups = $this->user->getGroups();
   }
 
   /**
@@ -41,8 +41,7 @@ abstract class BasesfSocialGroupActions extends sfActions
    */
   public function executeView(sfWebRequest $request)
   {
-    $this->group = sfSocialGroupPeer::retrieveByPK($request->getParameter('id'));
-    $this->forward404Unless($this->group, 'group not found');
+    $this->group = $this->getRoute()->getObject();
     // invite form
     if ($this->group->isMember($this->user))
     {
@@ -57,16 +56,15 @@ abstract class BasesfSocialGroupActions extends sfActions
    */
   public function executeEdit(sfWebRequest $request)
   {
-    $this->group = sfSocialGroupPeer::retrieveByPK($request->getParameter('id'));
-    $this->forward404Unless($this->group, 'group not found');
+    $this->group = $this->getRoute()->getObject();
     $this->forwardUnless($this->group->isAdmin($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     $this->form = new sfSocialGroupForm($this->group, array('user' => $this->user));
-    if ($request->isMethod('post'))
+    if ($request->isMethod(sfRequest::POST))
     {
       if ($this->form->bindAndSave($request->getParameter($this->form->getName())))
       {
         $this->getUser()->setFlash('notice', 'Group modified.');
-        $this->redirect('@sf_social_group?id=' . $this->form->getObject()->getId());
+        $this->redirect('sf_social_group', $this->form->getObject());
       }
     }
   }
@@ -78,7 +76,7 @@ abstract class BasesfSocialGroupActions extends sfActions
   public function executeCreate(sfWebRequest $request)
   {
     $this->form = new sfSocialGroupForm(null, array('user' => $this->user));
-    if ($request->isMethod('post'))
+    if ($request->isMethod(sfRequest::POST))
     {
       if ($this->form->bindAndSave($request->getParameter($this->form->getName())))
       {
@@ -94,20 +92,17 @@ abstract class BasesfSocialGroupActions extends sfActions
    */
   public function executeInvite(sfWebRequest $request)
   {
-    $this->forward404Unless($request->isMethod('post'), 'invalid request');
-    $values = $request->getParameter('sf_social_group_invite');
-    $this->group = sfSocialGroupPeer::retrieveByPK($values['group_id']);
-    $this->forward404Unless($this->group, 'group not found');
+    $this->group = $this->getRoute()->getObject();
     $this->forwardUnless($this->group->isAdmin($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     $this->form = new sfSocialGroupInviteForm(null, array('user' => $this->user,
                                                           'group' => $this->group));
-    if ($this->form->bindAndSave($values))
+    if ($this->form->bindAndSave($request->getParameter($this->form->getName())))
     {
       $this->dispatcher->notify(new sfEvent($this->form->getObjects(), 'social.group_invite'));
       $this->getUser()->setFlash('notice', '%1% users invited.');
       $this->getUser()->setFlash('nr', count($this->form->getValue('user_id')));
     }
-    $this->redirect('@sf_social_group?id=' . $this->group->getId());
+    $this->redirect('sf_social_group', $this->group);
   }
 
   /**
@@ -116,13 +111,12 @@ abstract class BasesfSocialGroupActions extends sfActions
    */
   public function executeJoin(sfWebRequest $request)
   {
-    $group = sfSocialGroupPeer::retrieveByPK($request->getParameter('id'));
-    $this->forward404Unless($group, 'group not found');
+    $group = $this->getRoute()->getObject();
     if ($group->join($this->user))
     {
       $this->getUser()->setFlash('notice', 'Group joined.');
     }
-    $this->redirect('@sf_social_group?id=' . $group->getId());
+    $this->redirect('sf_social_group', $group);
   }
 
   /**
@@ -131,14 +125,13 @@ abstract class BasesfSocialGroupActions extends sfActions
    */
   public function executeAccept(sfWebRequest $request)
   {
-    $invite = sfSocialGroupInvitePeer::retrieveByPK($request->getParameter('id'));
-    $this->forward404Unless($invite, 'invite not found');
+    $invite = $this->getRoute()->getObject();
     $this->forwardUnless($invite->getUserId() == $this->user->getId(), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
-    if ($invite->getsfSocialGroup()->join($this->user, $invite))
+    if ($invite->getGroup()->join($this->user, $invite))
     {
       $this->getUser()->setFlash('notice', 'Group joined.');
     }
-    $this->redirect('@sf_social_group?id=' . $invite->getsfSocialGroup()->getId());
+    $this->redirect('sf_social_group', $invite->getGroup());
   }
 
   /**
@@ -147,14 +140,13 @@ abstract class BasesfSocialGroupActions extends sfActions
    */
   public function executeDeny(sfWebRequest $request)
   {
-    $invite = sfSocialGroupInvitePeer::retrieveByPK($request->getParameter('id'));
-    $this->forward404Unless($invite, 'invite not found');
+    $invite = $this->getRoute()->getObject();
     $this->forwardUnless($invite->getUserId() == $this->user->getId(), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     if ($invite->refuse())
     {
       $this->getUser()->setFlash('notice', 'Invite refused.');
     }
-    $this->redirect('@sf_social_group?id=' . $invite->getsfSocialGroup()->getId());
+    $this->redirect('sf_social_group', $invite->getGroup());
   }
 
 }

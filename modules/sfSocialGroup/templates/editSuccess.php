@@ -1,6 +1,6 @@
 <h2><?php echo __('Edit group &quot;%1%&quot;', array('%1%' => $group->getTitle()), 'sfSocial') ?></h2>
 
-<form action="<?php echo url_for('@sf_social_group_edit?id=' . $group->getId()) ?>" method="post">
+<form action="<?php echo url_for('sf_social_group_edit', $group) ?>" method="post">
   <ul class="form">
     <?php echo $form ?>
     <li class="buttons">

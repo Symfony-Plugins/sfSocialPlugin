@@ -20,7 +20,7 @@ class sfSocialNotifyListener
   static public function listenToWriteMessage(sfEvent $event)
   {
     $msg = $event->getSubject();
-    foreach ($msg->getSfSocialMessageRcpts() as $rcpt)
+    foreach ($msg->getRcpts() as $rcpt)
     {
       $notify = new sfSocialNotify;
       $notify->notifyMessage($msg, $rcpt);

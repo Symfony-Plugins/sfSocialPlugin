@@ -94,4 +94,20 @@ class sfSocialMessage extends BasesfSocialMessage
     }
   }
 
+  /**
+   * @return array
+   */
+  public function getRcpts()
+  {
+    return $this->getsfSocialMessageRcpts();
+  }
+
+  /**
+   * @return sfGuardUser
+   */
+  public function getFrom()
+  {
+    return $this->getsfGuardUser();
+  }
+
 }

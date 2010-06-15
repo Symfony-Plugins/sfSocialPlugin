@@ -11,14 +11,18 @@ sf_social_message_list:
   param: { module: sfSocialMessage, action: list }
 
 sf_social_message_sentread:
-  url:   /message/sent/:id
-  param: { module: sfSocialMessage, action: sentread }
-  requirements: { id: \d+ }
+  url:          /message/sent/:id
+  param:        { module: sfSocialMessage, action: sentread }
+  class:        sfPropelRoute
+  options:      { model: sfSocialMessage, type: object }
+  requirements: { id: \d+, sf_method: get }
 
 sf_social_message_read:
-  url:   /message/:id
-  param: { module: sfSocialMessage, action: read }
-  requirements: { id: \d+ }
+  url:          /message/:id
+  param:        { module: sfSocialMessage, action: read }
+  class:        sfPropelRoute
+  options:      { model: sfSocialMessage, type: object }
+  requirements: { id: \d+, sf_method: get }
 
 sf_social_message_new:
   url:   /message/compose/*
@@ -43,27 +47,29 @@ sf_social_event_pastlist:
   param: { module: sfSocialEvent, action: pastlist }
 
 sf_social_event_edit:
-  url:   /event/:id/edit
-  param: { module: sfSocialEvent, action: edit }
-  requirements: { id: \d+ }
+  url:          /event/:id/edit
+  param:        { module: sfSocialEvent, action: edit }
+  class:        sfPropelRoute
+  options:      { model: sfSocialEvent, type: object }
+  requirements: { id: \d+, sf_method: [ get, post ] }
 
 sf_social_event_invite:
-  url:   /event/:id/invite/*
-  param: { module: sfSocialEvent, action: invite }
-  requirements: { id: \d+ }
+  url:          /event/:id/invite/*
+  param:        { module: sfSocialEvent, action: invite }
+  class:        sfPropelRoute
+  options:      { model: sfSocialEvent, type: object }
+  requirements: { id: \d+, sf_method: post }
 
 sf_social_event:
-  url:   /event/:id
-  param: { module: sfSocialEvent, action: view }
-  requirements: { id: \d+ }
+  url:          /event/:id
+  param:        { module: sfSocialEvent, action: view }
+  class:        sfPropelRoute
+  options:      { model: sfSocialEvent, type: object }
+  requirements: { id: \d+, sf_method: [ get, post ] }
 
 sf_social_event_new:
   url:   /event/create
   param: { module: sfSocialEvent, action: create }
-
-sf_social_event_js:
-  url:   /event.js
-  param: { module: sfSocialEvent, action: invitejs, sf_format: js }
 
 # contacts
 
@@ -80,19 +86,25 @@ sf_social_contact_list:
   param: { module: sfSocialContact, action: list }
 
 sf_social_contact_accept_request:
-  url:   /request/accept/:id
-  param: { module: sfSocialContact, action: acceptrequest }
-  requirements: { id: \d+ }
+  url:          /request/accept/:id
+  param:        { module: sfSocialContact, action: acceptrequest }
+  class:        sfPropelRoute
+  options:      { model: sfSocialContactRequest, type: object }
+  requirements: { id: \d+, sf_method: get }
 
 sf_social_contact_deny_request:
-  url:   /request/deny/:id
-  param: { module: sfSocialContact, action: denyrequest }
-  requirements: { id: \d+ }
+  url:          /request/deny/:id
+  param:        { module: sfSocialContact, action: denyrequest }
+  class:        sfPropelRoute
+  options:      { model: sfSocialContactRequest, type: object }
+  requirements: { id: \d+, sf_method: get }
 
 sf_social_contact_cancel_request:
-  url:   /request/cancel/:id
-  param: { module: sfSocialContact, action: cancelrequest }
-  requirements: { id: \d+ }
+  url:          /request/cancel/:id
+  param:        { module: sfSocialContact, action: cancelrequest }
+  class:        sfPropelRoute
+  options:      { model: sfSocialContactRequest, type: object }
+  requirements: { id: \d+, sf_method: get }
 
 sf_social_contact_send_request:
   url:   /request/send/*
@@ -101,7 +113,9 @@ sf_social_contact_send_request:
 sf_social_contact_delete:
   url:   /contact/delete/:id
   param: { module: sfSocialContact, action: delete }
-  requirements: { id: \d+ }
+  class:        sfPropelRoute
+  options:      { model: sfSocialContact, type: object }
+  requirements: { id: \d+, sf_method: delete }
 
 sf_social_contact_search:
   url:   /search/*
@@ -110,9 +124,12 @@ sf_social_contact_search:
 # notify
 
 sf_social_notify:
-  url:   /notify/:id
-  param: { module: sfSocialNotify, action: get }
-  requirements: { id: \d+ }
+  url:          /notify/:id
+  param:        { module: sfSocialNotify, action: get }
+  class:        sfPropelRoute
+  options:      { model: sfSocialNotify, type: object }
+  requirements: { id: \d+, sf_method: get }
+
 
 # user
 
@@ -120,24 +137,27 @@ sf_social_user_search:
   url:   /user/search/*
   param: { module: sfSocialUser, action: search }
 
-sf_social_user:
-  url:   /user/:username
-  param: { module: sfSocialUser, action: user }
-  requirements: { username: \w+ }
-
 sf_social_user_edit:
-  url:   /user/:username/edit
-  param: { module: sfSocialUser, action: edit }
-  requirements: { username: \w+ }
+  url:          /user/editprofile
+  param:        { module: sfSocialUser, action: edit }
+
+sf_social_user:
+  url:          /user/:username
+  param:        { module: sfSocialUser, action: user }
+  class:        sfPropelRoute
+  options:      { model: sfSocialGuardUser, type: object }
+  requirements: { username: \w+, sf_method: get }
 
 sf_social_user_contacts:
-  url:   /user/:username/contacts
-  param: { module: sfSocialUser, action: contacts }
-  requirements: { username: \w+ }
+  url:          /user/:username/contacts
+  param:        { module: sfSocialUser, action: contacts }
+  class:        sfPropelRoute
+  options:      { model: sfSocialGuardUser, type: object }
+  requirements: { username: \w+, sf_method: get }
 
 sf_social_user_shared_contacts:
-  url:   /user/sharedcontacts/:user1/:user2
-  param: { module: sfSocialUser, action: sharedcontacts }
+  url:          /user/sharedcontacts/:user1/:user2
+  param:        { module: sfSocialUser, action: sharedcontacts }
   requirements: { user1: \w+, user2: \w+ }
 
 # groups
@@ -155,39 +175,47 @@ sf_social_group_invitedlist:
   param: { module: sfSocialGroup, action: invitedlist }
 
 sf_social_group_edit:
-  url:   /group/:id/edit
-  param: { module: sfSocialGroup, action: edit }
-  requirements: { id: \d+ }
+  url:          /group/:id/edit
+  param:        { module: sfSocialGroup, action: edit }
+  class:        sfPropelRoute
+  options:      { model: sfSocialGroup, type: object }
+  requirements: { id: \d+, sf_method: [ get, post ] }
 
 sf_social_group_invite:
-  url:   /group/:id/invite/*
-  param: { module: sfSocialGroup, action: invite }
-  requirements: { id: \d+ }
+  url:          /group/:id/invite/*
+  param:        { module: sfSocialGroup, action: invite }
+  class:        sfPropelRoute
+  options:      { model: sfSocialGroup, type: object }
+  requirements: { id: \d+, sf_method: [ post ] }
 
 sf_social_group_join:
-  url:   /group/:id/join
-  param: { module: sfSocialGroup, action: join }
-  requirements: { id: \d+ }
+  url:          /group/:id/join
+  param:        { module: sfSocialGroup, action: join }
+  class:        sfPropelRoute
+  options:      { model: sfSocialGroup, type: object }
+  requirements: { id: \d+, sf_method: [ get, post ] }
 
 sf_social_group_accept:
-  url:   /group/:id/accept
-  param: { module: sfSocialGroup, action: accept }
-  requirements: { id: \d+ }
+  url:          /group/:id/accept
+  param:        { module: sfSocialGroup, action: accept }
+  class:        sfPropelRoute
+  options:      { model: sfSocialGroupInvite, type: object }
+  requirements: { id: \d+, sf_method: [ get, post ] }
 
 sf_social_group_deny:
-  url:   /group/:id/deny
-  param: { module: sfSocialGroup, action: deny }
-  requirements: { id: \d+ }
+  url:          /group/:id/deny
+  param:        { module: sfSocialGroup, action: deny }
+  class:        sfPropelRoute
+  options:      { model: sfSocialGroupInvite, type: object }
+  requirements: { id: \d+, sf_method: [ get, post ] }
 
 sf_social_group:
-  url:   /group/:id
-  param: { module: sfSocialGroup, action: view }
-  requirements: { id: \d+ }
+  url:          /group/:id
+  param:        { module: sfSocialGroup, action: view }
+  class:        sfPropelRoute
+  options:      { model: sfSocialGroup, type: object }
+  requirements: { id: \d+, sf_method: [ get, post ] }
 
 sf_social_group_new:
   url:   /group/create
   param: { module: sfSocialGroup, action: create }
-
-sf_social_group_js:
-  url:   /group.js
-  param: { module: sfSocialGroup, action: invitejs, sf_format: js }

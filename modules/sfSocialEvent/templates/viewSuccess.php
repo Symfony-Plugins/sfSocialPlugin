@@ -19,12 +19,12 @@
 
 <?php if ($event->isAdmin($_user)): ?>
 <div id="event_edit">
-  <?php echo link_to(__('Edit event', null, 'sfSocial'), '@sf_social_event_edit?id=' . $event->getId()) ?>
+  <?php echo link_to(__('Edit event', null, 'sfSocial'), 'sf_social_event_edit', $event) ?>
 </div>
 <?php endif ?>
 
 <div id="event_confirm">
-  <form action="<?php echo url_for('@sf_social_event?id=' . $event->getId()) ?>" method="post">
+  <form action="<?php echo url_for('sf_social_event', $event) ?>" method="post">
     <?php echo $form['confirm']->renderError() ?>
     <?php echo $form['confirm']->renderLabel() ?>
     <?php echo $form['confirm'] ?>
@@ -38,7 +38,7 @@
 <?php if ($event->isAdmin($_user)): ?>
 <h3><?php echo __('Invite', null, 'sfSocial') ?>:</h3>
 <div id="event_invite">
-  <form id="invites" action="<?php echo url_for('@sf_social_event_invite?id=' . $event->getId()) ?>" method="post">
+  <form id="invites" action="<?php echo url_for('sf_social_event_invite', $event) ?>" method="post">
     <?php echo $form2['user_id']->renderError() ?>
     <?php echo $form2['user_id']->renderLabel() ?>
     <?php echo $form2['user_id'] ?>
@@ -53,8 +53,8 @@
 <ul id="confirmed" class="event">
 <?php foreach ($confirmed as $eventUser): ?>
   <li>
-    <?php $cUser = $eventUser->getsfGuardUser() ?>
-    <?php echo link_to(image_tag($cUser->getThumb(), 'alt=' . $cUser . ' title=' . $cUser . ' class=left'), '@sf_social_user?username=' . $cUser) ?>
+    <?php $cUser = $eventUser->getUser() ?>
+    <?php echo link_to(image_tag($cUser->getThumb(), 'alt=' . $cUser . ' title=' . $cUser . ' class=left'), 'sf_social_user', $cUser) ?>
   </li>
 <?php endforeach ?>
 </ul>
@@ -67,8 +67,8 @@
 <ul id="maybe" class="event">
 <?php foreach ($maybes as $eventUser): ?>
   <li>
-    <?php $cUser = $eventUser->getsfGuardUser() ?>
-    <?php echo link_to(image_tag($cUser->getThumb(), 'alt=' . $cUser . ' title=' . $cUser . ' class=left'), '@sf_social_user?username=' . $cUser) ?>
+    <?php $cUser = $eventUser->getUser() ?>
+    <?php echo link_to(image_tag($cUser->getThumb(), 'alt=' . $cUser . ' title=' . $cUser . ' class=left'), 'sf_social_user', $cUser, 'rel=' . $cUser->getId()) ?>
   </li>
 <?php endforeach ?>
 </ul>
@@ -81,8 +81,8 @@
 <ul id="not" class="event">
 <?php foreach ($nots as $eventUser): ?>
   <li>
-    <?php $cUser = $eventUser->getsfGuardUser() ?>
-    <?php echo link_to(image_tag($cUser->getThumb(), 'alt=' . $cUser . ' title=' . $cUser . ' class=left'), '@sf_social_user?username=' . $cUser) ?>
+    <?php $cUser = $eventUser->getUser() ?>
+    <?php echo link_to(image_tag($cUser->getThumb(), 'alt=' . $cUser . ' title=' . $cUser . ' class=left'), 'sf_social_user', $cUser, 'rel=' . $cUser->getId()) ?>
   </li>
 <?php endforeach ?>
 </ul>
@@ -95,8 +95,8 @@
 <ul id="invited" class="event">
 <?php foreach ($invited as $invite): ?>
   <li>
-    <?php $_user = $invite->getsfGuardUserRelatedByUserId() ?>
-    <?php echo link_to(image_tag($_user->getThumb(), 'alt=' . $_user . ' title=' . $_user . ' class=left'), '@sf_social_user?username=' . $_user) ?>
+    <?php $_user = $invite->getTo() ?>
+    <?php echo link_to(image_tag($_user->getThumb(), 'alt=' . $_user . ' title=' . $_user . ' class=left'), 'sf_social_user', $_user, 'rel=' . $_user->getId()) ?>
   </li>
 <?php endforeach ?>
 </ul>

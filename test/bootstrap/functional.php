@@ -14,6 +14,5 @@ $plugin_configuration = new sfSocialPluginConfiguration($configuration, dirname(
 sfToolkit::clearDirectory(sfConfig::get('sf_app_cache_dir'));
 
 // import fixture data
-#new sfDatabaseManager(ProjectConfiguration::getApplicationConfiguration('frontend', 'test', true));
 $data = new sfPropelData();
 $data->loadData(dirname(__FILE__) . '/../../data/fixtures');

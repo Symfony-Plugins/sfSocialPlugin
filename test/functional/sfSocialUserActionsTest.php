@@ -32,7 +32,7 @@ $browser->
     with('response')->begin()->
     checkElement('body h2', '/max/')->
     checkElement('body', '/it\'s you!/')->
-    checkElement('a[href$="user/max/edit"]', 'Edit profile')->
+    checkElement('a[href$="user/editprofile"]', 'Edit profile')->
   end()->
 
   info('edit profile')->
@@ -99,12 +99,6 @@ $browser->
   get('/user/karl')->
     with('response')->begin()->
     checkElement('div#shared_contacts ul li', 1)->
-  end()->
-
-  info('edit profile of other user')->
-  get('/user/danny/edit')->
-  with('response')->begin()->
-    isStatusCode(403)->
-
   end()
+
 ;

@@ -21,8 +21,7 @@ abstract class BasesfSocialUserActions extends sfActions
    */
   public function executeUser(sfWebRequest $request)
   {
-    $this->pageUser = sfGuardUserPeer::retrieveByUsername($request->getParameter('username'));
-    $this->forward404Unless($this->pageUser, 'user not found');
+    $this->pageUser = $this->getRoute()->getObject();
     try
     {
       $this->profile = $this->pageUser->getProfile();
@@ -39,18 +38,15 @@ abstract class BasesfSocialUserActions extends sfActions
    */
   public function executeEdit(sfWebRequest $request)
   {
-    $pageUser = sfGuardUserPeer::retrieveByUsername($request->getParameter('username'));
-    $this->forward404Unless($pageUser, 'user not found');
-    $this->forwardUnless($this->user->getId() == $pageUser->getId(), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     $this->form = new sfSocialProfileForm($this->user);
-    if ($request->isMethod('post'))
+    if ($request->isMethod(sfRequest::POST))
     {
       if ($this->form->bindAndSave($request->getParameter($this->form->getName()),
                                    $request->getFiles($this->form->getName())))
       {
         $this->form->save();
         $this->getUser()->setFlash('notice', 'Profile saved.');
-        $this->redirect('@sf_social_user?username=' . $this->user);
+        $this->redirect('sf_social_user', $this->user);
       }
     }
   }
@@ -62,8 +58,7 @@ abstract class BasesfSocialUserActions extends sfActions
   public function executeContacts(sfWebRequest $request)
   {
     $this->page = $request->getParameter('page', 1);
-    $this->pageUser = sfGuardUserPeer::retrieveByUsername($request->getParameter('username'));
-    $this->forward404Unless($this->pageUser, 'user not found');
+    $this->pageUser = $this->getRoute()->getObject();
     $this->pager = $this->pageUser->getContactsPager($this->page);
   }
 

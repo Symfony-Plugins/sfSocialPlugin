@@ -16,9 +16,9 @@
 <ul id="list">
 <?php foreach ($groups as $group): ?>
   <li class="<?php $bRow = empty($bRow) ? print('a') : false ?>">
-    <strong><?php echo link_to($group->getTitle(), '@sf_social_group?id=' . $group->getId()) ?></strong>
+    <strong><?php echo link_to($group->getTitle(), 'sf_social_group', $group) ?></strong>
     <div class="descr">
-      <?php echo link_to(truncate_text($group->getDescription(), 50), '@sf_social_group?id=' . $group->getId()) ?>
+      <?php echo link_to(truncate_text($group->getDescription(), 50), 'sf_social_group', $group) ?>
     </div>
   </li>
 <?php endforeach ?>

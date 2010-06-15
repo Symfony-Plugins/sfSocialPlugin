@@ -10,4 +10,11 @@
 
 class sfSocialEventUser extends BasesfSocialEventUser
 {
+  /**
+   * @return sfGuardUser
+   */
+  public function getUser()
+  {
+    return $this->getsfGuardUser();
+  }
 }

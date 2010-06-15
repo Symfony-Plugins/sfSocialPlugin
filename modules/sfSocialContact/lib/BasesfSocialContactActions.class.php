@@ -32,7 +32,7 @@ class BasesfSocialContactActions extends sfActions
   public function executeSearch(sfWebRequest $request)
   {
     $text = $request->getParameter('q');
-    $excludeIds = urldecode($request->getParameter('exclude_ids'));
+    $excludeIds = explode(',', urldecode($request->getParameter('exclude_ids')));
     $this->contacts = sfSocialContactPeer::search($this->user, $text, $excludeIds);
   }
 
@@ -71,7 +71,7 @@ class BasesfSocialContactActions extends sfActions
       $this->forward404Unless($userTo, 'user not found');
     }
     $this->form = new sfSocialContactRequestForm(null, array('user' => $this->user, 'to' => $userTo));
-    if ($request->isMethod('post'))
+    if ($request->isMethod(sfRequest::POST))
     {
       if ($this->form->bindAndSave($request->getParameter($this->form->getName())))
       {
@@ -88,11 +88,10 @@ class BasesfSocialContactActions extends sfActions
    */
   public function executeAcceptrequest(sfWebRequest $request)
   {
-    $request = sfSocialContactRequestPeer::retrieveByPK($request->getParameter('id'));
-    $this->forward404Unless($request, 'request not found');
-    $this->forwardUnless($request->checkUserTo($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
-    $request->accept();
-    $this->getUser()->addContact($request->getsfGuardUserRelatedByUserFrom());
+    $cRequest = $this->getRoute()->getObject();
+    $this->forwardUnless($cRequest->checkUserTo($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
+    $cRequest->accept();
+    $this->getUser()->addContact($cRequest->getFrom());
     $this->getUser()->setFlash('notice', 'Contact request accepted.');
     $this->redirect('@sf_social_contact_requests');
   }
@@ -103,10 +102,9 @@ class BasesfSocialContactActions extends sfActions
    */
   public function executeDenyrequest(sfWebRequest $request)
   {
-    $request = sfSocialContactRequestPeer::retrieveByPK($request->getParameter('id'));
-    $this->forward404Unless($request, 'request not found');
-    $this->forwardUnless($request->checkUserTo($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
-    $request->refuse();
+    $cRequest = $this->getRoute()->getObject();
+    $this->forwardUnless($cRequest->checkUserTo($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
+    $cRequest->refuse();
     $this->getUser()->setFlash('notice', 'Contact request refused.');
     $this->redirect('@sf_social_contact_requests');
   }
@@ -117,11 +115,12 @@ class BasesfSocialContactActions extends sfActions
    */
   public function executeCancelrequest(sfWebRequest $request)
   {
-    $request = sfSocialContactRequestPeer::retrieveByPK($request->getParameter('id'));
-    $this->forward404Unless($request, 'request not found');
-    $this->forwardUnless($request->checkUserFrom($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
-    $request->cancel();
-    $this->getUser()->setFlash('notice', 'Contact request canceled.');
+    $cRequest = $this->getRoute()->getObject();
+    $this->forwardUnless($cRequest->checkUserFrom($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
+    if ($cRequest->cancel())
+    {
+      $this->getUser()->setFlash('notice', 'Contact request canceled.');
+    }
     $this->redirect('@sf_social_contact_sentrequests');
   }
 
@@ -131,8 +130,8 @@ class BasesfSocialContactActions extends sfActions
    */
   public function executeDelete(sfWebRequest $request)
   {
-    $contact = sfSocialContactPeer::retrieveByPK($request->getParameter('id'));
-    $this->forward404Unless($contact, 'contact not found');
+    $request->checkCSRFProtection();
+    $contact = $this->getRoute()->getObject();
     $this->forwardUnless($contact->checkUserFrom($this->user), sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
     $contact->delete();
     $this->getUser()->setFlash('notice', 'Contact removed.');

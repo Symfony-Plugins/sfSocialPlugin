@@ -1,8 +1,8 @@
 <?php use_helper('Date') ?>
 <h2><?php echo $message->getSubject() ?></h2>
 
-<?php $_user = $message->getsfGuardUser() ?>
-<?php echo link_to(image_tag($_user->getThumb(), 'alt=' . $_user . ' title=' . $_user), '@sf_social_user?username=' . $_user) ?>
+<?php $_user = $message->getFrom() ?>
+<?php echo link_to(image_tag($_user->getThumb(), 'alt=' . $_user . ' title=' . $_user), 'sf_social_user', $_user) ?>
 
 <?php echo format_datetime($message->getCreatedAt()) ?>
 

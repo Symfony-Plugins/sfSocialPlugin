@@ -5,11 +5,11 @@
 <?php endif ?>
 
 <div id="event_invite">
-  <form action="<?php echo url_for('@sf_social_event_invite?id=' . $event->getId()) ?>" method="post">
+  <form action="<?php echo url_for('sf_social_event_invite', $event) ?>" method="post">
     <ul class="form">
       <?php echo $form ?>
       <li class="buttons">
-        <?php echo link_to(__('cancel', null, 'sfSocial'), '@sf_social_event?id=' . $event->getId(), 'class=cancel') ?>
+        <?php echo link_to(__('cancel', null, 'sfSocial'), 'sf_social_event', $event, 'class=cancel') ?>
         <input type="submit" value="<?php echo __('invite', null, 'sfSocial') ?>" />
       </li>
     </ul>

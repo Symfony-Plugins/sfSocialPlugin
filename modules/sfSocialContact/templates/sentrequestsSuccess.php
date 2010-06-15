@@ -16,10 +16,10 @@
 <ul id="list">
 <?php foreach ($pager->getResults() as $request): ?>
   <li class="<?php $bRow = empty($bRow) ? print('a') : false ?>">
-    <?php $_user = $request->getsfGuardUserRelatedByUserTo() ?>
-    <?php echo link_to(image_tag($_user->getThumb(), 'alt=' . $_user . ' title=' . $_user . ' class=left'), '@sf_social_user?username=' . $_user) ?>
+    <?php $_user = $request->getTo() ?>
+    <?php echo link_to(image_tag($_user->getThumb(), 'alt=' . $_user . ' title=' . $_user . ' class=left'), 'sf_social_user', $_user) ?>
     <div>
-      <?php echo link_to($_user, '@sf_social_user?username=' . $_user) ?>,
+      <?php echo link_to($_user, 'sf_social_user', $_user) ?>,
       <?php echo __('sent %1% ago', array('%1%' => time_ago_in_words($request->getCreatedAt('U'))), 'sfSocial') ?>
     </div>
     <div class="req_message"><?php echo $request->getMessage() ?></div>

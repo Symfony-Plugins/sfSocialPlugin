@@ -32,8 +32,8 @@ $browser->
   end()->
 
   info('remove a contact')->
-  click('Remove', array('position' => 2))->
-  followRedirect()->
+  click('Remove', array('position' => 2), array('method' => 'delete', '_with_csrf' => true))->
+  with('response')->isRedirected()->followRedirect()->
   with('response')->begin()->
     checkElement('ul#list li', 4)->
   end()->
@@ -123,9 +123,9 @@ $browser->
   end()->
 
   info('unauthorized contact removing')->
-  get('/contact/delete/' . $contact1->getId())->
+  get('/contact/delete/' . $contact1->getId(), array(), array('method' => 'delete', '_with_csrf' => true))->
   with('response')->begin()->
-    isStatusCode(403)->
+    isStatusCode(404)->
   end()->
 
   info('unauthorized request accepting')->
