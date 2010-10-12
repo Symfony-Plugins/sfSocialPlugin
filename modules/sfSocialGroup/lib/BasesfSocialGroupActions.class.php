@@ -6,7 +6,7 @@
  * @package     sfSocialPlugin
  * @subpackage  sfSocialGroup
  * @author      Massimiliano Arione <garakkio@gmail.com>
- * @version     SVN: $Id: BaseActions.class.php 12628 2008-11-04 14:43:36Z Kris.Wallsmith $
+ * @version     SVN: $Id$
  */
 abstract class BasesfSocialGroupActions extends sfActions
 {

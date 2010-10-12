@@ -1,4 +1,9 @@
 // sfSocial event invites
+
+$(document).ready(function() {
+  sfsevt.init();
+});
+
 sfsevt =
 {
 
@@ -15,7 +20,7 @@ sfsevt =
   validate: function(e)
   {
     // recipients
-    if ($('div#users span').length < 1)
+    if ($('div#users span').length == 0)
     {
       alert('Error: recipients missing');
       return false;
@@ -44,8 +49,3 @@ sfsevt =
   }
 
 }
-
-$(document).ready(function()
-{
-  sfsevt.init();
-});

@@ -1,5 +1,5 @@
 <?php
 
-class sfSocialContactGroupPeer extends BasesfSocialContactGroupPeer
+class sfSocialContactGroupPeer extends PluginsfSocialContactGroupPeer
 {
 }

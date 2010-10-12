@@ -6,15 +6,8 @@
  * @package    sfSocialPlugin
  * @subpackage sfSocialEvent
  * @author     Massimiliano Arione <garakkio@gmail.com>
+ * @version    SVN: $Id$
  */
-
-class sfSocialEventUser extends BasesfSocialEventUser
+class sfSocialEventUser extends PluginsfSocialEventUser
 {
-  /**
-   * @return sfGuardUser
-   */
-  public function getUser()
-  {
-    return $this->getsfGuardUser();
-  }
 }

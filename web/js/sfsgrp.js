@@ -1,4 +1,9 @@
 // sfSocial group invites
+
+$(document).ready(function() {
+  sfsgrp.init();
+});
+
 sfsgrp =
 {
 
@@ -14,7 +19,7 @@ sfsgrp =
   validate: function(e)
   {
     // recipients
-    if ($('div#users span').length < 1)
+    if ($('div#users span').length == 0)
     {
       alert('Error: recipients missing');
       return false;
@@ -23,8 +28,3 @@ sfsgrp =
   }
 
 }
-
-$(document).ready(function()
-{
-  sfsgrp.init();
-});

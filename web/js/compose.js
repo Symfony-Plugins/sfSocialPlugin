@@ -1,4 +1,9 @@
 // sfSocial message compose
+
+$(document).ready(function() {
+  sfsmsg.init();
+});
+
 sfsmsg =
 {
 
@@ -20,13 +25,13 @@ sfsmsg =
       return false;
     }
     // text
-    if ($('#sf_social_message_text').attr('value').length < 2)
+    if ($('#sf_social_message_text').attr('value').length < 3)
     {
       alert('Error: text missing');
       return false;
     }
     // recipients
-    if ($('div#users span').length < 1)
+    if ($('div#users span').length == 0)
     {
       alert('Error: recipients missing');
       return false;
@@ -35,8 +40,3 @@ sfsmsg =
   }
 
 }
-
-$(document).ready(function()
-{
-  sfsmsg.init();
-});

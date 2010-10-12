@@ -1,5 +1,5 @@
 <?php
 
-class sfSocialMessagePeer extends BasesfSocialMessagePeer
+class sfSocialMessagePeer extends PluginsfSocialMessagePeer
 {
 }

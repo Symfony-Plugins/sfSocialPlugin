@@ -15,7 +15,7 @@ sfsac =
   {
     // get form
     var form = $('#' + form_id);
-    if (!form)
+    if (form.length == 0)
     {
       return;
     }
@@ -26,7 +26,7 @@ sfsac =
     }
     // get "to" field
     var to = $('#' + select_id);
-    if (!to)
+    if (to.length == 0)
     {
       return;
     }
@@ -41,9 +41,11 @@ sfsac =
     var users = $('<div id="users">');
     prnt.append(users);
     // add possible selected values
-    if (selected)
+    if (selected.length > 0)
     {
-      sfsac.add(selected.value, selected.text);
+      selected.each(function(i, sel) {
+        sfsac.add(sel.value, sel.text);
+      });
     }
     // add a new input field
     var input = $('<input id="usrinput">');

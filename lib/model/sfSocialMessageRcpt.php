@@ -1,21 +1,5 @@
 <?php
 
-class sfSocialMessageRcpt extends BasesfSocialMessageRcpt
+class sfSocialMessageRcpt extends PluginsfSocialMessageRcpt
 {
-  /**
-   * @return sfSocialMessage
-   */
-  public function getMessage()
-  {
-    return $this->getsfSocialMessage();
-  }
-
-  /**
-   * @return sfGuardUser
-   */
-  public function getTo()
-  {
-    return $this->getsfGuardUser();
-  }
-
 }

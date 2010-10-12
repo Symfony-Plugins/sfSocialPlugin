@@ -1,5 +1,5 @@
 <?php
 
-class sfSocialNotifyPeer extends BasesfSocialNotifyPeer
+class sfSocialNotifyPeer extends PluginsfSocialNotifyPeer
 {
 }
