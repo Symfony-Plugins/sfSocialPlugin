@@ -16,7 +16,7 @@ class PluginsfSocialEventPeer extends BasesfSocialEventPeer
     $c->addDescendingOrderByColumn(self::START);
     $pager = new sfPropelPager('sfSocialEvent', $n);
     $pager->setCriteria($c);
-    $pager->setPeerMethod('doSelectJoinsfGuardUser');
+    $pager->setPeerMethod('doSelectJoinAdmin');
     $pager->setPage($page);
     $pager->init();
 

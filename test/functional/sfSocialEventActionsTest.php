@@ -28,6 +28,7 @@ $browser->
     checkElement('body h2', '/Events/')->
     // XXX this will work until 2012-12-21 :-)
     checkElement('ul#list li', time() > strtotime('2009-09-09 10:00:00') ? 1 : 2)->
+    isValid(true)->
   end()->
 
   info('single event')->
@@ -37,8 +38,9 @@ $browser->
     isParameter('action', 'view')->
   end()->
   with('response')->begin()->
+    isStatusCode(200)->
     checkElement('body h2', '/Event "End of the world"/')->
-    checkElement('a[href$="/events"]', '/Back to list/')->
+    checkElement('div#body a[href$="/events"]', '/Back to list/')->
   end()->
 
   info('edit event')->

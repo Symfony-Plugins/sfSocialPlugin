@@ -4,7 +4,7 @@
 
 <?php if ($profile->getPicture()): ?>
 <div class="pic">
-  <?php echo image_tag(sfConfig::get('app_sf_social_pic_path', '/uploads/sf_social_pics/') . $profile->getPicture()) ?>
+  <?php echo image_tag(sfConfig::get('app_sf_social_pic_path', '/uploads/sf_social_pics/') . $profile->getPicture(), 'alt=') ?>
 </div>
 <?php endif ?>
 
@@ -41,7 +41,7 @@
   <?php foreach ($sharedContacts as $contact): ?>
     <li>
       <?php /* escaping strategy safety */ $_shared = $contact instanceof sfSocialContact ? $contact->getTo() : $contact->getRawValue()->getTo() ?>
-      <?php echo link_to(image_tag($_shared->getThumb(), 'title=' . $_shared), 'sf_social_user', $_shared) ?>
+      <?php echo link_to(image_tag($_shared->getThumb(), 'alt= title=' . $_shared), 'sf_social_user', $_shared) ?>
     </li>
   <?php endforeach ?>
   </ul>
@@ -61,7 +61,7 @@
   <ul>
   <?php foreach ($contacts as $cUser): ?>
     <li>
-      <?php echo link_to(image_tag($cUser->getThumb(), 'title=' . $cUser), 'sf_social_user', $cUser) ?>
+      <?php echo link_to(image_tag($cUser->getThumb(), 'alt= title=' . $cUser), 'sf_social_user', $cUser) ?>
     </li>
   <?php endforeach ?>
   </ul>

@@ -5,8 +5,8 @@ classes:
   sfSocialContact:
     columns:
       id:         ~
-      user_from:  { type: integer, required: true, foreignClass: sfGuardUser, foreignReference: id, onDelete: cascade, onUpdate: cascade }
-      user_to:    { type: integer, required: true, foreignClass: sfGuardUser, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+      user_from:  { type: integer, required: true, foreignClass: sfGuardUser, fkPhpName: From, fkRefPhpName: ContactFrom, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+      user_to:    { type: integer, required: true, foreignClass: sfGuardUser, fkPhpName: To, fkRefPhpName: ContactTo, foreignReference: id, onDelete: cascade, onUpdate: cascade }
       created_at: ~
     uniques:
       contact:    [ user_from, user_to ]
@@ -26,8 +26,8 @@ classes:
   sfSocialContactRequest:
     columns:
       id:         ~
-      user_from:  { type: integer, required: true, foreignClass: sfGuardUser, foreignReference: id, onDelete: cascade, onUpdate: cascade }
-      user_to:    { type: integer, required: true, foreignClass: sfGuardUser, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+      user_from:  { type: integer, required: true, foreignClass: sfGuardUser, fkPhpName: From, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+      user_to:    { type: integer, required: true, foreignClass: sfGuardUser, fkPhpName: To, foreignReference: id, onDelete: cascade, onUpdate: cascade }
       message:    { type: varchar }
       accepted:   { type: boolean, default: false }
       created_at: ~
@@ -37,7 +37,7 @@ classes:
   sfSocialEvent:
     columns:
       id:          ~
-      user_admin:  { type: integer, required: true, foreignClass: sfGuardUser, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+      user_admin:  { type: integer, required: true, foreignClass: sfGuardUser, fkPhpName: Admin, foreignReference: id, onDelete: cascade, onUpdate: cascade }
       title:       { type: varchar, required: true }
       description: { type: longvarchar, required: true }
       start:       { type: timestamp }
@@ -50,8 +50,8 @@ classes:
     columns:
       id:         ~
       event_id:   { type: integer, required: true, foreignClass: sfSocialEvent, foreignReference: id, onDelete: cascade, onUpdate: cascade }
-      user_id:    { type: integer, required: true, foreignClass: sfGuardUser, foreignReference: id, onDelete: cascade, onUpdate: cascade }
-      user_from:  { type: integer, required: true, foreignClass: sfGuardUser, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+      user_id:    { type: integer, required: true, foreignClass: sfGuardUser, fkPhpName: To, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+      user_from:  { type: integer, required: true, foreignClass: sfGuardUser, fkPhpName: From, foreignReference: id, onDelete: cascade, onUpdate: cascade }
       replied:    { type: boolean, default: false }
       created_at: ~
     uniques:
@@ -60,7 +60,7 @@ classes:
   sfSocialEventUser:
     columns:
       event_id:   { type: integer, primaryKey: true, required: true, foreignClass: sfSocialEvent, foreignReference: id, onDelete: cascade, onUpdate: cascade }
-      user_id:    { type: integer, primaryKey: true, required: true, foreignClass: sfGuardUser, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+      user_id:    { type: integer, primaryKey: true, required: true, foreignClass: sfGuardUser, fkPhpName: User, foreignReference: id, onDelete: cascade, onUpdate: cascade }
       confirm:    { type: integer, required: true, default: 0 }
       created_at: ~
   
@@ -76,9 +76,9 @@ classes:
   sfSocialGroupInvite:
     columns:
       id:         ~
-      group_id:   { type: integer, required: true, foreignClass: sfSocialGroup, foreignReference: id, onDelete: cascade, onUpdate: cascade }
-      user_id:    { type: integer, required: true, foreignClass: sfGuardUser, foreignReference: id, onDelete: cascade, onUpdate: cascade }
-      user_from:  { type: integer, required: true, foreignClass: sfGuardUser, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+      group_id:   { type: integer, required: true, foreignClass: sfSocialGroup, fkPhpName: Group, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+      user_id:    { type: integer, required: true, foreignClass: sfGuardUser, fkPhpName: To, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+      user_from:  { type: integer, required: true, foreignClass: sfGuardUser, fkPhpName: From, foreignReference: id, onDelete: cascade, onUpdate: cascade }
       replied:    { type: boolean, default: false }
       created_at: ~
     uniques:
@@ -93,7 +93,7 @@ classes:
   sfSocialMessage:
     columns:
       id:         ~
-      user_from:  { type: integer, required: true, foreignClass: sfGuardUser, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+      user_from:  { type: integer, required: true, foreignClass: sfGuardUser, fkPhpName: From, foreignReference: id, onDelete: cascade, onUpdate: cascade }
       subject:    { type: varchar, required: true }
       text:       { type: longvarchar, required: true }
       created_at: ~
@@ -101,8 +101,8 @@ classes:
   sfSocialMessageRcpt:
     columns:
       id:      ~
-      msg_id:  { type: integer, required: true, foreignClass: sfSocialMessage, foreignReference: id, onDelete: cascade, onUpdate: cascade }
-      user_to: { type: integer, required: true, foreignClass: sfGuardUser, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+      msg_id:  { type: integer, required: true, foreignClass: sfSocialMessage, fkPhpName: Message, fkRefPhpName: Rcpt, foreignReference: id, onDelete: cascade, onUpdate: cascade }
+      user_to: { type: integer, required: true, foreignClass: sfGuardUser, fkPhpName: To, foreignReference: id, onDelete: cascade, onUpdate: cascade }
       is_read: { type: boolean, default: false }
   
   sfSocialNotify:

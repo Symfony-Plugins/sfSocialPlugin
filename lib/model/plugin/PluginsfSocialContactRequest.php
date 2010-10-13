@@ -47,20 +47,4 @@ class PluginsfSocialContactRequest extends BasesfSocialContactRequest
     $this->delete();
   }
 
-  /**
-   * @return sfGuardUser
-   */
-  public function getFrom()
-  {
-    return $this->getsfGuardUserRelatedByUserFrom();
-  }
-
-  /**
-   * @return sfGuardUser
-   */
-  public function getTo()
-  {
-    return $this->getsfGuardUserRelatedByUserTo();
-  }
-
 }

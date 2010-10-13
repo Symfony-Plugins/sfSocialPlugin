@@ -10,7 +10,7 @@ class PluginsfSocialMessage extends BasesfSocialMessage
    */
   public function checkUserTo($user)
   {
-    $rcpts = $this->getsfSocialMessageRcpts();
+    $rcpts = $this->getRcpts();
     foreach ($rcpts as $rcpt)
     {
       if ($rcpt->getUserTo() == $user->getId())
@@ -37,7 +37,7 @@ class PluginsfSocialMessage extends BasesfSocialMessage
    */
   public function read($user)
   {
-    $rcpts = $this->getsfSocialMessageRcpts();
+    $rcpts = $this->getRcpts();
     foreach ($rcpts as $rcpt)
     {
       if ($rcpt->getUserTo() == $user->getId())
@@ -54,7 +54,7 @@ class PluginsfSocialMessage extends BasesfSocialMessage
    */
   public function getRcptUsers()
   {
-    $rcpts = $this->getsfSocialMessageRcpts();
+    $rcpts = $this->getRcpts();
     foreach ($rcpts as $rcpt)
     {
       if ($rcpt->getUserTo() == $user->getId())
@@ -87,27 +87,11 @@ class PluginsfSocialMessage extends BasesfSocialMessage
       foreach ($rcpts as $user_to)
       {
         $rcpt = new sfSocialMessageRcpt;
-        $rcpt->setsfSocialMessage($this);
+        $rcpt->setMessage($this);
         $rcpt->setUserTo($user_to);
         $rcpt->save();
       }
     }
-  }
-
-  /**
-   * @return array
-   */
-  public function getRcpts()
-  {
-    return $this->getsfSocialMessageRcpts();
-  }
-
-  /**
-   * @return sfGuardUser
-   */
-  public function getFrom()
-  {
-    return $this->getsfGuardUser();
   }
 
 }

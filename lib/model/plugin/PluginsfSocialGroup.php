@@ -109,7 +109,7 @@ class PluginsfSocialGroup extends BasesfSocialGroup
     $c = new Criteria;
     $c->add(sfSocialGroupInvitePeer::REPLIED, false);
 
-    return $this->getsfSocialGroupInvitesJoinsfGuardUserRelatedByUserId($c);
+    return $this->getsfSocialGroupInvitesJoinTo($c);
   }
 
   /**

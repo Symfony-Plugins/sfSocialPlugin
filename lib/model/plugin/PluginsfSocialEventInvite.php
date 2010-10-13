@@ -9,7 +9,7 @@ class PluginsfSocialEventInvite extends BasesfSocialEventInvite
   public function getReply()
   {
     $event = $this->getsfSocialEvent();
-    $user = $this->getsfGuardUserRelatedByUserId();
+    $user = $this->getTo();
     $eventUser = sfSocialEventUserPeer::retrieveByPK($event->getId(), $user->getId());
     if (null === $eventUser)
     {
@@ -37,21 +37,4 @@ class PluginsfSocialEventInvite extends BasesfSocialEventInvite
   {
     return $this->getsfSocialEvent();
   }
-
-  /**
-   * @return sfGuardUser
-   */
-  public function getFrom()
-  {
-    return $this->getsfGuardUserRelatedByUserFrom();
-  }
-
-  /**
-   * @return sfGuardUser
-   */
-  public function getTo()
-  {
-    return $this->getsfGuardUserRelatedByUserId();
-  }
-
 }

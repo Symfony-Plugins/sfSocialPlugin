@@ -309,6 +309,14 @@
         <target>Nome</target>
       </trans-unit>
       <trans-unit>
+        <source>First name</source>
+        <target>Nome</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Last name</source>
+        <target>Cognome</target>
+      </trans-unit>
+      <trans-unit>
         <source>Birthday</source>
         <target>Data di nascita</target>
       </trans-unit>
@@ -319,6 +327,18 @@
       <trans-unit>
         <source>Location</source>
         <target>Località</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Picture</source>
+        <target>Foto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Password</source>
+        <target>Password</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Password again</source>
+        <target>Ripeti password</target>
       </trans-unit>
       <trans-unit>
         <source>[1]1 contact[2,+Inf]%1% contacts</source>
@@ -335,6 +355,10 @@
       <trans-unit>
         <source>Edit profile</source>
         <target>Modifica profilo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>remove the current file</source>
+        <target>elimina il file attuale</target>
       </trans-unit>
       <trans-unit>
         <source>Contacts of %1%</source>

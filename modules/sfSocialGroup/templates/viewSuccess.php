@@ -59,7 +59,7 @@
   <ul id="invited">
   <?php foreach ($invited as $invite): ?>
     <li>
-      <?php $_user = $invite->getFrom() instanceof sfGuardUser ? $invite->getFrom() : $invite->getFrom()->getRawValue() ?>
+      <?php $_user = $invite->getTo() instanceof sfGuardUser ? $invite->getTo() : $invite->getTo()->getRawValue() ?>
       <?php echo link_to(image_tag($_user->getThumb(), 'title=' . $_user . ' alt=' . $_user), 'sf_social_user', $_user) ?>
     </li>
   <?php endforeach ?>

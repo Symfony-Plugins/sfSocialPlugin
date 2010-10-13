@@ -29,6 +29,7 @@ $browser->
     isStatusCode(200)->
     checkElement('body h2', '/Contacts list/')->
     checkElement('ul#list li', 5)->
+    isValid(true)->
   end()->
 
   info('remove a contact')->

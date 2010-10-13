@@ -17,7 +17,7 @@ class PluginsfSocialContact extends BasesfSocialContact
    */
   public function __toString()
   {
-    return $this->getsfGuardUserRelatedByUserTo();
+    return $this->getTo();
   }
 
   /**
@@ -47,7 +47,11 @@ class PluginsfSocialContact extends BasesfSocialContact
 			$c = new Criteria();
 			$c->add(sfSocialContactPeer::USER_FROM, $this->getUserTo());
 			$c->add(sfSocialContactPeer::USER_TO, $this->getUserFrom());
-			sfSocialContactPeer::doDelete($c);
+			$contacts = sfSocialContactPeer::doSelect($c);
+      foreach ($contacts as $contact)
+      {
+        $contact->delete();
+      }
 			$con->commit();
 		}
 		catch (PDOException $e)
@@ -64,23 +68,7 @@ class PluginsfSocialContact extends BasesfSocialContact
    */
   public function getUserId()
   {
-    return $this->getsfGuardUserRelatedByUserTo()->getId();
-  }
-
-  /**
-   * @return sfGuardUser
-   */
-  public function getFrom()
-  {
-    return $this->getsfGuardUserRelatedByUserFrom();
-  }
-
-  /**
-   * @return sfGuardUser
-   */
-  public function getTo()
-  {
-    return $this->getsfGuardUserRelatedByUserTo();
+    return $this->getTo()->getId();
   }
 
 }

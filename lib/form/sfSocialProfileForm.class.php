@@ -6,6 +6,7 @@
  * @package    sfSocialPlugin
  * @subpackage form
  * @author     Massimiliano Arione <garakkio@gmail.com>
+ * @version    SVN: $Id$
  */
 class sfSocialProfileForm extends sfGuardUserForm
 {
@@ -14,9 +15,11 @@ class sfSocialProfileForm extends sfGuardUserForm
   const SEX_UNKNOWN = '';
   const SEX_MALE    = 'M';
   const SEX_FEMALE  = 'F';
-  static public $sexChoices = array(self::SEX_UNKNOWN => 'Unspecified',
-                                    self::SEX_MALE    => 'Male',
-                                    self::SEX_FEMALE  => 'Female');
+  static public $sexChoices = array(
+    self::SEX_UNKNOWN => 'Unspecified',
+    self::SEX_MALE    => 'Male',
+    self::SEX_FEMALE  => 'Female',
+  );
 
   public function configure()
   {
@@ -30,21 +33,29 @@ class sfSocialProfileForm extends sfGuardUserForm
     $this->widgetSchema['birthday']->setOption('years', array_combine($years, $years));
 
     // make "sex" a choice
-    $this->widgetSchema['sex'] = new sfWidgetFormChoice(array('expanded' => false,
-                                                              'choices' => self::$sexChoices));
-    $this->validatorSchema['sex'] = new sfValidatorChoice(array('required' => false,
-                                                                'choices' => array_keys(self::$sexChoices)));
+    $this->widgetSchema['sex'] = new sfWidgetFormChoice(array(
+      'expanded' => false,
+      'choices'  => self::$sexChoices,
+    ));
+    $this->validatorSchema['sex'] = new sfValidatorChoice(array(
+      'required' => false,
+      'choices'  => array_keys(self::$sexChoices),
+    ));
 
     // make picture editable
     $path = sfConfig::get('app_sf_social_pic_path', '/sf_social_pics/');
     $maxsize = sfConfig::get('app_sf_social_pic_maxsize', 30000);
-    $this->widgetSchema['picture'] = new sfWidgetFormInputFileEditable(array('file_src' => '/uploads' . $path . $this->getObject()->getProfile()->getPicture(),
-                                                                             'is_image' => true));
-    $this->validatorSchema['picture'] = new sfValidatorFile(array('required' => false,
-                                                                  'mime_types' => 'web_images',
-                                                                  'max_size' => $maxsize,
-                                                                  'validated_file_class' => 'sfSocialValidatedFile',
-                                                                  'path' => sfConfig::get('sf_upload_dir') . $path));
+    $this->widgetSchema['picture'] = new sfWidgetFormInputFileEditable(array(
+      'file_src' => '/uploads' . $path . $this->getObject()->getProfile()->getPicture(),
+      'is_image' => true,
+    ));
+    $this->validatorSchema['picture'] = new sfValidatorFile(array(
+      'required'             => false,
+      'mime_types'           => 'web_images',
+      'max_size'             => $maxsize,
+      'validated_file_class' => 'sfSocialValidatedFile',
+      'path'                 => sfConfig::get('sf_upload_dir') . $path,
+    ));
   }
 
   /**

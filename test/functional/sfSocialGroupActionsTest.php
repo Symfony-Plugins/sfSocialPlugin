@@ -32,6 +32,7 @@ $browser->
     isStatusCode(200)->
     checkElement('body h2', '/Groups/')->
     checkElement('ul#list li', 6)->
+    isValid(true)->
   end()->
 
   info('single group')->
@@ -42,6 +43,7 @@ $browser->
   end()->
   with('response')->begin()->
     checkElement('body h2', '/Group "we are all dummies"/')->
+    isValid(true)->
   end()->
 
   info('edit a group')->

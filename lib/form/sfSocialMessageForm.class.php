@@ -18,21 +18,26 @@ class sfSocialMessageForm extends BasesfSocialMessageForm
     $user = $this->options['user'];
     $this->widgetSchema['user_from'] = new sfWidgetFormInputHidden();
     $this->setDefault('user_from', $user->getId());
-    $this->setValidator('user_from',
-                        new sfValidatorChoice(array('choices' => array($user->getId()))));
+    $this->setValidator('user_from', new sfValidatorChoice(array(
+      'choices' => array($user->getId()),
+    )));
 
     // add recipients field
-    $this->widgetSchema['to'] = new sfWidgetFormChoice(array('multiple' => true, 'choices' => $this->getRcpts()));
-    $this->setValidator('to',
-                        new sfValidatorPropelChoice(array('model'    => 'sfGuardUser',
-                                                          'column'   => 'id',
-                                                          'multiple' => true,
-                                                          'required' => true)));
+    $this->widgetSchema['to'] = new sfWidgetFormChoice(array(
+      'multiple' => true,
+      'choices'  => $this->getRcpts(),
+    ));
+    $this->setValidator('to', new sfValidatorPropelChoice(array(
+      'model'    => 'sfGuardUser',
+      'column'   => 'id',
+      'multiple' => true,
+      'required' => true,
+    )));
 
     // if it's a reply message, set defaults
     if (!empty($this->options['reply_to']))
     {
-      $this->setDefault('to', $this->options['reply_to']->getsfGuardUser()->getId());
+      $this->setDefault('to', $this->options['reply_to']->getUserFrom());
       $this->setDefault('subject', $this->options['reply_to']->getReplySubject());
     }
 
@@ -72,8 +77,8 @@ class sfSocialMessageForm extends BasesfSocialMessageForm
     {
       $return[$contact->getId()]  = $contact->getUsername();
     }
-    return $return;
 
+    return $return;
   }
 
 }

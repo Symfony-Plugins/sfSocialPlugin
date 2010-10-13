@@ -66,7 +66,7 @@ class PluginsfSocialEvent extends BasesfSocialEvent
     $c = new Criteria;
     $c->add(sfSocialEventUserPeer::CONFIRM, sfSocialEventUserPeer::REPLY_YES);
 
-    return $this->getsfSocialEventUsersJoinsfGuardUser($c);
+    return $this->getsfSocialEventUsersJoinUser($c);
   }
 
   /**
@@ -78,7 +78,7 @@ class PluginsfSocialEvent extends BasesfSocialEvent
     $c = new Criteria;
     $c->add(sfSocialEventUserPeer::CONFIRM, sfSocialEventUserPeer::REPLY_MAYBE);
 
-    return $this->getsfSocialEventUsersJoinsfGuardUser($c);
+    return $this->getsfSocialEventUsersJoinUser($c);
   }
 
   /**
@@ -90,7 +90,7 @@ class PluginsfSocialEvent extends BasesfSocialEvent
     $c = new Criteria;
     $c->add(sfSocialEventUserPeer::CONFIRM, sfSocialEventUserPeer::REPLY_NO);
 
-    return $this->getsfSocialEventUsersJoinsfGuardUser($c);
+    return $this->getsfSocialEventUsersJoinUser($c);
   }
 
   /**
@@ -102,15 +102,7 @@ class PluginsfSocialEvent extends BasesfSocialEvent
     $c = new Criteria;
     $c->add(sfSocialEventInvitePeer::REPLIED, false);
 
-    return $this->getsfSocialEventInvitesJoinsfGuardUserRelatedByUserId($c);
-  }
-
-  /**
-   * @return sfGuardUser
-   */
-  public function getAdmin()
-  {
-    return $this->getsfGuardUser();
+    return $this->getsfSocialEventInvitesJoinTo($c);
   }
 
 }

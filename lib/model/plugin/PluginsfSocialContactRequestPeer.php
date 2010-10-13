@@ -17,7 +17,7 @@ class PluginsfSocialContactRequestPeer extends BasesfSocialContactRequestPeer
     $c->addDescendingOrderByColumn(self::CREATED_AT);
     $pager = new sfPropelPager('sfSocialContactRequest', $n);
     $pager->setCriteria($c);
-    $pager->setPeerMethod('doSelectJoinsfGuardUserRelatedByUserFrom');
+    $pager->setPeerMethod('doSelectJoinFrom');
     $pager->setPage($page);
     $pager->init();
 
@@ -39,7 +39,7 @@ class PluginsfSocialContactRequestPeer extends BasesfSocialContactRequestPeer
     $c->addDescendingOrderByColumn(self::CREATED_AT);
     $pager = new sfPropelPager('sfSocialContactRequest', $n);
     $pager->setCriteria($c);
-    $pager->setPeerMethod('doSelectJoinsfGuardUserRelatedByUserTo');
+    $pager->setPeerMethod('doSelectJoinTo');
     $pager->setPage($page);
     $pager->init();
 

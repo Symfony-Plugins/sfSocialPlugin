@@ -92,7 +92,7 @@ class PluginsfSocialGuardUser extends PluginsfGuardUser
    */
   public function countContacts()
   {
-    return $this->countsfSocialContactsRelatedByUserFrom();
+    return $this->countContactFroms();
   }
 
   /**
@@ -110,12 +110,12 @@ class PluginsfSocialGuardUser extends PluginsfGuardUser
       {
 	   		$c->setLimit($limit);
       }
-	  	$contacts = $this->getsfSocialContactsRelatedByUserFrom($c);
+	  	$contacts = $this->getContactFroms($c);
       if (!empty($contacts))
       {
         foreach ($contacts as $contact)
         {
-          $this->contacts[] = $contact->getsfGuardUserRelatedByUserTo();
+          $this->contacts[] = $contact->getTo();
         }
       }
 		}

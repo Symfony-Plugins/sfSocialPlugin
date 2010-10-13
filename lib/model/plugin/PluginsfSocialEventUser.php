@@ -10,11 +10,4 @@
 
 class PluginsfSocialEventUser extends BasesfSocialEventUser
 {
-  /**
-   * @return sfGuardUser
-   */
-  public function getUser()
-  {
-    return $this->getsfGuardUser();
-  }
 }

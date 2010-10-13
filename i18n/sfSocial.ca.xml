@@ -337,6 +337,10 @@
         <target>Modifica perfil</target>
       </trans-unit>
       <trans-unit>
+        <source>remove the current file</source>
+        <target>remove the current file</target> <!-- TODO -->
+      </trans-unit>
+      <trans-unit>
         <source>Contacts of %1%</source>
         <target>Contactes de %1%</target>
       </trans-unit>

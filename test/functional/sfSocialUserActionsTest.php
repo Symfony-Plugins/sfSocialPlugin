@@ -21,6 +21,7 @@ $browser->
     with('response')->begin()->
     checkElement('body h2', '/Searching "i"/')->
     checkElement('body ul#list li', 7)->
+    isValid(true)->
   end()->
 
   info('user page')->
@@ -33,6 +34,7 @@ $browser->
     checkElement('body h2', '/max/')->
     checkElement('body', '/it\'s you!/')->
     checkElement('a[href$="user/editprofile"]', 'Edit profile')->
+    isValid(true)->
   end()->
 
   info('edit profile')->
@@ -73,32 +75,36 @@ $browser->
   info('profile of one of your contacts')->
   get('/user/mario')->
     with('response')->begin()->
-    checkElement('a[href$="/contacts"]', 'mario is your contact')->
+    checkElement('div#body a[href$="/contacts"]', 'mario is your contact')->
     checkElement('a[href$="user/mario/edit"]', false)->
+    isValid(true)->
   end()->
 
   info('profile of someone you requested contact')->
   get('/user/luigi')->
     with('response')->begin()->
     checkElement('a[href$="contacts/sentrequests"]', 'A contact request is pending')->
+    isValid(true)->
   end()->
 
   info('profile of someone requested you contact')->
   get('/user/danny')->
     with('response')->begin()->
     checkElement('a[href$="contacts/requests"]', 'A contact request is pending')->
+    isValid(true)->
   end()->
 
   info('profile of someone else')->
   get('/user/goofy')->
     with('response')->begin()->
     checkElement('a[href$="/request/send/to/goofy"]', 'Add goofy to your contacts')->
+    isValid(true)->
   end()->
 
   info('profile with sared contacts ')->
   get('/user/karl')->
     with('response')->begin()->
     checkElement('div#shared_contacts ul li', 1)->
+    isValid(true)->
   end()
-
 ;

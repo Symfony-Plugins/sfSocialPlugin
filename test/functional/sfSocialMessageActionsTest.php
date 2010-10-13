@@ -31,6 +31,7 @@ $browser->
     checkElement('body h2', '/Messages received/')->
     checkElement('ul#list li', 5)->
     checkElement('ul#list li.unread', true, array('position' => 2))->
+    isValid(true)->
   end()->
 
   info('click on a message')->
@@ -41,6 +42,7 @@ $browser->
   end()->
   with('response')->begin()->
     checkElement('body h2', '/hello pal/')->
+    isValid(true)->
   end()->
 
   info('reply to message')->
@@ -52,6 +54,7 @@ $browser->
   click('cancel')->
   with('response')->begin()->
     checkElement('ul#list li.read', true, array('position' => 2))->
+    isValid(true)->
   end()->
 
   info('compose a new message')->
@@ -62,6 +65,7 @@ $browser->
   end()->
   with('response')->begin()->
     checkElement('body h2', '/Compose a new message/')->
+    isValid(true)->
   end()->
   click('send', array('sf_social_message' => array(
     'subject' => '',
@@ -103,6 +107,7 @@ $browser->
   get('/message/compose/to/anna')->
   with('response')->begin()->
     checkElement('select#sf_social_message_to > option[value="' . $anna->getId() . '"][selected="selected"]', true)->
+    isValid(true)->
   end()->
 
   info('sent messages')->
@@ -110,6 +115,5 @@ $browser->
   with('request')->begin()->
     isParameter('module', 'sfSocialMessage')->
     isParameter('action', 'sentlist')->
-
   end()
 ;

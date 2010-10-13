@@ -38,7 +38,7 @@ class sfSocialGroupInviteForm extends BasesfSocialGroupInviteForm
       addAscendingOrderByColumn(sfGuardUserPeer::USERNAME);
     $this->widgetSchema['user_id']->setOption('model', 'sfSocialContact');
     $this->widgetSchema['user_id']->addOption('multiple', true);
-    $this->widgetSchema['user_id']->addOption('peer_method', 'doSelectJoinsfGuardUserRelatedByUserTo');
+    $this->widgetSchema['user_id']->addOption('peer_method', 'doSelectJoinTo');
     $this->widgetSchema['user_id']->addOption('criteria', $c);
     $this->widgetSchema['user_id']->addOption('key_method', 'getUserId');
     $this->widgetSchema['user_id']->setLabel('User');
