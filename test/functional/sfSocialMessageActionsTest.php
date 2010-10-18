@@ -31,6 +31,7 @@ $browser->
     checkElement('body h2', '/Messages received/')->
     checkElement('ul#list li', 5)->
     checkElement('ul#list li.unread', true, array('position' => 2))->
+    checkElement('ul#list li.unread', 4)->
     isValid(true)->
   end()->
 
@@ -115,5 +116,11 @@ $browser->
   with('request')->begin()->
     isParameter('module', 'sfSocialMessage')->
     isParameter('action', 'sentlist')->
+  end()->
+
+  info('first message is now read')->
+  get('/messages/')->
+  with('response')->begin()->
+    checkElement('ul#list li.unread', 3)->
   end()
 ;
